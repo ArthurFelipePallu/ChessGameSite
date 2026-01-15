@@ -1,0 +1,46 @@
+:root {
+  color-scheme: light dark;
+  
+  --cs-color-bg-primary: #7a7a7a;
+  --cs-color-bg-secondary: #5a5a5a;
+  --cs-color-bg-terciary: #3a3a3a;
+
+  --cs-color-card-bg: #5a5a5a;
+  --cs-color-card-border: #4a4a4a;
+
+  --cs-color-btn-primary: #3483fa;
+  --cs-color-btn-inverse: #fff;
+
+  --cs-color-btn-hover-primary: #2a6cce;
+
+
+  --cs-color-font-primary: #ffffff;
+  --cs-color-font-secondary: #0caf1d;
+  --cs-color-font-tertiary: #ff8800;
+
+
+  --cs-color-font-warning: #ff3333;
+  --cs-color-font-placeholder: #d3d2d2;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
