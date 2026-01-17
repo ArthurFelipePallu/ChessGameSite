@@ -1,0 +1,31 @@
+/* Square.css */
+.square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease;
+  cursor: pointer; /* Add pointer cursor to indicate squares are clickable */
+}
+
+.newSquare{
+  display: grid;
+  place-items: center; /* shorthand for centering */
+
+}
+
+.square.selected {
+  border: 3px solid #00f; /* Highlight the selected square with a blue border */
+}
+
+.square.possible-move {
+  border: 2px solid #00ff00; /* Green border for possible moves */
+}
+
+
+.piece {
+  /* display: inline-block; */
+  font-size: 100%; /* slightly smaller than the square */
+}
+

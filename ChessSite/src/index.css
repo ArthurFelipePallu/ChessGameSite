@@ -1,9 +1,10 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   
   --cs-color-bg-primary: #7a7a7a;
   --cs-color-bg-secondary: #5a5a5a;
   --cs-color-bg-terciary: #3a3a3a;
+  --cs-color-bg-quarternary: #ffffff;
 
   --cs-color-card-bg: #5a5a5a;
   --cs-color-card-border: #4a4a4a;
@@ -28,6 +29,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans";
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -38,9 +46,17 @@ a:hover {
 }
 
 body {
-  margin: 0;
+background-color: var(--cs-color-bg-quarternary);
+}
+main {
+  padding: 0 20px;
+}
+
+
+/* ============================================================================ */
+
+.cs-container-flex-between-center{
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: space-between;
+  align-items: center;
 }

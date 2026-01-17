@@ -1,36 +1,36 @@
-import './App.css'
-import Home from './routes/Home';
-import { history } from './utils/history'
-import Regras from './routes/Home/Regras';
-import JogoLocal from './routes/Home/JogoLocal';
-import Configuracao from './routes/Home/Configuracao';
-import { unstable_HistoryRouter as HistoryRouter, Route,Routes } from "react-router-dom";
-import User from './routes/User';
+import User from "./routes/User";
+import Home from "./routes/Home";
+import Regras from "./routes/Home/Regras";
+import { history } from "./utils/history";
+// import HomePage from "./routes/Home/HomePage";
+import JogoLocal from "./routes/Home/JogoLocal";
+import Configuracao from "./routes/Home/Configuracao";
 
+import {
+  unstable_HistoryRouter as HistoryRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 export default function App() {
-
   return (
-    <>
-    <HistoryRouter history={history}>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    <HistoryRouter history={history as any}>
       <Routes>
-        <Route path='/' element={<Home/>}>
-          <Route index element={<Home/>}/>
-          <Route path='configuracao' element={<Configuracao />}/>
-          <Route path='jogo-local' element={<JogoLocal />}/>
-          <Route path='regras' element={<Regras />}/>
-        </Route>
-        {/* ============================================================ */}
-        <Route path='/user/' element={<User/>}>
+         <Route path='/' element={<Home/>}>
+           <Route index element={<JogoLocal/>}/>
+           <Route path='configuracao' element={<Configuracao />}/>
+           <Route path='jogo-local' element={<JogoLocal />}/>
+           <Route path='regras' element={<Regras />}/>
+         </Route>
+         {/* ============================================================ */}
+         <Route path='/user/' element={<User/>}>
          
-        </Route>
+         </Route>
         
-        <Route path="*" element={<Home />} />
+         <Route path="*" element={<Home />} />
 
-      </Routes>
-
+       </Routes>
     </HistoryRouter>
-    </>
-  )
+  );
 }
-
