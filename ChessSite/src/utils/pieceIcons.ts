@@ -1,21 +1,13 @@
- const pieceIcons = {
-    'p': '♟',
-    'b': '♝', 
-    'n': '♞', 
-    'r': '♜',
-    'q': '♛', 
-    'k': '♚', 
-    ' ': '',  // Empty square
-    'P': '♙',
-    'B': '♗', 
-    'N': '♘', 
-    'R': '♖',
-    'Q': '♕', 
-    'K': '♔', 
-  };
+import {type PieceIconDTO} from "../models/Chess/pieceIconDTO";
+import pieceIconsData from "../data/JSON/pieceIcons.json";
+ 
 
-export const getChessPieceIcon = (piece : string)  =>{
+const pieceIconsMap: Record<string,string> = {};
+(pieceIconsData as PieceIconDTO[]).forEach( ({key,value}) =>{
+  pieceIconsMap[key] = value;
+});
 
-    return pieceIcons[piece];
-
+export function getPieceIconByKey(key : string)
+{
+  return pieceIconsMap[key];
 }

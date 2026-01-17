@@ -1,0 +1,15 @@
+[
+  { "key": "p", "value": "♟" },
+  { "key": "b", "value": "♝" },
+  { "key": "n", "value": "♞" },
+  { "key": "r", "value": "♜" },
+  { "key": "q", "value": "♛" },
+  { "key": "k", "value": "♚" },
+  { "key": " ", "value": "" },
+  { "key": "P", "value": "♙" },
+  { "key": "B", "value": "♗" },
+  { "key": "N", "value": "♘" },
+  { "key": "R", "value": "♖" },
+  { "key": "Q", "value": "♕" },
+  { "key": "K", "value": "♔" }
+]

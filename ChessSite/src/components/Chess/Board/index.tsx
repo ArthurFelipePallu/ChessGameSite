@@ -1,16 +1,29 @@
 import "./styles.css" 
 import Square from "../Square";
 import React , {useState} from "react";
+import type { SquareDTO } from "../../../models/Chess/SquareDTO";
+import type { BoardDTO } from "../../../models/Chess/BoardDTO";
+
+
+type Prop ={
+  boardInfo:BoardDTO;
+}
 
 
 
-
-
-
-export default function ChessBoard({ board, possibleMoves, BoardColorScheme })
+export default function ChessBoard({ boardInfo } : Prop)
 
  {
   const [selectedSquare, setSelectedSquare] = useState(null);
+
+
+const defaultSquare : SquareDTO = {
+                          content :"P",
+                          squareColor:'#aad9d8',
+                          clickAction: () => ({}),
+                          squareIsSelected:false,
+                          squareIsPossibleMove:false
+}
 
   // Default colors if no color scheme is provided
   const defaultColorScheme = {
@@ -28,10 +41,10 @@ export default function ChessBoard({ board, possibleMoves, BoardColorScheme })
     highlightedWhite,
     highlightedBlack,
     possibleMoveHighlight,
-  } = BoardColorScheme || defaultColorScheme;
+  } = boardInfo.boardColorScheme || defaultColorScheme;
 
   // Helper function to get the color of the square
-  const getSquareColor = (rowIndex, colIndex, isSelected, isPossibleMove) =>{
+  const getSquareColor = (rowIndex : number, colIndex : number, isSelected:boolean, isPossibleMove:boolean) =>{
     if (isSelected) {
       return (rowIndex + colIndex) % 2 === 0 ? highlightedWhite : highlightedBlack;
     }
@@ -42,35 +55,42 @@ export default function ChessBoard({ board, possibleMoves, BoardColorScheme })
   };
 
   // Handle square click, setting the selected square's position
-  const handleSquareClick = (rowIndex, colIndex) => {
+  const handleSquareClick = (rowIndex: number, colIndex: number) => {
     setSelectedSquare({ row: rowIndex, col: colIndex });
     console.log(`Square clicked at position: (${rowIndex}, ${colIndex})`);
   };
+
 
   return (
     <div className="chess-board-container">
       <div
         className="chess-board"
         style={{
-          gridTemplateColumns: `repeat(${board[0].length}, 1fr)`,
-          gridTemplateRows: `repeat(${board.length}, 1fr)`,
+          gridTemplateColumns: `repeat(${boardInfo.board[0].length}, 1fr)`,
+          gridTemplateRows: `repeat(${boardInfo.board.length}, 1fr)`,
         }}
       >
-        {board.map((row, rowIndex) => (
+        {boardInfo.board.map((row, rowIndex) => (
           row.map((square, colIndex) => {
             const isSelected = selectedSquare?.row === rowIndex && selectedSquare?.col === colIndex;
-            const isPossibleMove = possibleMoves[rowIndex][colIndex];
+            const isPossibleMove = boardInfo.possibleMoves[rowIndex][colIndex];
             const color = getSquareColor(rowIndex, colIndex, isSelected, isPossibleMove);
+
+             const boardSquareInfo : SquareDTO = {
+                          content :square,
+                          squareColor:color,
+                          clickAction: () => handleSquareClick(rowIndex,colIndex),
+                          squareIsSelected:isSelected,
+                          squareIsPossibleMove:isPossibleMove
+
+                        }
+
 
             return (
               <Square
                 key={`${rowIndex}-${colIndex}`}
-                piece={square}
-                color={color}
-                onClick={() => handleSquareClick(rowIndex, colIndex)}
-                isSelected={isSelected}
-                isPossibleMove={isPossibleMove}
-                possibleMoveHighlight={possibleMoveHighlight}
+                
+                squareInfo = { boardSquareInfo }
               />
             );
           })

@@ -1,31 +1,22 @@
 import './styles.css';  // CSS file for individual square styling
+import { getPieceIconByKey } from '../../../utils/pieceIcons';
+import type { SquareDTO } from '../../../models/Chess/SquareDTO';
 
+
+type Prop ={
+  squareInfo:SquareDTO;
+}
 
 // Square component
-const Square = ({ piece, color, onClick, isSelected, isPossibleMove, possibleMoveHighlight }) => {
-  const pieceIcons = {
-    'p': '♟', 
-    'b': '♝', 
-    'n': '♞', 
-    'r': '♜',
-    'q': '♛', 
-    'k': '♚', 
-    ' ': ' ',  // Empty square
-    'P': '♙', 
-    'B': '♗', 
-    'N': '♘', 
-    'R': '♖',
-    'Q': '♕', 
-    'K': '♔', 
-  };
+const Square = ({squareInfo} : Prop) => {
 
   return (
     <div
-      className={`square ${isSelected ? 'selected' : ''} ${isPossibleMove ? 'possible-move' : ''}`}
-      style={{ backgroundColor: color }}
-      onClick={onClick} // Attach click handler
+      className={`square ${squareInfo.squareIsSelected ? 'selected' : ''} ${squareInfo.squareIsPossibleMove ? 'possible-move' : ''}`}
+      style={{ backgroundColor: squareInfo.squareColor }}
+      // onClick={() => squareInfo.clickAction} // Attach click handler
     >
-      <div className="piece">{pieceIcons[piece]}</div> {/* Render the piece */}
+      <div className="piece">{getPieceIconByKey(squareInfo.content)}</div> {/* Render the piece */}
     </div>
   );
 };
