@@ -14,7 +14,7 @@ const Square = ({squareInfo} : Prop) => {
     <div
       className={`square ${squareInfo.squareIsSelected ? 'selected' : ''} ${squareInfo.squareIsPossibleMove ? 'possible-move' : ''}`}
       style={{ backgroundColor: squareInfo.squareColor }}
-      // onClick={() => squareInfo.clickAction} // Attach click handler
+      onClick={squareInfo.clickAction} // Attach click handler
     >
       <div className="piece">{getPieceIconByKey(squareInfo.content)}</div> {/* Render the piece */}
     </div>

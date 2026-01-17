@@ -7,6 +7,9 @@
   font-family: Arial, sans-serif;
   transition: background-color 0.3s ease;
   cursor: pointer; /* Add pointer cursor to indicate squares are clickable */
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none;     /* Old Edge */
 }
 
 .newSquare{

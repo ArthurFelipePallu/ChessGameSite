@@ -1,9 +1,9 @@
 import "./styles.css" 
 import Square from "../Square";
-import React , {useState} from "react";
+import {useState} from "react";
 import type { SquareDTO } from "../../../models/Chess/SquareDTO";
 import type { BoardDTO } from "../../../models/Chess/BoardDTO";
-
+import { getBoardColorSchemeById } from "../../../utils/BoardColorSchemes";
 
 type Prop ={
   boardInfo:BoardDTO;
@@ -41,7 +41,7 @@ const defaultSquare : SquareDTO = {
     highlightedWhite,
     highlightedBlack,
     possibleMoveHighlight,
-  } = boardInfo.boardColorScheme || defaultColorScheme;
+  } = getBoardColorSchemeById(boardInfo.boardColorSchemeId) || defaultColorScheme;
 
   // Helper function to get the color of the square
   const getSquareColor = (rowIndex : number, colIndex : number, isSelected:boolean, isPossibleMove:boolean) =>{

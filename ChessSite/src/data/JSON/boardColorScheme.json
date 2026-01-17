@@ -1,0 +1,139 @@
+[
+  {
+    "id": "classic",
+    "name": "ClassicBoardScheme",
+    "white": "#F0D9B5",
+    "black": "#B58863",
+    "highlightedWhite": "#F7EC77",
+    "highlightedBlack": "#E6CC5A",
+    "possibleMoveHighlight": "#6FAF3D"
+  },
+  {
+    "id": "dark",
+    "name": "DarkBoardScheme",
+    "white": "#BFC3C7",
+    "black": "#2F3336",
+    "highlightedWhite": "#8FAADC",
+    "highlightedBlack": "#5B78A6",
+    "possibleMoveHighlight": "#4CAF50"
+  },
+  {
+    "id": "tournament-green",
+    "name": "TournamentGreenScheme",
+    "white": "#E8F5E9",
+    "black": "#2E7D32",
+    "highlightedWhite": "#AED581",
+    "highlightedBlack": "#81C784",
+    "possibleMoveHighlight": "#FFD54F"
+  },
+  {
+    "id": "modern-minimal",
+    "name": "ModernMinimalScheme",
+    "white": "#ECEFF1",
+    "black": "#90A4AE",
+    "highlightedWhite": "#64B5F6",
+    "highlightedBlack": "#42A5F5",
+    "possibleMoveHighlight": "#26C6DA"
+  },
+  {
+    "id": "high-contrast",
+    "name": "HighContrastScheme",
+    "white": "#FFFFFF",
+    "black": "#000000",
+    "highlightedWhite": "#FFEB3B",
+    "highlightedBlack": "#FFC107",
+    "possibleMoveHighlight": "#00E676"
+  },
+
+  {
+    "id": "midnight-blue",
+    "name": "MidnightBlueScheme",
+    "white": "#E3F2FD",
+    "black": "#0D47A1",
+    "highlightedWhite": "#90CAF9",
+    "highlightedBlack": "#1565C0",
+    "possibleMoveHighlight": "#FF7043"
+  },
+  {
+    "id": "desert-sand",
+    "name": "DesertSandScheme",
+    "white": "#FFF3E0",
+    "black": "#D7A86E",
+    "highlightedWhite": "#FFE082",
+    "highlightedBlack": "#FFCA28",
+    "possibleMoveHighlight": "#8D6E63"
+  },
+  {
+    "id": "forest-night",
+    "name": "ForestNightScheme",
+    "white": "#D0E8D0",
+    "black": "#1B5E20",
+    "highlightedWhite": "#9CCC65",
+    "highlightedBlack": "#558B2F",
+    "possibleMoveHighlight": "#FFEB3B"
+  },
+  {
+    "id": "royal-purple",
+    "name": "RoyalPurpleScheme",
+    "white": "#F3E5F5",
+    "black": "#4A148C",
+    "highlightedWhite": "#CE93D8",
+    "highlightedBlack": "#7B1FA2",
+    "possibleMoveHighlight": "#FF4081"
+  },
+  {
+    "id": "ice-glacier",
+    "name": "IceGlacierScheme",
+    "white": "#E0F7FA",
+    "black": "#006064",
+    "highlightedWhite": "#80DEEA",
+    "highlightedBlack": "#0097A7",
+    "possibleMoveHighlight": "#00E5FF"
+  },
+  {
+    "id": "chesscom-default",
+    "name": "ChessComDefaultScheme",
+    "white": "#EEEED2",
+    "black": "#769656",
+    "highlightedWhite": "#F6F669",
+    "highlightedBlack": "#BACA44",
+    "possibleMoveHighlight": "#829769"
+  },
+  {
+    "id": "wood-mahogany",
+    "name": "MahoganyWoodScheme",
+    "white": "#F3E2C7",
+    "black": "#7A4A2E",
+    "highlightedWhite": "#FFD180",
+    "highlightedBlack": "#FFB74D",
+    "possibleMoveHighlight": "#8BC34A"
+  },
+  {
+    "id": "obsidian",
+    "name": "ObsidianScheme",
+    "white": "#DADADA",
+    "black": "#1C1C1C",
+    "highlightedWhite": "#9FA8DA",
+    "highlightedBlack": "#5C6BC0",
+    "possibleMoveHighlight": "#66BB6A"
+  },
+  {
+    "id": "blueprint",
+    "name": "BlueprintScheme",
+    "white": "#E1F5FE",
+    "black": "#01579B",
+    "highlightedWhite": "#81D4FA",
+    "highlightedBlack": "#0288D1",
+    "possibleMoveHighlight": "#FFCA28"
+  },
+  {
+    "id": "lava",
+    "name": "LavaScheme",
+    "white": "#FFECE6",
+    "black": "#BF360C",
+    "highlightedWhite": "#FFAB91",
+    "highlightedBlack": "#E64A19",
+    "possibleMoveHighlight": "#FFD600"
+  }
+]
+
