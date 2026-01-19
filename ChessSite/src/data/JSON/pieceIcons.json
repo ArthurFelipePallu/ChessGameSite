@@ -1,15 +1,15 @@
 [
-  { "key": "p", "value": "♟" },
-  { "key": "b", "value": "♝" },
-  { "key": "n", "value": "♞" },
-  { "key": "r", "value": "♜" },
-  { "key": "q", "value": "♛" },
-  { "key": "k", "value": "♚" },
-  { "key": " ", "value": "" },
-  { "key": "P", "value": "♙" },
-  { "key": "B", "value": "♗" },
-  { "key": "N", "value": "♘" },
-  { "key": "R", "value": "♖" },
-  { "key": "Q", "value": "♕" },
-  { "key": "K", "value": "♔" }
+  { "id": "p", "icon": "♟" },
+  { "id": "b", "icon": "♝" },
+  { "id": "n", "icon": "♞" },
+  { "id": "r", "icon": "♜" },
+  { "id": "q", "icon": "♛" },
+  { "id": "k", "icon": "♚" },
+  { "id": " ", "icon":  ""  },
+  { "id": "P", "icon": "♙" },
+  { "id": "B", "icon": "♗" },
+  { "id": "N", "icon": "♘" },
+  { "id": "R", "icon": "♖" },
+  { "id": "Q", "icon": "♕" },
+  { "id": "K", "icon": "♔" }
 ]

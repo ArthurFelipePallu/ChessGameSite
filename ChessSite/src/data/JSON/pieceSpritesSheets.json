@@ -1,0 +1,9 @@
+[
+  {
+    "id": "classic",
+    "src": "/assets/classicPieces-spriteSheet.png",
+    "rows":2,
+    "cols":6
+  }
+]
+

@@ -1,0 +1,65 @@
+
+/* Page container */
+.config-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Page title */
+.config-page > h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+/* Wrapper for all groups */
+.color-scheme-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cs-scheme-group {
+  margin-bottom: 0.5rem;
+}
+
+/* Clickable header */
+.cs-scheme-group-header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  cursor: pointer;
+  color: var(--cs-color-font-primary);
+}
+
+.cs-scheme-group-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Arrow */
+.cs-group-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.cs-group-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Grid for cards */
+.cs-scheme-cards-container {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 1rem;
+  margin-left: 3%;
+}
+
+
+
+/*CURRENT SELECTED SCHEME*/
+

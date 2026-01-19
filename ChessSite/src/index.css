@@ -1,18 +1,20 @@
 :root {
   color-scheme: light;
   
-  --cs-color-bg-primary: #7a7a7a;
-  --cs-color-bg-secondary: #5a5a5a;
-  --cs-color-bg-terciary: #3a3a3a;
-  --cs-color-bg-quarternary: #ffffff;
+  --cs-color-bg-primary: #1a1a1a;
+  --cs-color-bg-secondary: #3a3a3a;
+  --cs-color-bg-terciary: #5a5a5a;
+  --cs-color-bg-quarternary: #7a7a7a;
+  --cs-color-bg-quintiary: #ffffff;
 
   --cs-color-card-bg: #5a5a5a;
   --cs-color-card-border: #4a4a4a;
+  --cs-color-card-font: #0caf1d;
 
   --cs-color-btn-primary: #3483fa;
   --cs-color-btn-inverse: #fff;
 
-  --cs-color-btn-hover-primary: #2a6cce;
+  --cs-color-btn-hover-primary: ##5a5a5a;
 
 
   --cs-color-font-primary: #ffffff;
@@ -46,7 +48,7 @@ a:hover {
 }
 
 body {
-background-color: var(--cs-color-bg-quarternary);
+background-color: var(--cs-color-bg-primary);
 }
 main {
   padding: 0 20px;
@@ -55,8 +57,45 @@ main {
 
 /* ============================================================================ */
 
+.cs-container-flex-center-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .cs-container-flex-between-center{
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+
+/* ============================================================================ */
+
+
+.threeD {
+  color: var(--cs-color-card-font);
+  white-space: nowrap;
+  transform: scale(0.7) translate(-5%, -5%);
+  font-size: 3em;
+  font-family: sans-serif;
+  letter-spacing: 0.1em;
+  transition: 0.3s;
+  text-shadow: 1px 1px 0 var(--cs-color-btn-hover-primary),
+               1px 2px 0 var(--cs-color-btn-hover-primary),
+               1px 3px 0 var(--cs-color-btn-hover-primary), 
+               1px 4px 0 var(--cs-color-btn-hover-primary),
+               1px 5px 0 var(--cs-color-btn-hover-primary), 
+               1px 6px 0 var(--cs-color-btn-hover-primary), 
+               1px 7px 0 var(--cs-color-btn-hover-primary), 
+               1px 8px 0 var(--cs-color-btn-hover-primary),
+               5px 13px 15px black;
+}
+
+.threeD:hover {
+  cursor: pointer;
+  transition: 0.3s;
+  transform: scale(.8)translate(-5%, -5%);
+  text-shadow: 1px -1px 0 grey, 1px -2px 0 grey, 1px -3px 0 grey,
+    1px -4px 0 grey, 1px -5px 0 grey, 1px -6px 0 grey, 1px -7px 0 grey,
+    1px -8px 0 grey, 5px -13px 15px black, 5px -13px 25px #808080;
 }

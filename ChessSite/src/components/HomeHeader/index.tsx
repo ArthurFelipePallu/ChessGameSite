@@ -1,5 +1,18 @@
-import { Link } from 'react-router-dom';
 import './styles.css'
+import LinkIcon from '../LinkIcon';
+import { Link } from 'react-router-dom';
+import type { LinkIconDTO } from '../../models/UtilsDtos/iconDTO';
+
+
+const configLinkIcon : LinkIconDTO = {
+    iconId: "settings",
+    path: "/configuracao"
+}
+const loginLinkIcon : LinkIconDTO = {
+    iconId: "user",
+    path: "/user/"
+}
+
 
 export default function HomeHeader()
 {
@@ -11,11 +24,11 @@ export default function HomeHeader()
                     <h1>Chess Site</h1> 
                 </Link>
 
-                <div>
-                <Link to={"/user/"}> 
-                    <h3>User</h3> 
-                </Link>
-            </div>
+                
+                <div className="cs-container-flex-between-center  cs-header-icons-container">
+                    <LinkIcon linkIconInfo={configLinkIcon} />
+                    <LinkIcon linkIconInfo={loginLinkIcon} />
+                </div>
             </nav>
             
         </header>

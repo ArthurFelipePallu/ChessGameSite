@@ -1,0 +1,82 @@
+[
+  {
+    "category": "chess",
+    "icons": [
+      { "id": "pawn", "icon": "♟️" },
+      { "id": "rook", "icon": "♜" },
+      { "id": "knight", "icon": "♞" },
+      { "id": "bishop", "icon": "♝" },
+      { "id": "queen", "icon": "♛" },
+      { "id": "king", "icon": "♚" }
+    ]
+  },
+  {
+    "category": "competition",
+    "icons": [
+      { "id": "trophy", "icon": "🏆" },
+      { "id": "medal", "icon": "🥇" },
+      { "id": "leaderboard", "icon": "🏅" },
+      { "id": "rank", "icon": "📊" }
+    ]
+  },
+  {
+    "category": "modes",
+    "icons": [
+      { "id": "local-game", "icon": "👥" },
+      { "id": "online-game", "icon": "🌐" },
+      { "id": "ai", "icon": "🤖" },
+      { "id": "training", "icon": "🎯" }
+    ]
+  },
+  {
+    "category": "themes",
+    "icons": [
+      { "id": "classic", "icon": "♟️" },
+      { "id": "dark", "icon": "🌙" },
+      { "id": "nature", "icon": "🌿" },
+      { "id": "retro", "icon": "🕹️" }
+    ]
+  },
+  {
+    "category": "ui",
+    "icons": [
+      { "id": "play", "icon": "▶️" },
+      { "id": "pause", "icon": "⏸️" },
+      { "id": "restart", "icon": "♻️" },
+      { "id": "settings", "icon": "⚙️" },
+      { "id": "close", "icon": "❌" },
+      
+      { "id": "login", "icon": "🔐" },
+      { "id": "logout", "icon": "🚪" },
+      { "id": "user", "icon": "👤" },
+      { "id": "profile", "icon": "🧑‍💼" },
+      { "id": "register", "icon": "📝" },
+
+      { "id": "home", "icon": "🏠" },
+      { "id": "menu", "icon": "☰" },
+      { "id": "back", "icon": "⬅️" },
+      { "id": "forward", "icon": "➡️" },
+
+      { "id": "save", "icon": "💾" },
+      { "id": "edit", "icon": "✏️" },
+      { "id": "delete", "icon": "🗑️" },
+      { "id": "confirm", "icon": "✔️" },
+      { "id": "cancel", "icon": "✖️" },
+
+      { "id": "search", "icon": "🔍" },
+      { "id": "filter", "icon": "🔽" },
+      { "id": "sort", "icon": "↕️" },
+
+      { "id": "info", "icon": "ℹ️" },
+      { "id": "warning", "icon": "⚠️" },
+      { "id": "error", "icon": "🚫" },
+      { "id": "success", "icon": "✅" },
+
+      { "id": "fullscreen", "icon": "⛶" },
+      { "id": "exit-fullscreen", "icon": "🗗" },
+
+      { "id": "theme", "icon": "🎨" },
+      { "id": "language", "icon": "🌐" }
+    ]
+  }
+]

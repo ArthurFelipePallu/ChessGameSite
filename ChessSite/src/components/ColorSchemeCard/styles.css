@@ -1,0 +1,40 @@
+
+.color-scheme-card {
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--cs-color-card-border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--cs-color-card-bg);
+  cursor: pointer;
+}
+
+.color-scheme-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.color-scheme-card-title{
+    width: 80%;
+    height: 15%;
+    text-align: center;
+}
+
+.color-scheme-chessBoard{
+  width: 80%;
+  pointer-events: none;
+}
+
+.color-scheme-card.selected {
+  border: 2px solid #4CAF50; /* Highlight selected card with a green border */
+}
+
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+  color: var(--cs-color-card-font);
+}
+
+

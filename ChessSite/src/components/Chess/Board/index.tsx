@@ -3,7 +3,7 @@ import Square from "../Square";
 import {useState} from "react";
 import type { SquareDTO } from "../../../models/Chess/SquareDTO";
 import type { BoardDTO } from "../../../models/Chess/BoardDTO";
-import { getBoardColorSchemeById } from "../../../utils/BoardColorSchemes";
+import { getBoardColorSchemeById } from "../../../services/boardColorScheme-service";
 
 type Prop ={
   boardInfo:BoardDTO;
@@ -16,42 +16,18 @@ export default function ChessBoard({ boardInfo } : Prop)
  {
   const [selectedSquare, setSelectedSquare] = useState(null);
 
-
-const defaultSquare : SquareDTO = {
-                          content :"P",
-                          squareColor:'#aad9d8',
-                          clickAction: () => ({}),
-                          squareIsSelected:false,
-                          squareIsPossibleMove:false
-}
-
-  // Default colors if no color scheme is provided
-  const defaultColorScheme = {
-    white: '#f0d9b5',
-    black: '#b58863',
-    highlightedWhite: '#aad9d8',
-    highlightedBlack: '#7f6f4f',
-    possibleMoveHighlight: '#90ee90',
-  };
-
   // Fallback to default colors if no custom color scheme is passed
-  const {
-    white,
-    black,
-    highlightedWhite,
-    highlightedBlack,
-    possibleMoveHighlight,
-  } = getBoardColorSchemeById(boardInfo.boardColorSchemeId) || defaultColorScheme;
+  const scheme = getBoardColorSchemeById(boardInfo.boardColorSchemeId) ;
 
   // Helper function to get the color of the square
   const getSquareColor = (rowIndex : number, colIndex : number, isSelected:boolean, isPossibleMove:boolean) =>{
     if (isSelected) {
-      return (rowIndex + colIndex) % 2 === 0 ? highlightedWhite : highlightedBlack;
+      return (rowIndex + colIndex) % 2 === 0 ? scheme.highlightedWhite : scheme.highlightedBlack;
     }
     if (isPossibleMove) {
-      return possibleMoveHighlight;
+      return scheme.possibleMoveHighlight;
     }
-    return (rowIndex + colIndex) % 2 === 0 ? white : black;
+    return (rowIndex + colIndex) % 2 === 0 ? scheme.white : scheme.black;
   };
 
   // Handle square click, setting the selected square's position
@@ -59,6 +35,28 @@ const defaultSquare : SquareDTO = {
     setSelectedSquare({ row: rowIndex, col: colIndex });
     console.log(`Square clicked at position: (${rowIndex}, ${colIndex})`);
   };
+
+
+function createSquare(square:string,rowIndex:number,colIndex:number): JSX.Element{
+  const isSelected = selectedSquare?.row === rowIndex && selectedSquare?.col === colIndex;
+  const isPossibleMove = boardInfo.possibleMoves[rowIndex][colIndex];
+  const color = getSquareColor(rowIndex, colIndex, isSelected, isPossibleMove);
+
+   const boardSquareInfo : SquareDTO = {
+                content :square,
+                squareColor:color,
+                clickAction: () => handleSquareClick(rowIndex,colIndex),
+                squareIsSelected:isSelected,
+                squareIsPossibleMove:isPossibleMove
+
+              }
+  return (
+    <Square
+      key={`${rowIndex}-${colIndex}`}
+      squareInfo = { boardSquareInfo }
+    />
+  );  
+}
 
 
   return (
@@ -72,27 +70,7 @@ const defaultSquare : SquareDTO = {
       >
         {boardInfo.board.map((row, rowIndex) => (
           row.map((square, colIndex) => {
-            const isSelected = selectedSquare?.row === rowIndex && selectedSquare?.col === colIndex;
-            const isPossibleMove = boardInfo.possibleMoves[rowIndex][colIndex];
-            const color = getSquareColor(rowIndex, colIndex, isSelected, isPossibleMove);
-
-             const boardSquareInfo : SquareDTO = {
-                          content :square,
-                          squareColor:color,
-                          clickAction: () => handleSquareClick(rowIndex,colIndex),
-                          squareIsSelected:isSelected,
-                          squareIsPossibleMove:isPossibleMove
-
-                        }
-
-
-            return (
-              <Square
-                key={`${rowIndex}-${colIndex}`}
-                
-                squareInfo = { boardSquareInfo }
-              />
-            );
+            return createSquare(square,rowIndex,colIndex);
           })
         ))}
       </div>

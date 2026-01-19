@@ -1,139 +1,464 @@
 [
   {
     "id": "classic",
-    "name": "ClassicBoardScheme",
-    "white": "#F0D9B5",
-    "black": "#B58863",
-    "highlightedWhite": "#F7EC77",
-    "highlightedBlack": "#E6CC5A",
-    "possibleMoveHighlight": "#6FAF3D"
+    "name": "Classic Boards",
+    "iconId":"pawn",
+    "colorSchemes": [
+      {
+        "id": "black-white",
+        "name": "Black & White",
+        "white": "#FFFFFF",
+        "black": "#000000",
+        "highlightedWhite": "#FFEB3B",
+        "highlightedBlack": "#FFC107",
+        "possibleMoveHighlight": "#00E676"
+      },
+      {
+        "id": "classic-wood",
+        "name": "Classic Wood",
+        "white": "#F0D9B5",
+        "black": "#B58863",
+        "highlightedWhite": "#F7EC77",
+        "highlightedBlack": "#E6CC5A",
+        "possibleMoveHighlight": "#6FAF3D"
+      },
+      {
+        "id": "chesscom",
+        "name": "Chess dot com",
+        "white": "#EEEED2",
+        "black": "#769656",
+        "highlightedWhite": "#F6F669",
+        "highlightedBlack": "#BACA44",
+        "possibleMoveHighlight": "#7DBA2F"
+      },
+      {
+        "id": "lichess",
+        "name": "Lichess Classic",
+        "white": "#F0F0F0",
+        "black": "#B9B9B9",
+        "highlightedWhite": "#E6E67A",
+        "highlightedBlack": "#CFCF4A",
+        "possibleMoveHighlight": "#A6D785"
+      },
+      {
+        "id": "wood-mahogany",
+        "name": "Mahogany Wood",
+        "white": "#F3E2C7",
+        "black": "#7A4A2E",
+        "highlightedWhite": "#FFD180",
+        "highlightedBlack": "#FFB74D",
+        "possibleMoveHighlight": "#8BC34A"
+      },
+      {
+        "id": "blueprint",
+        "name": "Blueprint",
+        "white": "#E1F5FE",
+        "black": "#01579B",
+        "highlightedWhite": "#81D4FA",
+        "highlightedBlack": "#0288D1",
+        "possibleMoveHighlight": "#FFCA28"
+      },
+      {
+        "id": "royal-purple",
+        "name": "Royal Purple",
+        "white": "#F3E5F5",
+        "black": "#4A148C",
+        "highlightedWhite": "#CE93D8",
+        "highlightedBlack": "#7B1FA2",
+        "possibleMoveHighlight": "#FF4081"
+      },
+      {
+        "id": "modern-minimal",
+        "name": "Modern Minimal",
+        "white": "#ECEFF1",
+        "black": "#90A4AE",
+        "highlightedWhite": "#64B5F6",
+        "highlightedBlack": "#42A5F5",
+        "possibleMoveHighlight": "#26C6DA"
+      }
+    ]
+  },
+  {
+    "id": "tournament",
+    "name": "Tournament Boards",
+    "iconId":"trophy",
+    "colorSchemes": [
+      {
+        "id": "blue-tournament",
+        "name": "Blue Tournament",
+        "white": "#DCE7F2",
+        "black": "#5A7DAF",
+        "highlightedWhite": "#F1F78B",
+        "highlightedBlack": "#9DB4E0",
+        "possibleMoveHighlight": "#7EC850"
+      },
+      {
+        "id": "green-felt",
+        "name": "Green Felt",
+        "white": "#DDEBD6",
+        "black": "#5F7F4E",
+        "highlightedWhite": "#F3F78A",
+        "highlightedBlack": "#9FBF7A",
+        "possibleMoveHighlight": "#7FBF4A"
+      },
+      {
+        "id": "tournament-green",
+        "name": "Tournament Green",
+        "white": "#E8F5E9",
+        "black": "#2E7D32",
+        "highlightedWhite": "#AED581",
+        "highlightedBlack": "#81C784",
+        "possibleMoveHighlight": "#FFD54F"
+      },
+      {
+        "id": "gray-blue-tournament",
+        "name": "Gray Blue Tournament",
+        "white": "#E6EBF1",
+        "black": "#4A5D73",
+        "highlightedWhite": "#F6F89E",
+        "highlightedBlack": "#9FB7D8",
+        "possibleMoveHighlight": "#7BC96F"
+      },
+      {
+        "id": "slate-tournament",
+        "name": "Slate Tournament",
+        "white": "#ECEFF1",
+        "black": "#37474F",
+        "highlightedWhite": "#FFF59D",
+        "highlightedBlack": "#90A4AE",
+        "possibleMoveHighlight": "#81C784"
+      },
+      {
+        "id": "fide-blue",
+        "name": "FIDE Blue",
+        "white": "#E3F2FD",
+        "black": "#1565C0",
+        "highlightedWhite": "#FFF59D",
+        "highlightedBlack": "#64B5F6",
+        "possibleMoveHighlight": "#66BB6A"
+      },
+      {
+        "id": "olive-tournament",
+        "name": "Olive Tournament",
+        "white": "#EEF2E6",
+        "black": "#6B8E23",
+        "highlightedWhite": "#DCE775",
+        "highlightedBlack": "#9CCC65",
+        "possibleMoveHighlight": "#FDD835"
+      },
+      {
+        "id": "stone-tournament",
+        "name": "Stone Tournament",
+        "white": "#F5F5F5",
+        "black": "#616161",
+        "highlightedWhite": "#FFF176",
+        "highlightedBlack": "#9E9E9E",
+        "possibleMoveHighlight": "#81C784"
+      }
+    ]
+  },
+  {
+    "id": "nature",
+    "name": "Nature Boards",
+    "iconId":"nature",
+    "colorSchemes": [
+      {
+        "id": "midnight-blue",
+        "name": "Midnight Blue",
+        "white": "#E3F2FD",
+        "black": "#0D47A1",
+        "highlightedWhite": "#90CAF9",
+        "highlightedBlack": "#1565C0",
+        "possibleMoveHighlight": "#FF7043"
+      },
+      {
+        "id": "desert-sand",
+        "name": "Desert Sand",
+        "white": "#FFF3E0",
+        "black": "#D7A86E",
+        "highlightedWhite": "#FFE082",
+        "highlightedBlack": "#FFCA28",
+        "possibleMoveHighlight": "#8D6E63"
+      },
+      {
+        "id": "forest-night",
+        "name": "Forest Night",
+        "white": "#D0E8D0",
+        "black": "#1B5E20",
+        "highlightedWhite": "#9CCC65",
+        "highlightedBlack": "#558B2F",
+        "possibleMoveHighlight": "#FFEB3B"
+      },
+      {
+        "id": "ice-glacier",
+        "name": "Ice Glacier",
+        "white": "#E0F7FA",
+        "black": "#006064",
+        "highlightedWhite": "#80DEEA",
+        "highlightedBlack": "#0097A7",
+        "possibleMoveHighlight": "#00E5FF"
+      },
+      {
+        "id": "lava",
+        "name": "Lava",
+        "white": "#FFECE6",
+        "black": "#BF360C",
+        "highlightedWhite": "#FFAB91",
+        "highlightedBlack": "#E64A19",
+        "possibleMoveHighlight": "#FFD600"
+      },
+      {
+        "id": "autumn-forest",
+        "name": "Autumn Forest",
+        "white": "#F3E5AB",
+        "black": "#8D5A2B",
+        "highlightedWhite": "#FFD54F",
+        "highlightedBlack": "#C4903F",
+        "possibleMoveHighlight": "#7CB342"
+      },
+      {
+        "id": "mountain-stone",
+        "name": "Mountain Stone",
+        "white": "#ECEFF1",
+        "black": "#546E7A",
+        "highlightedWhite": "#FFF59D",
+        "highlightedBlack": "#90A4AE",
+        "possibleMoveHighlight": "#81C784"
+      },
+      {
+        "id": "deep-ocean",
+        "name": "Deep Ocean",
+        "white": "#E1F5FE",
+        "black": "#01579B",
+        "highlightedWhite": "#81D4FA",
+        "highlightedBlack": "#0288D1",
+        "possibleMoveHighlight": "#26C6DA"
+      },
+      {
+        "id": "volcanic-ash",
+        "name": "Volcanic Ash",
+        "white": "#B0BEC5",
+        "black": "#263238",
+        "highlightedWhite": "#90A4AE",
+        "highlightedBlack": "#455A64",
+        "possibleMoveHighlight": "#FF8F00"
+      },  
+      {
+        "id": "mossy-rock",
+        "name": "Mossy Rock",
+        "white": "#E6EEDB",
+        "black": "#5A6F4E",
+        "highlightedWhite": "#C5E1A5",
+        "highlightedBlack": "#8BC34A",
+        "possibleMoveHighlight": "#FDD835"
+      },
+      {
+        "id": "sunset-canyon",
+        "name": "Sunset Canyon",
+        "white": "#FFE0B2",
+        "black": "#BF360C",
+        "highlightedWhite": "#FFCC80",
+        "highlightedBlack": "#E64A19",
+        "possibleMoveHighlight": "#FFEB3B"
+      },
+      {
+        "id": "polar-night",
+        "name": "Polar Night",
+        "white": "#E8F1F8",
+        "black": "#263238",
+        "highlightedWhite": "#B3E5FC",
+        "highlightedBlack": "#455A64",
+        "possibleMoveHighlight": "#4FC3F7"
+}
+      
+    ]
+  },
+  {
+    "id": "retro",
+    "name": "Retro & Nostalgia",
+    "iconId":"retro",
+    "colorSchemes": [
+      {
+      "id": "gameboy",
+      "name": "GameBoy",
+      "white": "#9BBC0F",
+      "black": "#0F380F",
+      "highlightedWhite": "#C4E456",
+      "highlightedBlack": "#4F7B2A",
+      "possibleMoveHighlight": "#8BAC0F"
+      },
+      {
+      "id": "gameboy-gray",
+      "name": "GameBoy Gray",
+      "white": "#E0E0E0",
+      "black": "#4A4A4A",
+      "highlightedWhite": "#FFFFFF",
+      "highlightedBlack": "#8A8A8A",
+      "possibleMoveHighlight": "#B5B5B5"
+      },
+      {
+      "id": "gameboy-blue",
+      "name": "GameBoy Blue",
+      "white": "#A7C7E7",
+      "black": "#1F3A5F",
+      "highlightedWhite": "#CFE4FF",
+      "highlightedBlack": "#4A6FA5",
+      "possibleMoveHighlight": "#7FB3D5"
+      },
+      {
+        "id": "gameboy-purple",
+        "name": "GameBoy Purple",
+        "white": "#E6D9F2",
+        "black": "#5A3E7A",
+        "highlightedWhite": "#F3ECFA",
+        "highlightedBlack": "#7A5FA3",
+        "possibleMoveHighlight": "#B39DDB"
+      },
+      {
+        "id": "gameboy-pocket",
+        "name": "GameBoy Pocket",
+        "white": "#D6D6C2",
+        "black": "#6B6B5B",
+        "highlightedWhite": "#EFEFD8",
+        "highlightedBlack": "#8A8A74",
+        "possibleMoveHighlight": "#B4C292"
+      },
+      {
+        "id": "nes-classic",
+        "name": "NES Classic",
+        "white": "#E6E6E6",
+        "black": "#2B2B2B",
+        "highlightedWhite": "#FFFFFF",
+        "highlightedBlack": "#7A7A7A",
+        "possibleMoveHighlight": "#C62828"
+      },
+      {
+        "id": "snes-controller",
+        "name": "SNES Controller",
+        "white": "#EDEDED",
+        "black": "#5E5E5E",
+        "highlightedWhite": "#FFF59D",
+        "highlightedBlack": "#9E9E9E",
+        "possibleMoveHighlight": "#8BC34A"
+      },
+      {
+        "id": "dos-terminal",
+        "name": "DOS Terminal",
+        "white": "#C7C7C7",
+        "black": "#000080",
+        "highlightedWhite": "#E0E0E0",
+        "highlightedBlack": "#0000CD",
+        "possibleMoveHighlight": "#00FF00"
+      },
+      {
+        "id": "calculator-lcd",
+        "name": "Calculator LCD",
+        "white": "#CDE2C3",
+        "black": "#2F4F2F",
+        "highlightedWhite": "#E4F2DA",
+        "highlightedBlack": "#4F6F4F",
+        "possibleMoveHighlight": "#9CCC65"
+      }
+
+
+
+    ]
   },
   {
     "id": "dark",
-    "name": "DarkBoardScheme",
-    "white": "#BFC3C7",
-    "black": "#2F3336",
-    "highlightedWhite": "#8FAADC",
-    "highlightedBlack": "#5B78A6",
-    "possibleMoveHighlight": "#4CAF50"
-  },
-  {
-    "id": "tournament-green",
-    "name": "TournamentGreenScheme",
-    "white": "#E8F5E9",
-    "black": "#2E7D32",
-    "highlightedWhite": "#AED581",
-    "highlightedBlack": "#81C784",
-    "possibleMoveHighlight": "#FFD54F"
-  },
-  {
-    "id": "modern-minimal",
-    "name": "ModernMinimalScheme",
-    "white": "#ECEFF1",
-    "black": "#90A4AE",
-    "highlightedWhite": "#64B5F6",
-    "highlightedBlack": "#42A5F5",
-    "possibleMoveHighlight": "#26C6DA"
-  },
-  {
-    "id": "high-contrast",
-    "name": "HighContrastScheme",
-    "white": "#FFFFFF",
-    "black": "#000000",
-    "highlightedWhite": "#FFEB3B",
-    "highlightedBlack": "#FFC107",
-    "possibleMoveHighlight": "#00E676"
-  },
+    "name": "Dark Mode Boards",
+    "iconId":"dark",
+    "colorSchemes": [        
+      {
+        "id": "dark",
+        "name": "Dark",
+        "white": "#BFC3C7",
+        "black": "#2F3336",
+        "highlightedWhite": "#8FAADC",
+        "highlightedBlack": "#5B78A6",
+        "possibleMoveHighlight": "#4CAF50"
+      },
+      {
+        "id": "slate-night",
+        "name": "Slate Night",
+        "white": "#AEB6BF",
+        "black": "#2B2F33",
+        "highlightedWhite": "#90A4AE",
+        "highlightedBlack": "#546E7A",
+        "possibleMoveHighlight": "#66BB6A"
+      },
+      {
+        "id": "dark-wood",
+        "name": "Dark Wood",
+        "white": "#8C6A4A",
+        "black": "#3E2A1C",
+        "highlightedWhite": "#C9A84F",
+        "highlightedBlack": "#6F4F2A",
+        "possibleMoveHighlight": "#9ACD32"
+      },
+      {
+        "id": "charcoal",
+        "name": "Charcoal",
+        "white": "#444444",
+        "black": "#1E1E1E",
+        "highlightedWhite": "#6A6A6A",
+        "highlightedBlack": "#3A3A3A",
+        "possibleMoveHighlight": "#4CAF50"
+      },
+      {
+        "id": "obsidian",
+        "name": "Obsidian",
+        "white": "#DADADA",
+        "black": "#1C1C1C",
+        "highlightedWhite": "#9FA8DA",
+        "highlightedBlack": "#5C6BC0",
+        "possibleMoveHighlight": "#66BB6A"
+      },
+      {
+        "id": "bloodstone",
+        "name": "Bloodstone",
+        "white": "#C7A1A1",
+        "black": "#2B0F0F",
+        "highlightedWhite": "#EF9A9A",
+        "highlightedBlack": "#7F2A2A",
+        "possibleMoveHighlight": "#FF7043"
+      },
+      {
+        "id": "graphite",
+        "name": "Graphite",
+        "white": "#9E9E9E",
+        "black": "#212121",
+        "highlightedWhite": "#BDBDBD",
+        "highlightedBlack": "#424242",
+        "possibleMoveHighlight": "#81C784"
+      },
+      {
+        "id": "ashes",
+        "name": "Ashes",
+        "white": "#7E7E7E",
+        "black": "#2A2A2A",
+        "highlightedWhite": "#A5A5A5",
+        "highlightedBlack": "#4F4F4F",
+        "possibleMoveHighlight": "#8BC34A"
+      },
+      {
+        "id": "midnight-steel",
+        "name": "Midnight Steel",
+        "white": "#C5CAE9",
+        "black": "#1A237E",
+        "highlightedWhite": "#9FA8DA",
+        "highlightedBlack": "#3949AB",
+        "possibleMoveHighlight": "#4CAF50"
+      }
 
-  {
-    "id": "midnight-blue",
-    "name": "MidnightBlueScheme",
-    "white": "#E3F2FD",
-    "black": "#0D47A1",
-    "highlightedWhite": "#90CAF9",
-    "highlightedBlack": "#1565C0",
-    "possibleMoveHighlight": "#FF7043"
-  },
-  {
-    "id": "desert-sand",
-    "name": "DesertSandScheme",
-    "white": "#FFF3E0",
-    "black": "#D7A86E",
-    "highlightedWhite": "#FFE082",
-    "highlightedBlack": "#FFCA28",
-    "possibleMoveHighlight": "#8D6E63"
-  },
-  {
-    "id": "forest-night",
-    "name": "ForestNightScheme",
-    "white": "#D0E8D0",
-    "black": "#1B5E20",
-    "highlightedWhite": "#9CCC65",
-    "highlightedBlack": "#558B2F",
-    "possibleMoveHighlight": "#FFEB3B"
-  },
-  {
-    "id": "royal-purple",
-    "name": "RoyalPurpleScheme",
-    "white": "#F3E5F5",
-    "black": "#4A148C",
-    "highlightedWhite": "#CE93D8",
-    "highlightedBlack": "#7B1FA2",
-    "possibleMoveHighlight": "#FF4081"
-  },
-  {
-    "id": "ice-glacier",
-    "name": "IceGlacierScheme",
-    "white": "#E0F7FA",
-    "black": "#006064",
-    "highlightedWhite": "#80DEEA",
-    "highlightedBlack": "#0097A7",
-    "possibleMoveHighlight": "#00E5FF"
-  },
-  {
-    "id": "chesscom-default",
-    "name": "ChessComDefaultScheme",
-    "white": "#EEEED2",
-    "black": "#769656",
-    "highlightedWhite": "#F6F669",
-    "highlightedBlack": "#BACA44",
-    "possibleMoveHighlight": "#829769"
-  },
-  {
-    "id": "wood-mahogany",
-    "name": "MahoganyWoodScheme",
-    "white": "#F3E2C7",
-    "black": "#7A4A2E",
-    "highlightedWhite": "#FFD180",
-    "highlightedBlack": "#FFB74D",
-    "possibleMoveHighlight": "#8BC34A"
-  },
-  {
-    "id": "obsidian",
-    "name": "ObsidianScheme",
-    "white": "#DADADA",
-    "black": "#1C1C1C",
-    "highlightedWhite": "#9FA8DA",
-    "highlightedBlack": "#5C6BC0",
-    "possibleMoveHighlight": "#66BB6A"
-  },
-  {
-    "id": "blueprint",
-    "name": "BlueprintScheme",
-    "white": "#E1F5FE",
-    "black": "#01579B",
-    "highlightedWhite": "#81D4FA",
-    "highlightedBlack": "#0288D1",
-    "possibleMoveHighlight": "#FFCA28"
-  },
-  {
-    "id": "lava",
-    "name": "LavaScheme",
-    "white": "#FFECE6",
-    "black": "#BF360C",
-    "highlightedWhite": "#FFAB91",
-    "highlightedBlack": "#E64A19",
-    "possibleMoveHighlight": "#FFD600"
+
+
+    ]
   }
 ]
+
+
+
+
+
 

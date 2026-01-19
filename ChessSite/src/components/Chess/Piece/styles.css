@@ -1,0 +1,10 @@
+.chess-piece {
+  width: 80%;
+  height: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
+  
+  background-color: red;
+}

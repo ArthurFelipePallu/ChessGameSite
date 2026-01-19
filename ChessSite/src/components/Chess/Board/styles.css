@@ -3,8 +3,8 @@
   width: 95%; /* Chessboard takes up 95% of the parent container's width */
   height: 95%; /* Chessboard takes up 95% of the parent container's height */
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .chess-board {
@@ -12,6 +12,8 @@
   gap: 0;
   width: 100%; /* Full width of the container */
   height: 100%; /* Full height of the container */
+  max-width: 512px;
+  max-height: 512px;
   grid-template-columns: repeat(8, 1fr); /* Default 8 columns */
   grid-template-rows: repeat(8, 1fr); /* Default 8 rows */
   aspect-ratio: 1/1;
