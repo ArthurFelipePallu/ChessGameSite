@@ -7,6 +7,11 @@ const spriteSheetMap: Record<string,SpriteSheetConfig> = {};
   spriteSheetMap[sheet.id] = sheet;
 });
 
+export function getAllSpriteSheetsInfo() : SpriteSheetConfig[]
+{
+  return (spriteSheetData as SpriteSheetConfig[]);
+}
+
 export function getSpriteSheetById(id : string)
 {
   return spriteSheetMap[id];

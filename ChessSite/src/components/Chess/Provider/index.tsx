@@ -8,7 +8,7 @@ type Props = {
 export function ContextSelectedBoardConfigurationProvider({ children }: Props) {
   const [contextSelectedBoardColorSchemeId, setContextSelectedBoardColorSchemeId] = useState<string>("classic");
 
-  const [contextSelectedPiecesSpriteSheetId, setContextSelectedPiecesSpriteSheetId] = useState<string>("classic");
+  const [contextSelectedPiecesSpriteSheetId, setContextSelectedPiecesSpriteSheetId] = useState<string>("classic-red");
 
   return (
     <ContextSelectedBoardConfiguration.Provider

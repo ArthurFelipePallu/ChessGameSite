@@ -4,6 +4,12 @@
     "src": "/assets/classicPieces-spriteSheet.png",
     "rows":2,
     "cols":6
+  },
+  {
+    "id": "classic-red",
+    "src": "/assets/classicRedPieces-spriteSheet.png",
+    "rows":2,
+    "cols":6
   }
 ]
 

@@ -12,6 +12,6 @@ export const ContextSelectedBoardConfiguration = createContext<ContextSelectedBo
     contextSelectedBoardColorSchemeId:"classic",
     setContextSelectedBoardColorSchemeId: () => {},
 
-    contextSelectedPiecesSpriteSheetId:"classic",
+    contextSelectedPiecesSpriteSheetId:"classic-red",
     setContextSelectedPiecesSpriteSheetId: () => {}
 });
