@@ -5,6 +5,7 @@ import BoardColorSchemeCard from "../../../components/ColorSchemeCard";
 import {getBoardColorSchemeById} from "../../../services/boardColorScheme-service";
 import { ContextSelectedBoardConfiguration } from "../../../utils/Contexts/boardConfig-context";
 import type { BoardColorSchemeCardDTO, BoardColorSchemeDTO } from "../../../models/BoardColorSchemeDTO";
+import { Outlet } from "react-router-dom";
 
 export default function ChessConfigPage(){
 
@@ -66,7 +67,8 @@ function createCurrentSchemeBoard()
       
       {createCurrentSchemeBoard()}
       
-      <ChessConfigBoardColorSchemeSelection />
+      <Outlet/>
+      {/* <ChessConfigBoardColorSchemeSelection /> */}
     </div>
   );
 };

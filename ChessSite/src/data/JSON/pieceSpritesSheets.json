@@ -1,15 +1,50 @@
 [
   {
     "id": "classic",
-    "src": "/assets/classicPieces-spriteSheet.png",
-    "rows":2,
-    "cols":6
+    "name": "Classic Piece Sets",
+    "spriteSheets": [
+        {
+          "id": "classic",
+          "name": "Classic",
+          "src": "/assets/classicPieces-spriteSheet.png",
+          "rows":2,
+          "cols":6
+        },
+        {
+          "id": "classic-red",
+          "name": "Classic Red",
+          "src": "/assets/classicRedPieces-spriteSheet.png",
+          "rows":2,
+          "cols":6
+        }
+    ]
   },
   {
-    "id": "classic-red",
-    "src": "/assets/classicRedPieces-spriteSheet.png",
-    "rows":2,
-    "cols":6
+    "id": "neon",
+    "name": "Neon Piece Sets",
+    "spriteSheets": [
+        {
+          "id": "classic-neon",
+          "name": "Classic Neon",
+          "src": "/assets/classicPieces-spriteSheet.png",
+          "rows":2,
+          "cols":6
+        },
+        {
+          "id": "rainbow-neon-pieces",
+          "name": "Rainbow Neon Pieces",
+          "src": "/assets/classicRedPieces-spriteSheet.png",
+          "rows":2,
+          "cols":6
+        },
+        {
+          "id": "rainbow-neon-set",
+          "name": "Rainbow Neon Set",
+          "src": "/assets/classicRedPieces-spriteSheet.png",
+          "rows":2,
+          "cols":6
+        }
+    ]
   }
 ]
 
