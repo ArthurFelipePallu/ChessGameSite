@@ -1,28 +1,79 @@
+import "./styles.css"
 import { useState } from "react";
+import { motion } from "framer-motion";
+import ChessConfigBoardColorSchemeSelection from "../../routes/Home/Configuracao/BoardColorSchemeSelection";
+
+function EmptyComponent(){
+    return (<></>);
+}
+const Tabs =[
+    {
+        "id": 0,
+        "name":"board",
+        "component":ChessConfigBoardColorSchemeSelection,
+    },
+    {
+        "id": 1,
+        "name":"pieces",
+        "component":EmptyComponent,
+    },
+    {
+        "id": 2,
+        "name":"connection",
+        "component":EmptyComponent,
+    },
+    {
+        "id": 3,
+        "name":"sounds",
+        "component":EmptyComponent,
+    },
+    {
+        "id": 4,
+        "name":"account",
+        "component":EmptyComponent,
+    }
+]
 
 
 
 export default function HighlightedTabs(){
+  const [highlightedIndex, setHighlightedIndex] = useState(2);
+
+  const ActiveComponent = Tabs.find(
+    (tab) => tab.id === highlightedIndex
+  )?.component;
+
 
   return (
-    <>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="Item One" {...a11yProps(0)} />
-            <Tab label="Item Two" {...a11yProps(1)} />
-            <Tab label="Item Three" {...a11yProps(2)} />
-        </Tabs>
-        </Box>
-        <CustomTabPanel value={value} index={0}>
-        Item One
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
-        Item Two
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
-        Item Three
-        </CustomTabPanel>
-    </>
-    
+    <div className="container">
+      <header>
+        <ul className="tabs">
+        {Tabs.map((tab) => (
+          <li
+            className={tab.id === highlightedIndex ? "active" : undefined}
+            onClick={() => setHighlightedIndex(tab.id)}
+            key={tab.id}
+          >
+            {tab.id === highlightedIndex && <motion.div
+              className="active-highlight"
+              transition={{
+                layout: {
+                  duration: 0.3,
+                  
+                }
+              }}
+              layoutId="highlight"
+            />}
+              {tab.id !== highlightedIndex && <div className="passive-highlight"></div>}
+            <span>{tab.name}</span>
+          </li>
+        ))}
+      </ul>
+      </header>
+      
+      <div>
+        {ActiveComponent && <ActiveComponent />}
+      </div>
+    </div>
   );
-}
+};

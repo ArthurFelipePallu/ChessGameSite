@@ -29,7 +29,7 @@ export default function App() {
           <Route path='/' element={<Home/>}>
             <Route index element={<JogoLocal/>}/>
             <Route path='configuracao/' element={<Configuracao />}>
-              <Route path='board-color-select' element={<ChessConfigBoardColorSchemeSelection />}/>
+              {/* <Route path='board-color-select' element={<ChessConfigBoardColorSchemeSelection />}/> */}
               <Route path='piece-set-select' element={<ChessConfigSpriteSheetSelection />}/>
             </Route>
             <Route path='jogo-local' element={<JogoLocal />}/>

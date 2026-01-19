@@ -1,11 +1,11 @@
 import "./styles.css"
+import { Outlet } from "react-router-dom";
 import { useContext, useEffect, useState } from 'react';
-import ChessConfigBoardColorSchemeSelection from './BoardColorSchemeSelection/index';
+import HighlightedTabs from "../../../components/HighlightedTabs";
 import BoardColorSchemeCard from "../../../components/ColorSchemeCard"; 
 import {getBoardColorSchemeById} from "../../../services/boardColorScheme-service";
 import { ContextSelectedBoardConfiguration } from "../../../utils/Contexts/boardConfig-context";
 import type { BoardColorSchemeCardDTO, BoardColorSchemeDTO } from "../../../models/BoardColorSchemeDTO";
-import { Outlet } from "react-router-dom";
 
 export default function ChessConfigPage(){
 
@@ -67,6 +67,7 @@ function createCurrentSchemeBoard()
       
       {createCurrentSchemeBoard()}
       
+      <HighlightedTabs />
       <Outlet/>
       {/* <ChessConfigBoardColorSchemeSelection /> */}
     </div>

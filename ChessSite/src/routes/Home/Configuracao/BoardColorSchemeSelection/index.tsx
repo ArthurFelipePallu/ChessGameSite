@@ -9,7 +9,7 @@ import type { BoardColorSchemeDTO, BoardColorSchemeGroupDTO, BoardColorSchemeCar
 export default function ChessConfigBoardColorSchemeSelection(){
 
   const colorSchemeGroups = getAllBoardColorSchemeGroups();
-  const [openGroupId, setOpenGroupId] = useState<string | null>("classic");
+  const [openGroupId, setOpenGroupId] = useState<string | null>("");
   const [selectedSchemeId, setSelectedSchemeId] = useState<string>(''); // Track the selected color scheme by its ID
   const { setContextSelectedBoardColorSchemeId} = useContext(ContextSelectedBoardConfiguration);
 
