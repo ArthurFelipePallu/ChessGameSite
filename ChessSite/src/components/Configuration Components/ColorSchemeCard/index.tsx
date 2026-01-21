@@ -1,8 +1,8 @@
 import "./styles.css"
-import ChessBoard from "../Chess/Board";
-import type { BoardDTO } from "../../models/Chess/BoardDTO";
-import { x2_Board , x2_defaultPossiblePositions } from '../../utils/Boards';
-import { type BoardColorSchemeCardDTO } from "../../models/BoardColorSchemeDTO";
+import ChessBoard from "../../Chess/Board";
+import type { BoardDTO } from "../../../models/Chess/BoardDTO";
+import { x2_Board , x2_defaultPossiblePositions } from '../../../utils/Boards';
+import { type BoardColorSchemeCardDTO } from "../../../models/ConfigurationModels/BoardColorSchemeDTO";
 
 type Prop={
     colorScheme: BoardColorSchemeCardDTO;

@@ -3,7 +3,7 @@ import spriteSheetData from "../data/JSON/pieceSpritesSheets.json";
 import { pieceMap, 
          defaultChessSpriteSheet, 
          type SpriteSheetDTO, 
-         type SpriteSheetGroupDTO } from "../models/UtilsDtos/SpriteSheetConfigDTO";
+         type SpriteSheetGroupDTO } from "../models/ConfigurationModels/SpriteSheetConfigDTO";
 
 
 
@@ -52,6 +52,10 @@ export function getSpriteByPieceId(pieceId : string)
   return pieceMap.map(p => p.id === pieceId);
 }
 
+export function getSpriteFromSpriteSheetByPieceId(spriteSheet:SpriteSheetDTO,pieceId : string)
+{
+  return pieceMap.map(p => p.id === pieceId);
+}
 
 
 /* ======================================================

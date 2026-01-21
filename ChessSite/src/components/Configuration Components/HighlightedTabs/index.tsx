@@ -1,7 +1,7 @@
 import "./styles.css"
 import { useState } from "react";
 import { motion } from "framer-motion";
-import ChessConfigBoardColorSchemeSelection from "../Configuration Components/BoardColorSchemeSelection";
+import ChessConfigBoardColorSchemeSelection from "../BoardColorSchemeSelection";
 
 function EmptyComponent(){
     return (<></>);
@@ -37,7 +37,7 @@ const Tabs =[
 
 
 export default function HighlightedTabs(){
-  const [highlightedIndex, setHighlightedIndex] = useState(2);
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
 
   const ActiveComponent = Tabs.find(
     (tab) => tab.id === highlightedIndex

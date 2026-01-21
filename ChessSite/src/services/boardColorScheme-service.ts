@@ -1,7 +1,7 @@
 import {
   type BoardColorSchemeDTO,
   type BoardColorSchemeGroupDTO
-} from "../models/BoardColorSchemeDTO";
+} from "../models/ConfigurationModels/BoardColorSchemeDTO";
 
 import boardColorSchemeData from "../data/JSON/boardColorScheme.json";
 

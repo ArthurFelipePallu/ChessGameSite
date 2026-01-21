@@ -1,15 +1,15 @@
 import "./styles.css"
 import { useContext, useState } from 'react';
-import { getIconById } from "../../../../services/icon-service";
-import BoardColorSchemeCard from "../../../../components/ColorSchemeCard";
-import { ContextSelectedBoardConfiguration } from "../../../../utils/Contexts/boardConfig-context";
-import { getAllBoardColorSchemeGroups } from "../../../../services/boardColorScheme-service";
-import type { BoardColorSchemeDTO, BoardColorSchemeGroupDTO, BoardColorSchemeCardDTO } from "../../../../models/BoardColorSchemeDTO";
+import { getIconById } from "../../../services/icon-service";
+import BoardColorSchemeCard from "../ColorSchemeCard";
+import { ContextSelectedBoardConfiguration } from "../../../utils/Contexts/boardConfig-context";
+import { getAllBoardColorSchemeGroups } from "../../../services/boardColorScheme-service";
+import type { BoardColorSchemeDTO, BoardColorSchemeGroupDTO, BoardColorSchemeCardDTO } from "../../../models/ConfigurationModels/BoardColorSchemeDTO";
 
-export default function ChessConfigSpriteSheetSelection(){
+export default function ChessConfigBoardColorSchemeSelection(){
 
   const colorSchemeGroups = getAllBoardColorSchemeGroups();
-  const [openGroupId, setOpenGroupId] = useState<string | null>("classic");
+  const [openGroupId, setOpenGroupId] = useState<string | null>("");
   const [selectedSchemeId, setSelectedSchemeId] = useState<string>(''); // Track the selected color scheme by its ID
   const { setContextSelectedBoardColorSchemeId} = useContext(ContextSelectedBoardConfiguration);
 

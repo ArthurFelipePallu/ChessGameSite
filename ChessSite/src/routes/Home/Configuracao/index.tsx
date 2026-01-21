@@ -1,12 +1,11 @@
 import "./styles.css"
 import { Outlet } from "react-router-dom";
 import { useContext, useEffect, useState } from 'react';
-import HighlightedTabs from "../../../components/HighlightedTabs";
-import BoardColorSchemeCard from "../../../components/ColorSchemeCard"; 
+import HighlightedTabs from "../../../components/Configuration Components/HighlightedTabs";
+import BoardColorSchemeCard from "../../../components/Configuration Components/ColorSchemeCard"; 
 import {getBoardColorSchemeById} from "../../../services/boardColorScheme-service";
 import { ContextSelectedBoardConfiguration } from "../../../utils/Contexts/boardConfig-context";
-import type { BoardColorSchemeCardDTO, BoardColorSchemeDTO } from "../../../models/BoardColorSchemeDTO";
-
+import type { BoardColorSchemeCardDTO, BoardColorSchemeDTO } from "../../../models/ConfigurationModels/BoardColorSchemeDTO";
 export default function ChessConfigPage(){
 
   const [selectedSchemeId, setSelectedSchemeId] = useState<string>(''); // Track the selected color scheme by its ID

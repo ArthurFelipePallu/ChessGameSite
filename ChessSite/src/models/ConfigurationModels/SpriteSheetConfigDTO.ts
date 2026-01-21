@@ -14,6 +14,14 @@ export type SpriteSheetDTO ={
     rows:number;
     cols:number;
 }
+export type SpriteSheetCardDTO ={
+    spriteSheetId:string;
+    spriteSheetName:string;
+    onClick: (id: string) => void,
+    isSelected: boolean,
+}
+
+
 
 export const defaultChessSpriteSheet: SpriteSheetDTO = {
   id:"classic",
