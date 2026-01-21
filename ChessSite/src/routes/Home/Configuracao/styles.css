@@ -12,6 +12,35 @@
   margin-bottom: 2.5rem;
 }
 
+
+
+.cs-config-card-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--cs-color-bg-quarternary);
+  margin-left: 10px;
+  margin-right: 10px;
+
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.cs-config-card-container h3{
+
+ text-align: center;
+}
+
+.cs-config-current-scheme-card-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+}
+.cs-config-current-piece-set-card-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+}
+
 /* Grid for cards */
 .cs-scheme-cards-container {
   margin-top: 1rem;

@@ -14,7 +14,7 @@ export type SpriteSheetDTO ={
     rows:number;
     cols:number;
 }
-export type SpriteSheetCardDTO ={
+export type PieceSetCardDTO ={
     spriteSheetId:string;
     spriteSheetName:string;
     onClick: (id: string) => void,

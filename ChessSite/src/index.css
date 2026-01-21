@@ -2,9 +2,12 @@
   color-scheme: light;
   
   --cs-color-bg-primary: #1a1a1a;
-  --cs-color-bg-secondary: #3a3a3a;
-  --cs-color-bg-terciary: #5a5a5a;
-  --cs-color-bg-quarternary: #7a7a7a;
+  --cs-color-bg-secondary: #2a2a2a;
+  --cs-color-bg-terciary: #3a3a3a;
+  --cs-color-bg-quarternary: #4a4a4a;
+  --cs-color-bg-quintiary: #5a5a5a;
+  --cs-color-bg-sextiary: #6a6a6a;
+  --cs-color-bg-septnary: #7a7a7a;
   --cs-color-bg-quintiary: #ffffff;
 
   --cs-color-card-bg: #5a5a5a;

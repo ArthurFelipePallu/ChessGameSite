@@ -27,11 +27,9 @@ export default function BoardColorSchemeCard({colorScheme} : Prop){
         </div>
         <div className="color-scheme-chessBoard">
             <ChessBoard
-                boardInfo={ cardBoard}
+                boardInfo={cardBoard}
             /> 
         </div>
-            
-        
     </div>
 
   );

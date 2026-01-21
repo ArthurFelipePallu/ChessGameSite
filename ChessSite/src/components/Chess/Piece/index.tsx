@@ -1,5 +1,5 @@
-import { ContextSelectedBoardConfiguration } from "../../../utils/Contexts/boardConfig-context";
 import { useContext } from "react";
+import { ContextSelectedBoardConfiguration } from "../../../utils/Contexts/boardConfig-context";
 import { getChessPieceStyleFromSpritesheet } from "../../../services/pieceSpriteSheet-service";
 
 export default function ChessPiece({ piece }: { piece: string }) {
