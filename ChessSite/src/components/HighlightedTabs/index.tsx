@@ -1,7 +1,7 @@
 import "./styles.css"
 import { useState } from "react";
 import { motion } from "framer-motion";
-import ChessConfigBoardColorSchemeSelection from "../Configuration Components/BoardColorSchemeSelection";
+import ChessConfigBoardColorSchemeSelection from "../Configuration Components/BoardColor/BoardColorSchemeSelection";
 
 function EmptyComponent(){
     return (<></>);

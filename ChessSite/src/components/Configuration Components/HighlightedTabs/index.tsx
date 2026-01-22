@@ -1,7 +1,8 @@
 import "./styles.css"
 import { useState } from "react";
 import { motion } from "framer-motion";
-import ChessConfigBoardColorSchemeSelection from "../BoardColorSchemeSelection";
+import ChessConfigBoardColorSchemeSelection from "../BoardColor/BoardColorSchemeSelection";
+import ChessConfigSpriteSheetSelection from "../PieceSetSelection";
 
 function EmptyComponent(){
     return (<></>);
@@ -15,7 +16,7 @@ const Tabs =[
     {
         "id": 1,
         "name":"pieces",
-        "component":EmptyComponent,
+        "component":ChessConfigSpriteSheetSelection,
     },
     {
         "id": 2,

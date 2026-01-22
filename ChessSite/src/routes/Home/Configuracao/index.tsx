@@ -6,7 +6,7 @@ import {getBoardColorSchemeById} from "../../../services/boardColorScheme-servic
 import PieceSetCard from "../../../components/Configuration Components/PieceSetCard";
 import HighlightedTabs from "../../../components/Configuration Components/HighlightedTabs";
 import { ContextSelectedBoardConfiguration } from "../../../utils/Contexts/boardConfig-context";
-import BoardColorSchemeCard from "../../../components/Configuration Components/ColorSchemeCard"; 
+import BoardColorSchemeCard from "../../../components/Configuration Components/BoardColor/ColorSchemeCard"; 
 import type { PieceSetCardDTO, SpriteSheetDTO } from "../../../models/ConfigurationModels/SpriteSheetConfigDTO";
 import type { BoardColorSchemeCardDTO, BoardColorSchemeDTO } from "../../../models/ConfigurationModels/BoardColorSchemeDTO";
 

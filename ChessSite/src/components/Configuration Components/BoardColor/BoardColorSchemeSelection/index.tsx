@@ -1,10 +1,10 @@
 import "./styles.css"
 import { useContext, useState } from 'react';
-import { getIconById } from "../../../services/icon-service";
+import { getIconById } from "../../../../services/icon-service";
 import BoardColorSchemeCard from "../ColorSchemeCard";
-import { ContextSelectedBoardConfiguration } from "../../../utils/Contexts/boardConfig-context";
-import { getAllBoardColorSchemeGroups } from "../../../services/boardColorScheme-service";
-import type { BoardColorSchemeDTO, BoardColorSchemeGroupDTO, BoardColorSchemeCardDTO } from "../../../models/ConfigurationModels/BoardColorSchemeDTO";
+import { ContextSelectedBoardConfiguration } from "../../../../utils/Contexts/boardConfig-context";
+import { getAllBoardColorSchemeGroups } from "../../../../services/boardColorScheme-service";
+import type { BoardColorSchemeDTO, BoardColorSchemeGroupDTO, BoardColorSchemeCardDTO } from "../../../../models/ConfigurationModels/BoardColorSchemeDTO";
 
 export default function ChessConfigBoardColorSchemeSelection(){
 

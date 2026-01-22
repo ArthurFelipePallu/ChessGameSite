@@ -26,21 +26,14 @@
         {
           "id": "classic-neon",
           "name": "Classic Neon",
-          "src": "/assets/classicPieces-spriteSheet.png",
+          "src": "/assets/low-poly-piece-set.png",
           "rows":2,
           "cols":6
         },
         {
-          "id": "rainbow-neon-pieces",
-          "name": "Rainbow Neon Pieces",
-          "src": "/assets/classicRedPieces-spriteSheet.png",
-          "rows":2,
-          "cols":6
-        },
-        {
-          "id": "rainbow-neon-set",
-          "name": "Rainbow Neon Set",
-          "src": "/assets/classicRedPieces-spriteSheet.png",
+          "id": "volcanic",
+          "name": "Volcanic",
+          "src": "/assets/volcanic.png",
           "rows":2,
           "cols":6
         }

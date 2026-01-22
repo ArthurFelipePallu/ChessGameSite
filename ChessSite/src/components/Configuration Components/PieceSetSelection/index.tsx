@@ -1,24 +1,23 @@
 import "./styles.css"
 import { useContext, useState } from 'react';
 import { getIconById } from "../../../services/icon-service";
-import BoardColorSchemeCard from "../ColorSchemeCard";
+import PieceSetCard from "../PieceSetCard";
 import { ContextSelectedBoardConfiguration } from "../../../utils/Contexts/boardConfig-context";
-import { getAllBoardColorSchemeGroups } from "../../../services/boardColorScheme-service";
-import type { BoardColorSchemeDTO, BoardColorSchemeGroupDTO, BoardColorSchemeCardDTO } from "../../../models/ConfigurationModels/BoardColorSchemeDTO";
+import { getAllSpriteSheetGroups } from "../../../services/pieceSpriteSheet-service";
+import type { SpriteSheetDTO, SpriteSheetGroupDTO, PieceSetCardDTO } from "../../../models/ConfigurationModels/SpriteSheetConfigDTO";
 
 export default function ChessConfigSpriteSheetSelection(){
 
-  const colorSchemeGroups = getAllBoardColorSchemeGroups();
+  const spriteSheetGroups = getAllSpriteSheetGroups();
   const [openGroupId, setOpenGroupId] = useState<string | null>("classic");
-  const [selectedSchemeId, setSelectedSchemeId] = useState<string>(''); // Track the selected color scheme by its ID
-  const { setContextSelectedBoardColorSchemeId} = useContext(ContextSelectedBoardConfiguration);
+  const [selectedSpriteSheetId, setSelectedSpriteSheetId] = useState<string>(''); // Track the selected color scheme by its ID
+  const { setContextSelectedPiecesSpriteSheetId} = useContext(ContextSelectedBoardConfiguration);
 
 
   // Handle the selection of a color scheme
   const handleCardClick = (id: string) => {
-    setSelectedSchemeId(id);
-    setContextSelectedBoardColorSchemeId(id);
-    console.log(id);
+    setSelectedSpriteSheetId(id);
+    setContextSelectedPiecesSpriteSheetId(id);
   };
 
   const toggleGroup = (groupId: string) => {
@@ -27,7 +26,7 @@ export default function ChessConfigSpriteSheetSelection(){
   );
 }
 
-function createSchemeGroup(group: BoardColorSchemeGroupDTO ): JSX.Element | null {
+function createSpriteSheetGroup(group: SpriteSheetGroupDTO ): JSX.Element | null {
   const isOpen = openGroupId === group.id;
 
   return (
@@ -42,7 +41,7 @@ function createSchemeGroup(group: BoardColorSchemeGroupDTO ): JSX.Element | null
   );
 }
 
-function createSchemeGroupHeader(group: BoardColorSchemeGroupDTO, isOpen :boolean ): JSX.Element | null {
+function createSchemeGroupHeader(group: SpriteSheetGroupDTO, isOpen :boolean ): JSX.Element | null {
 
   return (
       <button
@@ -55,7 +54,7 @@ function createSchemeGroupHeader(group: BoardColorSchemeGroupDTO, isOpen :boolea
         </span>
         
         <h2 className="cs-scheme-group-title">
-          { getIconById(group.iconId).icon}
+          {/* { getIconById(group.iconId).icon} */}
           {group.name}
         </h2>
       </button>
@@ -64,41 +63,41 @@ function createSchemeGroupHeader(group: BoardColorSchemeGroupDTO, isOpen :boolea
 }
 
 
-function createSchemeGroupContent(group: BoardColorSchemeGroupDTO, isOpen :boolean ): JSX.Element | null {
+function createSchemeGroupContent(group: SpriteSheetGroupDTO, isOpen :boolean ): JSX.Element | null {
   if(!isOpen) return (<></>);
   return (
       <div className="cs-scheme-cards-container">
-          {group.colorSchemes.map((scheme) => {
-            return createSchemeBoard(scheme);
+          {group.spriteSheets.map((sheet) => {
+            return createSchemeBoard(sheet);
           })}
         </div>
   
   );
 }
 
-function createSchemeBoard(scheme: BoardColorSchemeDTO | null): JSX.Element | null {
+function createSchemeBoard(scheme: SpriteSheetDTO | null): JSX.Element | null {
   if (!scheme) return null;
 
-  const cardDTO: BoardColorSchemeCardDTO = {
-    schemeId: scheme.id,
-    schemeName: scheme.name,
+  const cardDTO: PieceSetCardDTO = {
+    spriteSheetId: scheme.id,
+    spriteSheetName: scheme.name,
     onClick: handleCardClick,
-    isSelected: scheme.id === selectedSchemeId
+    isSelected: scheme.id === selectedSpriteSheetId
   };
 
   return (
-    <BoardColorSchemeCard
-      colorScheme={cardDTO}
+    <PieceSetCard
+      spriteSheetInfo={cardDTO}
     />
   );
 }
 
   return (
     <div className="config-page">
-      <h2>Choose Your Chessboard Color Scheme</h2>
+      <h2>Choose Your Piece Set</h2>
       <div className="color-scheme-cards">
-        {colorSchemeGroups.map((schemeGroup) => {
-                  return createSchemeGroup(schemeGroup);
+        {spriteSheetGroups.map((spriteSheetGroup) => {
+                  return createSpriteSheetGroup(spriteSheetGroup);
                 })}
               </div>
     </div>
