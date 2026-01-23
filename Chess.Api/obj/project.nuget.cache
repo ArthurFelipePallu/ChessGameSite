@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OPRlSXMT84s=",
+  "dgSpecHash": "W7KKPPd1OUk=",
   "success": true,
-  "projectFilePath": "E:\\Projetos\\React\\Chess.Api\\Chess.Api.csproj",
+  "projectFilePath": "E:\\Projetos\\ChessApp\\Chess.Api\\Chess.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Arthut Pallu\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.11\\microsoft.aspnetcore.openapi.9.0.11.nupkg.sha512",
     "C:\\Users\\Arthut Pallu\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"

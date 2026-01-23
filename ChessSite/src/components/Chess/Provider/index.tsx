@@ -6,7 +6,7 @@ type Props = {
 };
 
 export function ContextSelectedBoardConfigurationProvider({ children }: Props) {
-  const [contextSelectedBoardColorSchemeId, setContextSelectedBoardColorSchemeId] = useState<string>("classic");
+  const [contextSelectedBoardColorSchemeId, setContextSelectedBoardColorSchemeId] = useState<string>("classic-wood");
 
   const [contextSelectedPiecesSpriteSheetId, setContextSelectedPiecesSpriteSheetId] = useState<string>("classic");
 

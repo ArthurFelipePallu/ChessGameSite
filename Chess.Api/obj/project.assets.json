@@ -34,9 +34,22 @@
           }
         }
       },
+      "Chess.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Chess.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chess.Core.dll": {}
+        }
+      },
       "Chess.Engine/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Chess.Core": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Chess.Engine.dll": {}
         },
@@ -78,6 +91,11 @@
         "microsoft.openapi.nuspec"
       ]
     },
+    "Chess.Core/1.0.0": {
+      "type": "project",
+      "path": "../Chess.Core/Chess.Core.csproj",
+      "msbuildProject": "../Chess.Core/Chess.Core.csproj"
+    },
     "Chess.Engine/1.0.0": {
       "type": "project",
       "path": "../Chess.Engine/Chess.Engine.csproj",
@@ -86,6 +104,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Chess.Core >= 1.0.0",
       "Chess.Engine >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 9.0.11"
     ]
@@ -96,11 +115,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Projetos\\React\\Chess.Api\\Chess.Api.csproj",
+      "projectUniqueName": "E:\\Projetos\\ChessApp\\Chess.Api\\Chess.Api.csproj",
       "projectName": "Chess.Api",
-      "projectPath": "E:\\Projetos\\React\\Chess.Api\\Chess.Api.csproj",
+      "projectPath": "E:\\Projetos\\ChessApp\\Chess.Api\\Chess.Api.csproj",
       "packagesPath": "C:\\Users\\Arthut Pallu\\.nuget\\packages\\",
-      "outputPath": "E:\\Projetos\\React\\Chess.Api\\obj\\",
+      "outputPath": "E:\\Projetos\\ChessApp\\Chess.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Arthut Pallu\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -115,8 +134,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "E:\\Projetos\\React\\Chess.Engine\\Chess.Engine.csproj": {
-              "projectPath": "E:\\Projetos\\React\\Chess.Engine\\Chess.Engine.csproj"
+            "E:\\Projetos\\ChessApp\\Chess.Core\\Chess.Core.csproj": {
+              "projectPath": "E:\\Projetos\\ChessApp\\Chess.Core\\Chess.Core.csproj"
+            },
+            "E:\\Projetos\\ChessApp\\Chess.Engine\\Chess.Engine.csproj": {
+              "projectPath": "E:\\Projetos\\ChessApp\\Chess.Engine\\Chess.Engine.csproj"
             }
           }
         }

@@ -7,18 +7,31 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Chess.Api.Controllers;
 
+[ApiController]
 [Route("api/[controller]")]
-public class ChessController : ControllerBase
+public class ChessGameController : ControllerBase
 {
     public static ChessGame _game = new ChessGame();
     
     
-    [HttpGet("state")]
-    public IActionResult GetState()
+    
+    
+    [HttpGet("default-state")]
+    public IActionResult GetDefaultGameState()
     {
-        var state = _game.GetGameState();
+        var state = _game.GetDefaultGameState();
+    
+        var gameState = new GameStateDTO(state.Fen);
+        
+        return Ok(gameState);
+    }
+    
+    [HttpGet("random-state")]
+    public IActionResult GetRandomGameState()
+    {
+         var state = _game.GetRandomBoardState();
 
-        var gameState = new GameState(state.Fen, state.Turn);
+        var gameState = new GameStateDTO(state.Fen);
         
         return Ok(gameState);
     }

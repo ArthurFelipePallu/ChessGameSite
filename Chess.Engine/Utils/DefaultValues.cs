@@ -1,6 +1,10 @@
-﻿namespace Chess.Engine.Utils;
+﻿using Chess.Core.Enums;
 
-public class DefaultValues
+namespace Chess.Engine.Utils;
+
+public static class DefaultValues
 {
-    
+
+    public static readonly string Fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    public static readonly PieceColor StartingPiece = PieceColor.White;
 }

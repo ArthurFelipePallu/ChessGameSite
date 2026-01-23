@@ -1,11 +1,7 @@
 ﻿namespace Chess.Engine.ChessGame.Board.Fen;
 
-public class Fen
-{
-    
-}
 
-class RandomFenGenerator
+public class RandomFenGenerator
 {
     static Random random = new Random();
 
