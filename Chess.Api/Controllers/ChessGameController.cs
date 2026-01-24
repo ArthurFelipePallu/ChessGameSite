@@ -1,4 +1,5 @@
-﻿using Chess.Api.Models;
+﻿using Chess.Core.Enums;
+using Chess.Core.Models;
 using Chess.Engine;
 using Chess.Engine.ChessGame;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -17,23 +18,28 @@ public class ChessGameController : ControllerBase
     
     
     [HttpGet("default-state")]
-    public IActionResult GetDefaultGameState()
+    public GameStateDto GetDefaultGameState()
     {
         var state = _game.GetDefaultGameState();
     
-        var gameState = new GameStateDTO(state.Fen);
+        var gameState = new GameStateDto(state.Fen);
         
-        return Ok(gameState);
+        return gameState;
     }
     
     [HttpGet("random-state")]
-    public IActionResult GetRandomGameState()
+    public GameStateDto GetRandomGameState()
     {
          var state = _game.GetRandomBoardState();
 
-        var gameState = new GameStateDTO(state.Fen);
+        var gameState = new GameStateDto(state.Fen);
         
-        return Ok(gameState);
+        return gameState;
     }
-    
+ 
+    [HttpGet("piece-colors")]
+    public PieceColor GetPieceColorWhite()
+    {
+        return PieceColor.White;
+    }
 }

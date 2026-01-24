@@ -43,7 +43,9 @@ E:\Projetos\ChessApp\Chess.Api\bin\Debug\net9.0\Chess.Api.dll
 E:\Projetos\ChessApp\Chess.Api\bin\Debug\net9.0\Chess.Api.pdb
 E:\Projetos\ChessApp\Chess.Api\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 E:\Projetos\ChessApp\Chess.Api\bin\Debug\net9.0\Microsoft.OpenApi.dll
+E:\Projetos\ChessApp\Chess.Api\bin\Debug\net9.0\Chess.Core.dll
 E:\Projetos\ChessApp\Chess.Api\bin\Debug\net9.0\Chess.Engine.dll
+E:\Projetos\ChessApp\Chess.Api\bin\Debug\net9.0\Chess.Core.pdb
 E:\Projetos\ChessApp\Chess.Api\bin\Debug\net9.0\Chess.Engine.pdb
 E:\Projetos\ChessApp\Chess.Api\obj\Debug\net9.0\Chess.Api.csproj.AssemblyReference.cache
 E:\Projetos\ChessApp\Chess.Api\obj\Debug\net9.0\rpswa.dswa.cache.json

@@ -6,8 +6,7 @@ import type { BoardDTO } from '../../../models/Chess/BoardDTO';
 import { x8_defaultPossiblePositions } from '../../../utils/Boards';
 import { ContextSelectedBoardConfiguration } from '../../../utils/Contexts/boardConfig-context';
 import * as gameStateApiService from "../../../services/apiServices/chessGameState-api-service";
-import type { GameStateDTO } from '../../../models/Chess/GameStateDTO';
-
+import type { GameStateDto } from '../../../api/chessApi';
 
 
 export default function JogoLocal()
@@ -29,7 +28,7 @@ export default function JogoLocal()
 
 
     const loadGameState = async (
-    loader: () => Promise<GameStateDTO>
+    loader: () => Promise<GameStateDto>
     ) => {
     try {
         const state = await loader();

@@ -1,0 +1,12 @@
+E:\Projetos\ChessApp\Chess.Core\bin\Debug\net9.0\Chess.Core.deps.json
+E:\Projetos\ChessApp\Chess.Core\bin\Debug\net9.0\Chess.Core.dll
+E:\Projetos\ChessApp\Chess.Core\bin\Debug\net9.0\Chess.Core.pdb
+E:\Projetos\ChessApp\Chess.Core\obj\Debug\net9.0\Chess.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projetos\ChessApp\Chess.Core\obj\Debug\net9.0\Chess.Core.AssemblyInfoInputs.cache
+E:\Projetos\ChessApp\Chess.Core\obj\Debug\net9.0\Chess.Core.AssemblyInfo.cs
+E:\Projetos\ChessApp\Chess.Core\obj\Debug\net9.0\Chess.Core.csproj.CoreCompileInputs.cache
+E:\Projetos\ChessApp\Chess.Core\obj\Debug\net9.0\Chess.Core.sourcelink.json
+E:\Projetos\ChessApp\Chess.Core\obj\Debug\net9.0\Chess.Core.dll
+E:\Projetos\ChessApp\Chess.Core\obj\Debug\net9.0\refint\Chess.Core.dll
+E:\Projetos\ChessApp\Chess.Core\obj\Debug\net9.0\Chess.Core.pdb
+E:\Projetos\ChessApp\Chess.Core\obj\Debug\net9.0\ref\Chess.Core.dll
