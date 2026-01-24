@@ -4,4 +4,5 @@ export type SquareDTO = {
     clickAction: () => void,
     squareIsSelected : boolean,
     squareIsPossibleMove : boolean,
+    spriteSheetId:string
 }

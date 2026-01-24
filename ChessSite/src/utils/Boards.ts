@@ -1,16 +1,16 @@
 
 
 export const x1_Board = [
-  ['K'],
+  [' '],
 ];
 export const x2_Board = [
-  ['p', ' '],
-  [' ', 'P'],
+  [' ', ' '],
+  [' ', ' '],
 ];
 export const x3_Board = [
-  ['P', ' ', ' '],
-  [' ', 'Q', ' '],
-  [' ', ' ', 'R'],
+  [' ', ' ', ' '],
+  [' ', ' ', ' '],
+  [' ', ' ', ' '],
 ];
 
 // Example board with a standard 8x8 layout

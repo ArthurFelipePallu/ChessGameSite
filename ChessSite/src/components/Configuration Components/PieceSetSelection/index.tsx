@@ -1,6 +1,5 @@
 import "./styles.css"
 import { useContext, useState } from 'react';
-import { getIconById } from "../../../services/icon-service";
 import PieceSetCard from "../PieceSetCard";
 import { ContextSelectedBoardConfiguration } from "../../../utils/Contexts/boardConfig-context";
 import { getAllSpriteSheetGroups } from "../../../services/pieceSpriteSheet-service";
@@ -29,23 +28,24 @@ export default function ChessConfigSpriteSheetSelection(){
 function createSpriteSheetGroup(group: SpriteSheetGroupDTO ): JSX.Element | null {
   const isOpen = openGroupId === group.id;
 
+
   return (
-    <section key={group.id} className="cs-scheme-group">
+    <section key={group.id} className="cs-piece-set-group">
       
       {/* Group header (clickable) */}
-      {createSchemeGroupHeader(group,isOpen)}
+      {createSpriteSheetGroupHeader(group,isOpen)}
 
       {/* Group content */}
-      {createSchemeGroupContent(group,isOpen)}
+      {createSpriteSheetGroupContent(group,isOpen)}
     </section>
   );
 }
 
-function createSchemeGroupHeader(group: SpriteSheetGroupDTO, isOpen :boolean ): JSX.Element | null {
+function createSpriteSheetGroupHeader(group: SpriteSheetGroupDTO, isOpen :boolean ): JSX.Element | null {
 
   return (
       <button
-        className="cs-scheme-group-header"
+        className="cs-piece-set-group-header"
         onClick={() => toggleGroup(group.id)}
         aria-expanded={isOpen}
       >
@@ -53,7 +53,7 @@ function createSchemeGroupHeader(group: SpriteSheetGroupDTO, isOpen :boolean ): 
           ▾
         </span>
         
-        <h2 className="cs-scheme-group-title">
+        <h2 className="cs-piece-set-group-title">
           {/* { getIconById(group.iconId).icon} */}
           {group.name}
         </h2>
@@ -63,40 +63,46 @@ function createSchemeGroupHeader(group: SpriteSheetGroupDTO, isOpen :boolean ): 
 }
 
 
-function createSchemeGroupContent(group: SpriteSheetGroupDTO, isOpen :boolean ): JSX.Element | null {
+function createSpriteSheetGroupContent(group: SpriteSheetGroupDTO, isOpen :boolean ): JSX.Element | null {
   if(!isOpen) return (<></>);
+
   return (
-      <div className="cs-scheme-cards-container">
+      <div className="cs-piece-set-cards-container">
           {group.spriteSheets.map((sheet) => {
-            return createSchemeBoard(sheet);
+            return createPieceSetCard(sheet);
           })}
         </div>
   
   );
 }
 
-function createSchemeBoard(scheme: SpriteSheetDTO | null): JSX.Element | null {
-  if (!scheme) return null;
+function createPieceSetCard(sheet: SpriteSheetDTO | null): JSX.Element | null {
+
+  if (!sheet) return null;
 
   const cardDTO: PieceSetCardDTO = {
-    spriteSheetId: scheme.id,
-    spriteSheetName: scheme.name,
+    spriteSheetId: sheet.id,
+    spriteSheetName: sheet.name,
     onClick: handleCardClick,
-    isSelected: scheme.id === selectedSpriteSheetId
+    isSelected: sheet.id === selectedSpriteSheetId
   };
 
   return (
-    <PieceSetCard
+    <PieceSetCard 
+      key={sheet.id}
       spriteSheetInfo={cardDTO}
     />
   );
 }
+        
 
   return (
     <div className="config-page">
       <h2>Choose Your Piece Set</h2>
-      <div className="color-scheme-cards">
+      <div className="piece-set-cards">
+        
         {spriteSheetGroups.map((spriteSheetGroup) => {
+          
                   return createSpriteSheetGroup(spriteSheetGroup);
                 })}
               </div>

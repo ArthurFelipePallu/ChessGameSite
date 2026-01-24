@@ -5,6 +5,8 @@ import type { SquareDTO } from "../../../models/Chess/SquareDTO";
 import type { BoardDTO } from "../../../models/Chess/BoardDTO";
 import { getBoardColorSchemeById } from "../../../services/boardColorScheme-service";
 
+
+
 type Prop ={
   boardInfo:BoardDTO;
 }
@@ -47,8 +49,8 @@ function createSquare(square:string,rowIndex:number,colIndex:number): JSX.Elemen
                 squareColor:color,
                 clickAction: () => handleSquareClick(rowIndex,colIndex),
                 squareIsSelected:isSelected,
-                squareIsPossibleMove:isPossibleMove
-
+                squareIsPossibleMove:isPossibleMove,
+                spriteSheetId:boardInfo.boardUsingPieceSpriteSheetId
               }
   return (
     <Square

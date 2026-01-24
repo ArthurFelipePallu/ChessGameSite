@@ -88,6 +88,7 @@ function createSchemeBoard(scheme: BoardColorSchemeDTO | null): JSX.Element | nu
 
   return (
     <BoardColorSchemeCard
+      key={scheme.id}
       colorScheme={cardDTO}
     />
   );

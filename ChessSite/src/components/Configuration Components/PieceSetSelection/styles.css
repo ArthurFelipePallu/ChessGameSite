@@ -1,16 +1,16 @@
 
 /* Wrapper for all groups */
-.color-scheme-cards {
+.piece-set-cards {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
-.cs-scheme-group {
+.cs-piece-set-group {
   margin-bottom: 0.5rem;
 }
 
 /* Clickable header */
-.cs-scheme-group-header {
+.cs-piece-set-group-header {
   width: 100%;
   background: none;
   border: none;
@@ -22,7 +22,7 @@
   color: var(--cs-color-font-primary);
 }
 
-.cs-scheme-group-title {
+.cs-piece-set-group-title {
   font-size: 1.3rem;
   font-weight: 600;
 }
@@ -37,9 +37,14 @@
   transform: rotate(180deg);
 }
 
-
-
-
+/* Grid for cards */
+.cs-piece-set-cards-container {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 1rem;
+  margin-left: 3%;
+}
 
 /*CURRENT SELECTED SCHEME*/
 

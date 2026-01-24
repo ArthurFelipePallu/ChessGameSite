@@ -36,6 +36,13 @@
           "src": "/assets/volcanic.png",
           "rows":2,
           "cols":6
+        },
+        {
+          "id": "wood",
+          "name": "Wood",
+          "src": "/assets/wood.png",
+          "rows":2,
+          "cols":6
         }
     ]
   }

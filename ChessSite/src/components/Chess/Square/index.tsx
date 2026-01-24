@@ -2,6 +2,7 @@ import './styles.css';  // CSS file for individual square styling
 import type { SquareDTO } from '../../../models/Chess/SquareDTO';
 // import { getPieceIconByKey } from '../../../services/pieceIcons-service';
 import ChessPiece from '../Piece';
+import type { PieceInformationDTO } from '../../../models/Chess/PieceInfoDTO';
 
 type Prop ={
   squareInfo:SquareDTO;
@@ -9,6 +10,12 @@ type Prop ={
 
 // Square component
 const Square = ({squareInfo} : Prop) => {
+
+  const pieceInfo : PieceInformationDTO ={
+    pieceType: squareInfo.content,
+    spriteSheetId:squareInfo.spriteSheetId
+  }
+
 
   return (
     <div
@@ -18,7 +25,7 @@ const Square = ({squareInfo} : Prop) => {
     >
       <div className="piece">
         {/* {getPieceIconByKey(squareInfo.content)} */}
-        <ChessPiece piece={squareInfo.content}/>
+        <ChessPiece piece={pieceInfo}/>
         </div> {/* Render the piece */}
     </div>
   );

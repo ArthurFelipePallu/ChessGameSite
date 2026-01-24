@@ -44,6 +44,9 @@ export function getAllSpriteSheetGroups() : SpriteSheetGroupDTO[]
 
 export function getSpriteSheetById(id : string)
 {
+  
+  // console.log("SpriteSheet ID " + id);
+  // console.log("SpriteSheet from Map" + spriteSheetMap[id]);
   return spriteSheetMap[id];
 }
 
@@ -68,8 +71,12 @@ export function getSpriteFromSpriteSheetByPieceId(spriteSheet:SpriteSheetDTO,pie
 export function getChessPieceStyleFromSpritesheet(pieceId:string,spriteSheetId:string){
 
   const spriteSheet = getSpriteSheetById(spriteSheetId);
+  
+
   const spriteInfo = UseSpriteSheet(spriteSheet);
+  if(spriteInfo == null) return;
   const sprite = pieceMap.find(p => p.id === pieceId);
+  
 
   let fallbackPieceSetStyle = {};
   if(sprite){
@@ -85,6 +92,7 @@ export function getChessPieceStyleFromSpritesheet(pieceId:string,spriteSheetId:s
   }
   if (!spriteInfo || !sprite || pieceId === ' ') return fallbackPieceSetStyle;
 
+  
 
   const pieceStyle ={
             width: "100%",
@@ -96,6 +104,7 @@ export function getChessPieceStyleFromSpritesheet(pieceId:string,spriteSheetId:s
                                 ${sprite.row * (100 / (spriteSheet.rows - 1))}%`
             }
 
+  console.log( pieceStyle);
     return pieceStyle;
 }
 
@@ -110,7 +119,10 @@ export function UseSpriteSheet(config: SpriteSheetDTO) {
     spriteHeight: number;
   } | null>(null);
 
+  // console.log( "Config " + {config});
   useEffect(() => {
+    if (!config) return;
+
     loadSpriteSheet(config).then(setData);
   }, [config]);
 
@@ -128,6 +140,10 @@ export function loadSpriteSheet(config: SpriteSheetDTO): Promise<{
 {
   return new Promise((resolve) => {
     const img = new Image();
+    // console.log({img});
+    
+    // console.log({config});
+
     img.src = config.src;
 
     img.onload = () => {
@@ -142,4 +158,24 @@ export function loadSpriteSheet(config: SpriteSheetDTO): Promise<{
       });
     };
   });
+}
+
+
+
+export function getChessPieceStyle(
+  pieceId: string,
+  spriteSheet: SpriteSheetDTO
+) {
+  const sprite = pieceMap.find(p => p.id === pieceId);
+  if (!sprite || pieceId === ' ') return {};
+
+  return {
+    width: "100%",
+    height: "100%",
+    backgroundImage: `url(${spriteSheet.src})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: `${spriteSheet.cols * 100}% ${spriteSheet.rows * 100}%`,
+    backgroundPosition: `${sprite.col * (100 / (spriteSheet.cols - 1))}% 
+                         ${sprite.row * (100 / (spriteSheet.rows - 1))}%`,
+  };
 }

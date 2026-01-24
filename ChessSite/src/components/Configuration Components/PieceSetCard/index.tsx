@@ -1,9 +1,7 @@
 import "./styles.css"
-import ChessBoard from "../../Chess/Board";
-import type { BoardDTO } from "../../../models/Chess/BoardDTO";
+import ChessPiece from "../../Chess/Piece";
+import type { PieceInformationDTO } from "../../../models/Chess/PieceInfoDTO";
 import type { PieceSetCardDTO } from "../../../models/ConfigurationModels/SpriteSheetConfigDTO";
-import { x1_Board , x1_defaultPossiblePositions } from '../../../utils/Boards';
-
 
 type Prop={
     spriteSheetInfo: PieceSetCardDTO;
@@ -11,26 +9,25 @@ type Prop={
 
 export default function PieceSetCard({spriteSheetInfo} : Prop){
 
-    const cardBoard : BoardDTO = {
-        board : x1_Board,
-        possibleMoves : x1_defaultPossiblePositions,
-        boardColorSchemeId : spriteSheetInfo.spriteSheetId
+    const pieceInfo : PieceInformationDTO = {
+        pieceType : 'k',
+        spriteSheetId:spriteSheetInfo.spriteSheetId
     }
 
+   
+    //    console.log( "Piece " + spriteSheetInfo.spriteSheetId);
 
 
      return (
         <div
-          className={`cs-container-flex-between-center color-scheme-card ${spriteSheetInfo.isSelected ? 'selected' : ''}`}
+          className={`cs-container-flex-between-center piece-set-card ${spriteSheetInfo.isSelected ? 'selected' : ''}`}
           onClick={() => spriteSheetInfo.onClick(spriteSheetInfo.spriteSheetId)} // When card is clicked, call onClick function
         >
-            <div className="color-scheme-card-title">
+            <div className="piece-set-card-title">
                 <h3>{spriteSheetInfo.spriteSheetName}</h3>
             </div>
-            <div className="color-scheme-chessBoard">
-                <ChessBoard
-                    boardInfo={cardBoard}
-                /> 
+            <div className="piece-set-chessBoard">
+                <ChessPiece piece={pieceInfo} />  
             </div>
         </div>
     

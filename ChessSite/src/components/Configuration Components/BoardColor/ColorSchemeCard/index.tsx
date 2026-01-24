@@ -11,9 +11,10 @@ type Prop={
 export default function BoardColorSchemeCard({colorScheme} : Prop){
 
     const cardBoard : BoardDTO = {
-        board : x2_Board,
-        possibleMoves : x2_defaultPossiblePositions,
-        boardColorSchemeId : colorScheme.schemeId
+        board: x2_Board,
+        possibleMoves: x2_defaultPossiblePositions,
+        boardColorSchemeId: colorScheme.schemeId,
+        boardUsingPieceSpriteSheetId: ""
     }
 
 

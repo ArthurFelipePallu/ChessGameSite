@@ -10,11 +10,10 @@ import type { GameStateDTO } from '../../../models/Chess/GameStateDTO';
 
 
 
-
 export default function JogoLocal()
 {
     const [currentFen, setCurrentFen] = useState("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-    const {contextSelectedBoardColorSchemeId} = useContext(ContextSelectedBoardConfiguration);
+    const {contextSelectedBoardColorSchemeId,contextSelectedPiecesSpriteSheetId} = useContext(ContextSelectedBoardConfiguration);
     
     const defaultBoard = useMemo<BoardDTO>(() => {
         if (!currentFen) return null as any;
@@ -22,9 +21,10 @@ export default function JogoLocal()
         return {
             board: TurnFenToBoard(currentFen),
             possibleMoves: x8_defaultPossiblePositions,
-            boardColorSchemeId: contextSelectedBoardColorSchemeId
+            boardColorSchemeId: contextSelectedBoardColorSchemeId,
+            boardUsingPieceSpriteSheetId:contextSelectedPiecesSpriteSheetId
         };
-        }, [currentFen, contextSelectedBoardColorSchemeId]
+        }, [currentFen, contextSelectedBoardColorSchemeId,contextSelectedPiecesSpriteSheetId]
     );
 
 

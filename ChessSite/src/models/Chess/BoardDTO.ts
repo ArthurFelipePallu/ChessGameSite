@@ -2,6 +2,6 @@
 export type BoardDTO={
     board:string[][],
     possibleMoves:boolean[][],
-    boardColorSchemeId:string
-
+    boardColorSchemeId:string,
+    boardUsingPieceSpriteSheetId:string
 }
