@@ -4,6 +4,7 @@ export type ContextSelectedBoardConfigurationType={
     contextSelectedBoardColorSchemeId:string;
     setContextSelectedBoardColorSchemeId: (contextSelectedBoardColorSchemeId : string) => void;
     
+    
     contextSelectedPiecesSpriteSheetId:string;
     setContextSelectedPiecesSpriteSheetId: (contextSelectedPiecesSpriteSheetId : string) => void;
 }

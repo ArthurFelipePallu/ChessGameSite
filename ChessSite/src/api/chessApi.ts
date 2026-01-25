@@ -10,15 +10,24 @@
  * ---------------------------------------------------------------
  */
 
-export interface GameStateDto {
-  fen: string;
-  turn?: PieceColor;
+export interface ErrorResponseDto {
+  message: string;
+  /** @default null */
+  errorCode?: string | null;
+  /**
+   * @format int32
+   * @default 400
+   */
+  statusCode?: number;
 }
 
-/** @default 1 */
-export type PieceColor = number;
+export interface GameStateDto {
+  fen: string;
+}
 
-export type PieceColor2 = number;
+export interface PossibleMovesDto {
+  possibleMoves: string;
+}
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -288,11 +297,26 @@ export class Api<
      * No description
      *
      * @tags ChessGame
+     * @name ChessGameStartGameList
+     * @request GET:/api/ChessGame/start-game
+     */
+    chessGameStartGameList: (params: RequestParams = {}) =>
+      this.request<GameStateDto, ErrorResponseDto>({
+        path: `/api/ChessGame/start-game`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ChessGame
      * @name ChessGameDefaultStateList
      * @request GET:/api/ChessGame/default-state
      */
     chessGameDefaultStateList: (params: RequestParams = {}) =>
-      this.request<GameStateDto, any>({
+      this.request<GameStateDto, ErrorResponseDto>({
         path: `/api/ChessGame/default-state`,
         method: "GET",
         format: "json",
@@ -307,7 +331,7 @@ export class Api<
      * @request GET:/api/ChessGame/random-state
      */
     chessGameRandomStateList: (params: RequestParams = {}) =>
-      this.request<GameStateDto, any>({
+      this.request<GameStateDto, ErrorResponseDto>({
         path: `/api/ChessGame/random-state`,
         method: "GET",
         format: "json",
@@ -318,12 +342,15 @@ export class Api<
      * No description
      *
      * @tags ChessGame
-     * @name ChessGamePieceColorsList
-     * @request GET:/api/ChessGame/piece-colors
+     * @name ChessGamePossibleMoveDetail
+     * @request GET:/api/ChessGame/possible-move/{position}
      */
-    chessGamePieceColorsList: (params: RequestParams = {}) =>
-      this.request<PieceColor2, any>({
-        path: `/api/ChessGame/piece-colors`,
+    chessGamePossibleMoveDetail: (
+      position: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<PossibleMovesDto, ErrorResponseDto>({
+        path: `/api/ChessGame/possible-move/${position}`,
         method: "GET",
         format: "json",
         ...params,

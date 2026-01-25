@@ -42,7 +42,7 @@ function isCharInteger(c: string): boolean {
 }
 
 
-export function booleanFenToBooleanArray(
+export function BooleanFenToBooleanArray(
                                         fen: string,
                                         rows: number,
                                         cols: number,

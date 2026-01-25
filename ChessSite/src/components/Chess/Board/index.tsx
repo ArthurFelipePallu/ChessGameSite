@@ -1,9 +1,12 @@
 import "./styles.css" 
 import Square from "../Square";
-import {useState} from "react";
+import {useEffect, useState, useCallback} from "react";
 import type { SquareDTO } from "../../../models/Chess/SquareDTO";
 import type { BoardDTO } from "../../../models/Chess/BoardDTO";
 import { getBoardColorSchemeById } from "../../../services/boardColorScheme-service";
+import type { PossibleMovesDto } from "../../../api/chessApi";
+import type { ApiResult } from "../../../services/apiServices/chessGameState-api-service";
+import * as gameStateApiService from "../../../services/apiServices/chessGameState-api-service";
 
 
 
@@ -16,10 +19,33 @@ type Prop ={
 export default function ChessBoard({ boardInfo } : Prop)
 
  {
-  const [selectedSquare, setSelectedSquare] = useState(null);
+  const [selectedSquare, setSelectedSquare] = useState<{ row: number; col: number } | null>(null);
 
   // Fallback to default colors if no custom color scheme is passed
   const scheme = getBoardColorSchemeById(boardInfo.boardColorSchemeId) ;
+
+  // Extract the callback function to satisfy React Compiler
+  const { changePossibleMovesAction } = boardInfo;
+
+  const loadPossibleMoves = useCallback(async (row: number, col: number) => {
+    const result = await gameStateApiService.getPossibleMovesAtPosition(row, col);
+    if (result.success) {
+      // Call the callback to update possible moves in the parent component
+      changePossibleMovesAction(result.data.possibleMoves);
+    } else {
+      console.error("Failed to load possible moves:", result.error.message);
+      // You can also show a toast/notification to the user here
+      alert(`Error: ${result.error.message}`);
+    }
+  }, [changePossibleMovesAction]);
+
+  useEffect(() => {
+    if (selectedSquare !== null) {
+      loadPossibleMoves(selectedSquare.row, selectedSquare.col);
+    }
+  }, [selectedSquare, loadPossibleMoves]);
+
+
 
   // Helper function to get the color of the square
   const getSquareColor = (rowIndex : number, colIndex : number, isSelected:boolean, isPossibleMove:boolean) =>{
