@@ -21,6 +21,11 @@ export interface ErrorResponseDto {
   statusCode?: number;
 }
 
+export interface ExecuteMovementDto {
+  fromPos?: string;
+  toPos?: string;
+}
+
 export interface GameStateDto {
   fen: string;
 }
@@ -352,6 +357,26 @@ export class Api<
       this.request<PossibleMovesDto, ErrorResponseDto>({
         path: `/api/ChessGame/possible-move/${position}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ChessGame
+     * @name ChessGameExecuteMoveCreate
+     * @request POST:/api/ChessGame/execute-move
+     */
+    chessGameExecuteMoveCreate: (
+      data: ExecuteMovementDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<GameStateDto, ErrorResponseDto>({
+        path: `/api/ChessGame/execute-move`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

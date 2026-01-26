@@ -4,8 +4,6 @@ import {useEffect, useState, useCallback} from "react";
 import type { SquareDTO } from "../../../models/Chess/SquareDTO";
 import type { BoardDTO } from "../../../models/Chess/BoardDTO";
 import { getBoardColorSchemeById } from "../../../services/boardColorScheme-service";
-import type { PossibleMovesDto } from "../../../api/chessApi";
-import type { ApiResult } from "../../../services/apiServices/chessGameState-api-service";
 import * as gameStateApiService from "../../../services/apiServices/chessGameState-api-service";
 
 

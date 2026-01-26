@@ -89,7 +89,20 @@ export default function JogoLocal()
                     Default Game
                 </button>
             </div>
-
+            <div>
+                <button onClick={async () => {
+                    const result = await gameStateApiService.executeMovement("e2", "e4");
+                    if (result.success) {
+                        const [boardFen] = result.data.fen.split(" ");
+                        setCurrentFen(boardFen);
+                        setCurrentPossibleMoves(x8_defaultPossiblePositions);
+                    } else {
+                        alert(`Error: ${result.error.message}`);
+                    }
+                }}>
+                    Move Pawn (e2 to e4)
+                </button>
+            </div>
         </div>
         
         
