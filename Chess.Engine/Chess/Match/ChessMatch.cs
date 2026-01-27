@@ -275,7 +275,6 @@ public class ChessMatch
         var rookDestinationPosition = ChessNotationPosition.FromArrayIndices(kingPos.RowIndex, rookDestinationColumnIndex);
         MovePieceTo(rook,rookDestinationPosition,out var actionMessage);
 
-        _screen.ScreenWriteAndWaitForEnterToContinue(actionMessage);
     }
 
 
