@@ -1,6 +1,6 @@
 using Chess_Console_Project.Board;
 using Chess_Console_Project.Chess.Enums;
-using Chess_Console_Project.Chess.Exceptions;
+using Chess.Core.Exceptions;
 using Chess.Core.Enums;
 using Chess.Engine.Board;
 using Chess.Engine.Board.Pieces;

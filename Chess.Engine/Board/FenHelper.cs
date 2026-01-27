@@ -1,7 +1,7 @@
 using Chess.Core.Enums;
 using Chess.Engine.Board.Pieces;
 using Chess_Console_Project.Board;
-using Chess_Console_Project.Chess.Exceptions;
+using Chess.Core.Exceptions;
 
 namespace Chess.Engine.Board;
 
@@ -44,7 +44,7 @@ public static class FenHelper
     /// <summary>
     /// Gets the piece placement part of FEN (ranks 8-1)
     /// </summary>
-    private static string GetPiecePlacement(ChessBoard board)
+    public static string GetPiecePlacement(ChessBoard board)
     {
         var ranks = new List<string>();
 

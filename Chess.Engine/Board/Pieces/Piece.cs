@@ -2,7 +2,7 @@ using Chess.Core.Enums;
 using Chess_Console_Project.Board;
 using Chess_Console_Project.Chess.Enums;
 using Chess_Console_Project.Board.Exceptions;
-using Chess_Console_Project.Chess.Exceptions;
+using Chess.Core.Exceptions;
 
 
 namespace Chess.Engine.Board.Pieces;

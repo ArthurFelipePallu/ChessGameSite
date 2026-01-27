@@ -1,4 +1,4 @@
-namespace Chess_Console_Project.Chess.Match;
+namespace Chess.Core.Enums;
 
 public enum MatchStatus
 {

@@ -1,4 +1,4 @@
-namespace Chess_Console_Project.Chess.Exceptions;
+namespace Chess.Core.Exceptions;
 
 public enum ChessErrorCode
 {
@@ -52,6 +52,18 @@ public class ChessException : Exception
 public class MovementException : ChessException
 {
     public MovementException(
+        string message,
+        string? fromSquare = null,
+        string? toSquare = null,
+        string? piece = null,
+        Exception? innerException = null)
+        : base(message, ChessErrorCode.InvalidMove, fromSquare, toSquare, piece, innerException)
+    {
+    }
+}
+public class PieceNotFoundException : ChessException
+{
+    public PieceNotFoundException(
         string message,
         string? fromSquare = null,
         string? toSquare = null,

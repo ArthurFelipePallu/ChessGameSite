@@ -5,12 +5,12 @@ using Chess.Engine.Board.Pieces;
 
 namespace Chess.Engine.Chess.Chess_Movement;
 
-public class ChessMovement
+public class MatchHistory
 {
     private List<string> _movesWhite;
     private List<string> _movesBlack;
 
-    public ChessMovement()
+    public MatchHistory()
     {
         _movesWhite = [];
         _movesBlack = [];

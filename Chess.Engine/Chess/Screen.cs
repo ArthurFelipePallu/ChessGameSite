@@ -1,5 +1,5 @@
 using Chess_Console_Project.Board;
-using Chess_Console_Project.Chess.Exceptions;
+using Chess.Core.Exceptions;
 using Chess_Console_Project.Chess.Player;
 using Chess.Core.Enums;
 using Chess.Engine.Board;

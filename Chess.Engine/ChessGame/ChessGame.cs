@@ -1,4 +1,7 @@
-﻿using Chess.Core.Enums;
+using Chess_Console_Project.Board;
+using Chess.Core.Exceptions;
+using Chess.Core.Enums;
+using Chess.Core.Models;
 using Chess.Engine.Chess.Match;
 using Chess.Engine.Utils;
 using Chess.Engine.ChessGame.Board;
@@ -18,33 +21,68 @@ public class ChessGame
         Fen = DefaultValues.Fen;
     }
 
-    public void StartGame()
+    public string StartMatch()
     {
+        if(_match != null) 
+            throw new MatchAlreadyInPlayException();
         _match = new ChessMatch();
+        return GetDefaultBoardState();
     }
 
     public string GetPossiblePositionOfPieceAtPosition(string position)
     {
+        if (_match == null)
+            throw new MatchNotStartedException("GetPossiblePositionOfPieceAtPosition");
+        
         var piece = _match.AccessPieceAtChessBoardPosition(position);
+        if (piece == null) return "";//there is no piece at position
         _match.CalculatePiecePossibleMoves(piece);
         return _match.RetrievePiecePossibleMovesAsString(piece);
     }
     
-    public GameState GetDefaultGameState()
+    public string GetDefaultBoardState()
     {
+        if (_match == null)
+            throw new MatchNotStartedException("GetPossiblePositionOfPieceAtPosition");
+        
         Fen = DefaultValues.Fen;
-        return BuildCurrentGameState();
+        return Fen;
     }
 
-    public GameState GetRandomBoardState()
+    public string GetRandomBoardState()
     {
+        if (_match == null)
+            throw new MatchNotStartedException("GetPossiblePositionOfPieceAtPosition");
         Fen = RandomFenGenerator.GenerateRandomFen();
-        return BuildCurrentGameState();
+        return Fen;
     }
-
-    private GameState BuildCurrentGameState()
+    public string GetCurrentBoardStateFen()
     {
-        return new GameState(Fen,Turn );
+        if (_match == null)
+            throw new MatchNotStartedException("GetCurrentBoardStateFen");
+        
+        Fen = _match.RetrieveBoardCurrentStateFen();
+        //var boardStateFen = Fen.Split(' ')[0];
+        return Fen;
+    }
+    public void ExecuteMovement(ExecuteMovementDto movementDto)
+    {
+        
+        if (_match == null)
+            throw new MatchNotStartedException("ExecuteMovement");
+
+        if (movementDto == null)
+            throw new NullRequestObjectException("ExecuteMovement");
+        
+        var piece = _match.AccessPieceAtChessBoardPosition(movementDto.FromPos);
+        
+        
+        _match.ExecuteMovement(piece, new ChessNotationPosition(movementDto.ToPos));
+        
+    }
+    public PieceColor GetTurn()
+    {
+        return Turn;
     }
 
 }

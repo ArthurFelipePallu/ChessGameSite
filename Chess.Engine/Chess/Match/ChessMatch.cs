@@ -5,8 +5,7 @@ using Chess_Console_Project.Board;
 using Chess_Console_Project.Chess;
 using Chess_Console_Project.Chess.Enums;
 using Chess_Console_Project.Chess.Player;
-using Chess_Console_Project.Chess.Match;
-using Chess_Console_Project.Chess.Exceptions;
+using Chess.Core.Exceptions;
 using Chess_Console_Project.Chess.ChessPieces;
 using Chess.Engine.ChessGame.Board.Fen;
 
@@ -132,7 +131,11 @@ public class ChessMatch
         return BooleanFen.BooleanArrayToFen(piece.GetAllPossibleMoves());
     }
 
-
+    public string RetrieveBoardCurrentStateFen()
+    {
+        return FenHelper.GetPiecePlacement(_chessBoard);
+    }
+    
 
     /// <summary>
     /// BOARD METHODS
@@ -153,7 +156,7 @@ public class ChessMatch
     {
         _movesCount++;
     }
-    private void ExecuteMovement(Piece piece, ChessNotationPosition destination)
+    public void ExecuteMovement(Piece piece, ChessNotationPosition destination)
     {
         var actionMessage = "";
         var movementIsSuccessful = false;
@@ -175,23 +178,23 @@ public class ChessMatch
         else
             movementIsSuccessful = MovePieceTo(piece,destination,out actionMessage);
 
-        _screen.PrintBoardAndPlayers(_playerWhite,_playerBlack,_chessBoard,_toPlay);
+        //_screen.PrintBoardAndPlayers(_playerWhite,_playerBlack,_chessBoard,_toPlay);
         _chessBoard.SetLastMovedPiece(piece);
-        _screen.ScreenWriteAndWaitForEnterToContinue(actionMessage);
+        //_screen.ScreenWriteAndWaitForEnterToContinue(actionMessage);
 
-        if (piece is Pawn pawn)
-        {
-            if (pawn.CanPromote())
-            {
-                var pawnPromotesTo = _screen.AskForPawnPromotion();
-                var pawnChessNotationPos = pawn.GetPiecePosition();
-                _chessBoard.RemovePieceFromBoardAt(pawnChessNotationPos);
-                _chessBoard.AddPlayingPiece(pawn.GetPieceColor(),pawnPromotesTo,pawnChessNotationPos.Col,pawnChessNotationPos.Row);
-
-                _screen.PrintBoardAndPlayers(_playerWhite,_playerBlack,_chessBoard,_toPlay);
-                _screen.ScreenWriteAndWaitForEnterToContinue($"{pawn} promoted to {pawn.GetPieceColor()} {pawnPromotesTo} ");
-            }
-        }
+        // if (piece is Pawn pawn)
+        // {
+        //     if (pawn.CanPromote())
+        //     {
+        //         var pawnPromotesTo = _screen.AskForPawnPromotion();
+        //         var pawnChessNotationPos = pawn.GetPiecePosition();
+        //         _chessBoard.RemovePieceFromBoardAt(pawnChessNotationPos);
+        //         _chessBoard.AddPlayingPiece(pawn.GetPieceColor(),pawnPromotesTo,pawnChessNotationPos.Col,pawnChessNotationPos.Row);
+        //
+        //         _screen.PrintBoardAndPlayers(_playerWhite,_playerBlack,_chessBoard,_toPlay);
+        //         _screen.ScreenWriteAndWaitForEnterToContinue($"{pawn} promoted to {pawn.GetPieceColor()} {pawnPromotesTo} ");
+        //     }
+        // }
 
         if(movementIsSuccessful)
         {
