@@ -31,7 +31,18 @@ export default function JogoLocal()
     const verifyPositionIsInBoardPossibleMoves = useCallback((row:number,col:number) => {
         
         return currentPossibleMoves[row][col];
-    }, []);
+    }, [currentPossibleMoves]);
+
+    const executeBoardMovement = async (fromSquare:string,toSquare:string) => {
+        const result = await gameStateApiService.executeMovement(fromSquare, toSquare);
+        if (result.success) {
+            const [boardFen] = result.data.fen.split(" ");
+            setCurrentFen(boardFen);
+            setCurrentPossibleMoves(x8_defaultPossiblePositions);
+        } else {
+            alert(`Error: ${result.error.message}`);
+        }
+    }
 
 
     const matchBoard = useMemo<BoardDTO>(() => {
@@ -74,16 +85,7 @@ export default function JogoLocal()
     };
 
 
-    const executeBoardMovement = async (fromSquare:string,toSquare:string) => {
-        const result = await gameStateApiService.executeMovement(fromSquare, toSquare);
-        if (result.success) {
-            const [boardFen] = result.data.fen.split(" ");
-            setCurrentFen(boardFen);
-            setCurrentPossibleMoves(x8_defaultPossiblePositions);
-        } else {
-            alert(`Error: ${result.error.message}`);
-        }
-    }
+
 
     
 
@@ -113,7 +115,7 @@ export default function JogoLocal()
                 </button>
             </div>
             <div>
-                <button onClick={() => executeMove("e2","e4")}>
+                <button onClick={() => executeBoardMovement("e2","e4")}>
                     Move Pawn (e2 to e4)
                 </button>
             </div>

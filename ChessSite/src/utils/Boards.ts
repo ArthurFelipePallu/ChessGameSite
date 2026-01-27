@@ -31,7 +31,7 @@ export const x2_defaultPossiblePositions = createdefaultPossiblePositionsArrayWi
 export const x3_defaultPossiblePositions = createdefaultPossiblePositionsArrayWithSize(3);
 export const x8_defaultPossiblePositions = createdefaultPossiblePositionsArrayWithSize(8);
 
-
+export const x8_noPossiblePositionsFenString = "8/8/8/8/8/8/8/8"
 
 function createdefaultPossiblePositionsArrayWithSize( size : number)
 {

@@ -18,7 +18,6 @@ export default function ChessBoard({ boardInfo } : Prop)
 
  {
   const [selectedFromSquare, setSelectedFromSquare] = useState<{ row: number; col: number } | null>(null);
-  const [selectedToSquare, setSelectedToSquare] = useState<{ row: number; col: number } | null>(null);
 
   // Fallback to default colors if no custom color scheme is passed
   const scheme = getBoardColorSchemeById(boardInfo.boardColorSchemeId) ;
@@ -43,8 +42,8 @@ export default function ChessBoard({ boardInfo } : Prop)
 
 
   useEffect(() => {
-    if(selectedFromSquare === null)
-      changePossibleMovesAction(x8_noPossiblePositionsFenString);
+  //   if(selectedFromSquare === null)
+  //     changePossibleMovesAction(x8_noPossiblePositionsFenString);
 
     if (selectedFromSquare !== null) {
       loadPossibleMoves(selectedFromSquare.row, selectedFromSquare.col);
@@ -52,19 +51,18 @@ export default function ChessBoard({ boardInfo } : Prop)
   }, [selectedFromSquare, loadPossibleMoves, changePossibleMovesAction]);
 
 
-  const tryAndExecuteMovement = () =>{
+  const tryAndExecuteMovement = useCallback((targetRow: number, targetCol: number) =>{
 
-    if(selectedFromSquare !==null && selectedToSquare !== null)
+    if(selectedFromSquare !==null)
     {
       const fromSquare = toChessNotation(selectedFromSquare.row,selectedFromSquare.col);
-      const toSquare = toChessNotation(selectedToSquare.row,selectedToSquare.col);
+      const toSquare = toChessNotation(targetRow, targetCol);
       executeMove(fromSquare,toSquare);
       setSelectedFromSquare(null);
-      setSelectedToSquare(null);
 
       return;
     }
-  }
+  }, [selectedFromSquare, executeMove]);
 
   // Helper function to get the color of the square
   const getSquareColor = (rowIndex : number, colIndex : number, isSelected:boolean, isPossibleMove:boolean) =>{
@@ -94,13 +92,17 @@ export default function ChessBoard({ boardInfo } : Prop)
     {
       if(verifyPositionIsInPossibleMoves(rowIndex,colIndex)) // é um quadrado nos movimentos possiveis
       {
-        setSelectedToSquare({ row: rowIndex, col: colIndex });
-        tryAndExecuteMovement();
+        console.log("TRIED TO EXECUTE MOVEMENT");
+        tryAndExecuteMovement(rowIndex, colIndex);
         return;
       }
-      else
+      else // If it's not a possible move for the currently selected piece
       {
-        setSelectedFromSquare(null);
+        // Assume user wants to select a new piece (or clear if empty/opponent piece, handled by API/parent)
+        setSelectedFromSquare({ row: rowIndex, col: colIndex }); 
+        // Immediately clear possible moves to prevent visual flicker before API response
+        changePossibleMovesAction(x8_noPossiblePositionsFenString); 
+        return;
       }
     }
 
