@@ -16,7 +16,7 @@ export default function JogoLocal()
     const [currentPossibleMoves, setCurrentPossibleMoves] = useState<boolean[][]>(x8_defaultPossiblePositions);
     const {contextSelectedBoardColorSchemeId,contextSelectedPiecesSpriteSheetId} = useContext(ContextSelectedBoardConfiguration);
     
-    const changePossibleMoves = useCallback((possibleMovesFen: string) => {
+    const changeBoardPossibleMoves = useCallback((possibleMovesFen: string) => {
         try {
             // Convert the FEN string to a boolean array (8x8 board)
             const possibleMovesArray = BooleanFenToBooleanArray(possibleMovesFen, 8, 8, 'x');
@@ -28,6 +28,12 @@ export default function JogoLocal()
         }
     }, []);
 
+    const verifyPositionIsInBoardPossibleMoves = useCallback((row:number,col:number) => {
+        
+        return currentPossibleMoves[row][col];
+    }, []);
+
+
     const matchBoard = useMemo<BoardDTO>(() => {
         if (!currentFen) return null as any;
 
@@ -36,14 +42,17 @@ export default function JogoLocal()
             possibleMoves: currentPossibleMoves,
             boardColorSchemeId: contextSelectedBoardColorSchemeId,
             boardUsingPieceSpriteSheetId:contextSelectedPiecesSpriteSheetId,
-            changePossibleMovesAction: changePossibleMoves
+            executeMove : executeBoardMovement,
+            changePossibleMovesAction: changeBoardPossibleMoves,
+            verifyPositionIsInPossibleMoves :verifyPositionIsInBoardPossibleMoves
             
         };
         }, [currentFen, 
             currentPossibleMoves, 
             contextSelectedBoardColorSchemeId, 
             contextSelectedPiecesSpriteSheetId,
-            changePossibleMoves
+            changeBoardPossibleMoves,
+            verifyPositionIsInBoardPossibleMoves
            ]
     );
 
@@ -63,6 +72,20 @@ export default function JogoLocal()
             alert(`Error: ${result.error.message}`);
         }
     };
+
+
+    const executeBoardMovement = async (fromSquare:string,toSquare:string) => {
+        const result = await gameStateApiService.executeMovement(fromSquare, toSquare);
+        if (result.success) {
+            const [boardFen] = result.data.fen.split(" ");
+            setCurrentFen(boardFen);
+            setCurrentPossibleMoves(x8_defaultPossiblePositions);
+        } else {
+            alert(`Error: ${result.error.message}`);
+        }
+    }
+
+    
 
 
     return(
@@ -90,16 +113,7 @@ export default function JogoLocal()
                 </button>
             </div>
             <div>
-                <button onClick={async () => {
-                    const result = await gameStateApiService.executeMovement("e2", "e4");
-                    if (result.success) {
-                        const [boardFen] = result.data.fen.split(" ");
-                        setCurrentFen(boardFen);
-                        setCurrentPossibleMoves(x8_defaultPossiblePositions);
-                    } else {
-                        alert(`Error: ${result.error.message}`);
-                    }
-                }}>
+                <button onClick={() => executeMove("e2","e4")}>
                     Move Pawn (e2 to e4)
                 </button>
             </div>

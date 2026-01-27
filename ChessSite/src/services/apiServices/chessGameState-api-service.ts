@@ -1,6 +1,7 @@
 import api from "../../api/axios";
 import type { AxiosError } from "axios";
 import type { GameStateDto, PossibleMovesDto,ExecuteMovementDto } from "../../api/chessApi";
+import toChessNotation from "../../utils/Boards";
 
 export interface ErrorResponseDto {
   message: string;
@@ -157,13 +158,4 @@ export async function getPossibleMovesAtPosition(row:number,col:number): Promise
     };
   }
 }
-function toChessNotation(row:number, column:number) {
-  if (row < 0 || row > 7 || column < 0 || column > 7) {
-    throw new Error("Row and column must be between 0 and 7");
-  }
 
-  const file = String.fromCharCode("a".charCodeAt(0) + column);
-  const rank = 8 - row;
-
-  return `${file}${rank}`;
-}
