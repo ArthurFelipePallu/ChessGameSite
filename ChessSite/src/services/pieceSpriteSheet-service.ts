@@ -66,6 +66,50 @@ export function getSpriteFromSpriteSheetByPieceId(spriteSheet:SpriteSheetDTO,pie
 ====================================================== */
 
 
+export function getUserPortraitOnCoordinates(row:number,col:number){
+
+
+  const spriteSheet: SpriteSheetDTO = {
+                                        "id": "user-portrait",
+                                        "name": "User Portrait",
+                                        "src": "/assets/User-Sprites/user-portrait-spritesheet.png",
+                                        "rows":10,
+                                        "cols":20
+                                      }
+                                
+
+  const spriteInfo = UseSpriteSheet(spriteSheet);
+  if(spriteInfo == null) return;
+  
+
+  const fallbackPortraitSetStyle = {
+            width: "100%",
+            height: "100%",
+            backgroundImage: `url(${defaultChessSpriteSheet.src})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: `${defaultChessSpriteSheet.cols * 100}% ${defaultChessSpriteSheet.rows * 100}%`,
+            backgroundPosition: `${col * (100 / (spriteSheet.cols - 1))}% 
+                                ${row * (100 / (spriteSheet.rows - 1))}%`
+            }
+  
+  if (!spriteInfo  ) return fallbackPortraitSetStyle;
+
+  
+
+  const userPortraitStyle ={
+            width: "100%",
+            height: "100%",
+            backgroundImage: `url(${spriteSheet.src})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: `${spriteSheet.cols * 100}% ${spriteSheet.rows * 100}%`,
+            backgroundPosition: `${col * (100 / (spriteSheet.cols - 1))}% 
+                                ${row * (100 / (spriteSheet.rows - 1))}%`
+            }
+
+    console.log( userPortraitStyle);
+    return userPortraitStyle;
+}
+
 
 
 export function getChessPieceStyleFromSpritesheet(pieceId:string,spriteSheetId:string){
@@ -177,5 +221,43 @@ export function getChessPieceStyle(
     backgroundSize: `${spriteSheet.cols * 100}% ${spriteSheet.rows * 100}%`,
     backgroundPosition: `${sprite.col * (100 / (spriteSheet.cols - 1))}% 
                          ${sprite.row * (100 / (spriteSheet.rows - 1))}%`,
+  };
+}
+
+
+export function getUserPortraitStyle(row: number, col: number) {
+  const spriteSheet = {
+    src: "/assets/user-portrait-spritesheet.png",
+    rows: 10,
+    cols: 20
+  };
+
+  // safety clamp
+  row = Math.max(0, Math.min(row, spriteSheet.rows - 1));
+  col = Math.max(0, Math.min(col, spriteSheet.cols - 1));
+
+  console.log(row,col);
+
+  // return {
+  //   width: "100%",
+  //   height: "100%",
+  //   backgroundImage: `url(${spriteSheet.src})`,
+  //   backgroundRepeat: "no-repeat",
+
+  //   // Each sprite becomes exactly the size of the container
+  //   backgroundSize: `${spriteSheet.cols * 100}% ${spriteSheet.rows * 100}%`,
+
+  //   // Move exactly one sprite per step
+  //   backgroundPosition: `-${col * 100}% -${row * 100}%`
+  // };
+
+    return {
+    width: "100%",
+    height: "100%",
+    backgroundImage: `url(${spriteSheet.src})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: `${spriteSheet.cols * 100}% ${spriteSheet.rows * 100}%`,
+    backgroundPosition: `${col * (100 / (spriteSheet.cols - 1))}% 
+                         ${row * (100 / (spriteSheet.rows - 1))}%`,
   };
 }

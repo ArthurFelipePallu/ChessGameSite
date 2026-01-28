@@ -1,16 +1,17 @@
 
 .cs-jogolocal-container{
     width: 100%;
-    height: 100%;
+    height: 500px;
 }
 .cs-jogolocal-content-container{
     width: 80%;
+    height: 100%;
     margin: auto;
 }
 
 .cs-jogolocal-board-container{
-    width: 600px;
-    height: 600px;
+    width: 400px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;

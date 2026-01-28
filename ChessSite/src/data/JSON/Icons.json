@@ -78,5 +78,26 @@
       { "id": "theme", "icon": "🎨" },
       { "id": "language", "icon": "🌐" }
     ]
+  },
+  {
+    "category": "nations",
+    "icons": [
+      { "id": "russia", "icon": "🇷🇺" },
+      { "id": "usa", "icon": "🇺🇸" },
+      { "id": "india", "icon": "🇮🇳" },
+      { "id": "china", "icon": "🇨🇳" },
+
+      { "id": "norway", "icon": "🇳🇴" },
+      { "id": "armenia", "icon": "🇦🇲" },
+      { "id": "azerbaijan", "icon": "🇦🇿" },
+
+      { "id": "ukraine", "icon": "🇺🇦" },
+      { "id": "poland", "icon": "🇵🇱" },
+      { "id": "france", "icon": "🇫🇷" },
+
+      { "id": "germany", "icon": "🇩🇪" },
+      { "id": "england", "icon": "🇬🇧" },
+      { "id": "spain", "icon": "🇪🇸" }
+    ]
   }
 ]

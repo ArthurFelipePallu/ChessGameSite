@@ -1,0 +1,124 @@
+[
+    {
+     "id": 1,  
+     "name": "Ivan Petrov",        
+     "elo": 2785, 
+     "flagIconId": "🇷🇺" 
+    },
+    { 
+        "id": 2,  
+        "name": "Magnus Eriksen",     
+        "elo": 2830, 
+        "flagIconId": "🇳🇴" 
+    },
+    { 
+        "id": 3,  
+        "name": "Arjun Mehta",        
+        "elo": 2742,
+        "flagIconId": "🇮🇳" 
+    },
+    { 
+        "id": 4,  
+        "name": "Wei Zhang",          
+        "elo": 2760, 
+        "flagIconId": "🇨🇳" 
+    },
+    { 
+        "id": 5,  
+        "name": "Fabien Morel",       
+        "elo": 2721, 
+        "flagIconId": "🇫🇷" 
+    },
+    { 
+        "id": 6,  
+        "name": "Levon Sarkisian",    
+        "elo": 2791, 
+        "flagIconId": "🇦🇲" 
+    },
+    { 
+        "id": 7,  
+        "name": "Ilgar Mammadov",     
+        "elo": 2754, 
+        "flagIconId": "🇦🇿" 
+    },
+    { 
+        "id": 8,  
+        "name": "Dmytro Kovalenko",   
+        "elo": 2710, 
+        "flagIconId": "🇺🇦" 
+    },
+    { 
+        "id": 9,  
+        "name": "Jan Kowalski",       
+        "elo": 2684, 
+        "flagIconId": "🇵🇱" 
+    },
+    { 
+        "id": 10, 
+        "name": "Thomas Müller",      
+        "elo": 2702, 
+        "flagIconId": "🇩🇪" 
+    },
+    { 
+        "id": 11, 
+        "name": "James Whitaker",     
+        "elo": 2690, 
+        "flagIconId": "🇬🇧" 
+    },
+    { 
+        "id": 12, 
+        "name": "Carlos Alvarez",     
+        "elo": 2668, 
+        "flagIconId": "🇪🇸" 
+    },
+    { 
+        "id": 13, 
+        "name": "Michael Thompson",  
+        "elo": 2725, 
+        "flagIconId": "🇺🇸" 
+    },
+    { 
+        "id": 14, 
+        "name": "Sergey Volkov",      
+        "elo": 2733, 
+        "flagIconId": "🇷🇺" 
+    },
+    { 
+        "id": 15, 
+        "name": "Rohit Sharma",       
+        "elo": 2675, 
+        "flagIconId": "🇮🇳" 
+    },
+    { 
+        "id": 16, 
+        "name": "Li Chen",            
+        "elo": 2718, 
+        "flagIconId": "🇨🇳" 
+    },
+    { 
+        "id": 17, 
+        "name": "Pierre Dubois",      
+        "elo": 2659, 
+        "flagIconId": "🇫🇷" 
+    },
+    { 
+        "id": 18, 
+        "name": "Alexei Morozov",     
+        "elo": 2768, 
+        "flagIconId": "🇷🇺" 
+    },
+    { 
+        "id": 19, 
+        "name": "Aram Hakobyan",      
+        "elo": 2689, 
+        "flagIconId": "🇦🇲" 
+    },
+    { 
+        "id": 20, 
+        "name": "William Carter",     
+        "elo": 2645, 
+        "flagIconId": "🇺🇸" 
+    }
+]
+
+

@@ -1,5 +1,5 @@
 
-import type {PieceInformationDTO} from "../../../models/Chess/PieceInfoDTO";
+import type {PieceInformationDTO} from "../../../models/Chess/Piece/PieceInfoDTO";
 import { getSpriteSheetById } from "../../../services/pieceSpriteSheet-service";
 import { UseSpriteSheet } from "../../../services/pieceSpriteSheet-service";
 import { getChessPieceStyle } from "../../../services/pieceSpriteSheet-service";

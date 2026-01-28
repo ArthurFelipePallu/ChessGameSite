@@ -25,7 +25,7 @@ export default function App() {
       <HistoryRouter history={history as any}>
         <Routes>
           <Route path='/' element={<Home/>}>
-            <Route index element={<JogoLocal/>}/>
+            <Route index element={<HomePage/>}/>
             <Route path='configuracao/' element={<Configuracao />}>
             </Route>
             <Route path='jogo-local' element={<JogoLocal />}/>

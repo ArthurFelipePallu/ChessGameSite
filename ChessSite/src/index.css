@@ -51,8 +51,29 @@ a:hover {
 }
 
 body {
-background-color: var(--cs-color-bg-primary);
+  background: radial-gradient(
+    circle at top,
+    #1c1b18 0%,
+    #0f0f0e 60%,
+    #000 100%
+  );
+  color: #e5e5e5;
 }
+
+::selection {
+  background: #81b64c;
+  color: #0f0f0e;
+}
+
+/* Soft vignette */
+.page-vignette::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.8);
+}
+
 main {
   padding: 0 20px;
 }

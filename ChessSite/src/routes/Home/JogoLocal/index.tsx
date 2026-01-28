@@ -1,17 +1,19 @@
 import './styles.css'
 import TurnFenToBoard, {BooleanFenToBooleanArray} from '../../../utils/Fen';
 import { useContext, useMemo, useState, useCallback } from 'react';
-import type { GameStateDto } from '../../../api/chessApi';
 import ChessBoard from '../../../components/Chess/Board/index';
-import type { BoardDTO } from '../../../models/Chess/BoardDTO';
+import type { BoardDTO } from '../../../models/Chess/Board/BoardDTO';
 import { x8_defaultPossiblePositions } from '../../../utils/Boards';
-import type { ApiResult } from "../../../services/apiServices/chessGameState-api-service";
 import { ContextSelectedBoardConfiguration } from '../../../utils/Contexts/boardConfig-context';
 import * as gameStateApiService from "../../../services/apiServices/chessGameState-api-service";
-
+import * as userService from "../../../services/UserService/user-service";
+import UserDisplayer from '../../../components/User/UserDisplayer';
 
 export default function JogoLocal()
 {
+
+    const whitePlayerInfo = userService.getRandomUser();
+    const blackPlayerInfo = userService.getRandomUser();
     const [currentFen, setCurrentFen] = useState("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
     const [currentPossibleMoves, setCurrentPossibleMoves] = useState<boolean[][]>(x8_defaultPossiblePositions);
     const {contextSelectedBoardColorSchemeId,contextSelectedPiecesSpriteSheetId} = useContext(ContextSelectedBoardConfiguration);
@@ -32,6 +34,7 @@ export default function JogoLocal()
         
         return currentPossibleMoves[row][col];
     }, [currentPossibleMoves]);
+
 
     const executeBoardMovement = async (fromSquare:string,toSquare:string) => {
         const result = await gameStateApiService.executeMovement(fromSquare, toSquare);
@@ -68,21 +71,21 @@ export default function JogoLocal()
     );
 
 
-    const loadGameState = async (
-    loader: () => Promise<ApiResult<GameStateDto>>
-    ) => {
-        const result = await loader();
-        if (result.success) {
-            const [boardFen] = result.data.fen.split(" ");
-            setCurrentFen(boardFen);
-            // Reset possible moves when loading a new game state
-            setCurrentPossibleMoves(x8_defaultPossiblePositions);
-        } else {
-            console.error("Failed to load game state:", result.error.message);
-            // You can also show a toast/notification to the user here
-            alert(`Error: ${result.error.message}`);
-        }
-    };
+    // const loadGameState = async (
+    // loader: () => Promise<ApiResult<GameStateDto>>
+    // ) => {
+    //     const result = await loader();
+    //     if (result.success) {
+    //         const [boardFen] = result.data.fen.split(" ");
+    //         setCurrentFen(boardFen);
+    //         // Reset possible moves when loading a new game state
+    //         setCurrentPossibleMoves(x8_defaultPossiblePositions);
+    //     } else {
+    //         console.error("Failed to load game state:", result.error.message);
+    //         // You can also show a toast/notification to the user here
+    //         alert(`Error: ${result.error.message}`);
+    //     }
+    // };
 
 
 
@@ -98,27 +101,15 @@ export default function JogoLocal()
                     Start Game
                 </button>
             </div>
-            <div>
-                <button onClick={() => loadGameState(gameStateApiService.getRandomState)}>
-                    Random Game
-                </button>
-            </div>
+          
             <div className='cs-jogolocal-board-container'>
-                    <h1>Chess Board with Highlighted Moves</h1>
+                    <UserDisplayer userInfo={blackPlayerInfo} />
                     <ChessBoard
                         boardInfo={matchBoard}
                     />
+                    <UserDisplayer userInfo={whitePlayerInfo} />
             </div>
-            <div>
-                <button onClick={() => loadGameState(gameStateApiService.getDefaultState)}>
-                    Default Game
-                </button>
-            </div>
-            <div>
-                <button onClick={() => executeBoardMovement("e2","e4")}>
-                    Move Pawn (e2 to e4)
-                </button>
-            </div>
+           
         </div>
         
         

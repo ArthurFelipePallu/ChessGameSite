@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import type { LinkIconDTO } from '../../models/UtilsDtos/iconDTO';
 
 
+const logalGameLinkIcon : LinkIconDTO = {
+    iconId: "local-game",
+    path: "/jogo-local"
+}
 const configLinkIcon : LinkIconDTO = {
     iconId: "settings",
     path: "/configuracao"
@@ -26,6 +30,7 @@ export default function HomeHeader()
 
                 
                 <div className="cs-container-flex-between-center  cs-header-icons-container">
+                    <LinkIcon linkIconInfo={logalGameLinkIcon} />
                     <LinkIcon linkIconInfo={configLinkIcon} />
                     <LinkIcon linkIconInfo={loginLinkIcon} />
                 </div>
