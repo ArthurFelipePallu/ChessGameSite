@@ -2,11 +2,11 @@ import "./styles.css"
 import Square from "../Square";
 import toChessNotation from "../../../utils/Boards";
 import {useEffect, useState, useCallback} from "react";
-import type { SquareDTO } from "../../../models/Chess/SquareDTO";
-import type { BoardDTO } from "../../../models/Chess/BoardDTO";
+import type { BoardDTO } from "../../../models/Chess/Board/BoardDTO";
+import type { SquareDTO } from "../../../models/Chess/Board/SquareDTO";
+import { x8_noPossiblePositionsFenString } from "../../../utils/Boards";
 import { getBoardColorSchemeById } from "../../../services/boardColorScheme-service";
 import * as gameStateApiService from "../../../services/apiServices/chessGameState-api-service";
-import { x8_noPossiblePositionsFenString } from "../../../utils/Boards";
 
 type Prop ={
   boardInfo:BoardDTO;
@@ -75,6 +75,27 @@ export default function ChessBoard({ boardInfo } : Prop)
     return (rowIndex + colIndex) % 2 === 0 ? scheme.white : scheme.black;
   };
 
+const isPromotingSquare= (
+                            promotingSquare: string,
+                            rowIndex: number,
+                            colIndex: number
+                          ): boolean => 
+  {
+    if (!promotingSquare) return false;
+
+    const file = promotingSquare[0].toLowerCase(); // 'e'
+    const rank = promotingSquare[1];               // '2'
+
+    // Convert file (a-h) to column index (0-7)
+    const squareCol = file.charCodeAt(0) - 'a'.charCodeAt(0);
+
+    // Convert rank (1-8) to row index (7-0)
+    const squareRow = 8 - parseInt(rank, 10);
+
+    return squareRow === rowIndex && squareCol === colIndex;
+  };
+
+
   // Handle square click, setting the selected square's position
   const handleSquareClick = async (rowIndex: number, colIndex: number) => {
 
@@ -121,7 +142,8 @@ function createSquare(square:string,rowIndex:number,colIndex:number): JSX.Elemen
                 clickAction: () => handleSquareClick(rowIndex,colIndex),
                 squareIsSelected:isSelected,
                 squareIsPossibleMove:isPossibleMove,
-                spriteSheetId:boardInfo.boardUsingPieceSpriteSheetId
+                spriteSheetId:boardInfo.boardUsingPieceSpriteSheetId,
+                isPromotingSquare: isPromotingSquare(boardInfo.promotingSquare,rowIndex,colIndex),
               }
   return (
     <Square

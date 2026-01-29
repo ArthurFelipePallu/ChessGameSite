@@ -13,20 +13,35 @@ namespace Chess.Engine.ChessGame;
 public class ChessGame
 {
     public string Fen { get; private set; }
-    public PieceColor Turn = PieceColor.White;
-
+    
     private ChessMatch _match;
     public ChessGame()
     {
         Fen = DefaultValues.Fen;
     }
 
-    public string StartMatch()
+    public void StartMatch(GameStarterDto startDto)
     {
         if(_match != null) 
             throw new MatchAlreadyInPlayException();
-        _match = new ChessMatch();
-        return GetDefaultBoardState();
+        _match = new ChessMatch(startDto.WhitePlayerId, startDto.BlackPlayerId);
+        // return GetDefaultBoardState();
+    }
+
+    public GameStateDto GetCurrentState()
+    {
+        if (_match == null)
+            throw new MatchNotStartedException("GetCurrentBoardStateFen");
+        
+        var matchId = 1;
+        var whiteId = _match.GetWhitePlayerIdOfMatch();
+        var blackId = _match.GetBlackPlayerIdOfMatch();
+        var boardStateFen = _match.RetrieveBoardCurrentStateFen();
+        var colorToPlay = _match.PieceColorToPlayThisTurn();
+        var promotingSquare = _match.GetPromotingSquare;
+        
+        
+        return new GameStateDto(matchId, whiteId, blackId,boardStateFen, colorToPlay, promotingSquare);
     }
 
     public string GetPossiblePositionOfPieceAtPosition(string position)
@@ -34,37 +49,17 @@ public class ChessGame
         if (_match == null)
             throw new MatchNotStartedException("GetPossiblePositionOfPieceAtPosition");
         
+        
         var piece = _match.AccessPieceAtChessBoardPosition(position);
         if (piece == null) return "";//there is no piece at position
+
+        if (piece.GetPieceColor() != _match.PieceColorToPlayThisTurn())
+            throw new MovementException($"Piece selected does not belong to {_match.PieceColorToPlayThisTurn()} player");
+        
         _match.CalculatePiecePossibleMoves(piece);
         return _match.RetrievePiecePossibleMovesAsString(piece);
     }
     
-    public string GetDefaultBoardState()
-    {
-        if (_match == null)
-            throw new MatchNotStartedException("GetPossiblePositionOfPieceAtPosition");
-        
-        Fen = DefaultValues.Fen;
-        return Fen;
-    }
-
-    public string GetRandomBoardState()
-    {
-        if (_match == null)
-            throw new MatchNotStartedException("GetPossiblePositionOfPieceAtPosition");
-        Fen = RandomFenGenerator.GenerateRandomFen();
-        return Fen;
-    }
-    public string GetCurrentBoardStateFen()
-    {
-        if (_match == null)
-            throw new MatchNotStartedException("GetCurrentBoardStateFen");
-        
-        Fen = _match.RetrieveBoardCurrentStateFen();
-        //var boardStateFen = Fen.Split(' ')[0];
-        return Fen;
-    }
     public void ExecuteMovement(ExecuteMovementDto movementDto)
     {
         
@@ -80,9 +75,6 @@ public class ChessGame
         _match.ExecuteMovement(piece, new ChessNotationPosition(movementDto.ToPos));
         
     }
-    public PieceColor GetTurn()
-    {
-        return Turn;
-    }
+  
 
 }

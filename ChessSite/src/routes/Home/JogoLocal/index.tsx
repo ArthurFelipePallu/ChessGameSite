@@ -8,13 +8,18 @@ import { ContextSelectedBoardConfiguration } from '../../../utils/Contexts/board
 import * as gameStateApiService from "../../../services/apiServices/chessGameState-api-service";
 import * as userService from "../../../services/UserService/user-service";
 import UserDisplayer from '../../../components/User/UserDisplayer';
+import type { GameStateDto } from '../../../api/chessApi';
+
+
+
 
 export default function JogoLocal()
 {
+    const [currentGameState,SetCurrentGameState] = useState<GameStateDto>();
 
-    const whitePlayerInfo = userService.getRandomUser();
-    const blackPlayerInfo = userService.getRandomUser();
-    const [currentFen, setCurrentFen] = useState("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
+    const whitePlayerInfo = userService.getUserById(currentGameState?.whitePlayerId  || 1 ); 
+    const blackPlayerInfo = userService.getUserById(currentGameState?.blackPlayerId  || 2 );
+    // const [currentFen, setCurrentFen] = useState("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
     const [currentPossibleMoves, setCurrentPossibleMoves] = useState<boolean[][]>(x8_defaultPossiblePositions);
     const {contextSelectedBoardColorSchemeId,contextSelectedPiecesSpriteSheetId} = useContext(ContextSelectedBoardConfiguration);
     
@@ -39,8 +44,11 @@ export default function JogoLocal()
     const executeBoardMovement = async (fromSquare:string,toSquare:string) => {
         const result = await gameStateApiService.executeMovement(fromSquare, toSquare);
         if (result.success) {
-            const [boardFen] = result.data.fen.split(" ");
-            setCurrentFen(boardFen);
+            // const [boardFen] = result.data.fen.split(" ");
+            // setCurrentFen(boardFen);
+
+            console.log(result.data);
+            SetCurrentGameState(result.data);            
             setCurrentPossibleMoves(x8_defaultPossiblePositions);
         } else {
             alert(`Error: ${result.error.message}`);
@@ -48,12 +56,25 @@ export default function JogoLocal()
     }
 
 
+
+
     const matchBoard = useMemo<BoardDTO>(() => {
-        if (!currentFen) return null as any;
+        if (!currentGameState) return {
+    
+            board: TurnFenToBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"),
+            possibleMoves: currentPossibleMoves,
+            promotingSquare: "",
+            boardColorSchemeId: contextSelectedBoardColorSchemeId,
+            boardUsingPieceSpriteSheetId:contextSelectedPiecesSpriteSheetId,
+            executeMove : executeBoardMovement,
+            changePossibleMovesAction: changeBoardPossibleMoves,
+            verifyPositionIsInPossibleMoves :verifyPositionIsInBoardPossibleMoves
+        };
 
         return {
-            board: TurnFenToBoard(currentFen),
+            board: TurnFenToBoard(currentGameState.fen),
             possibleMoves: currentPossibleMoves,
+            promotingSquare:currentGameState.squareToPromote,
             boardColorSchemeId: contextSelectedBoardColorSchemeId,
             boardUsingPieceSpriteSheetId:contextSelectedPiecesSpriteSheetId,
             executeMove : executeBoardMovement,
@@ -61,13 +82,7 @@ export default function JogoLocal()
             verifyPositionIsInPossibleMoves :verifyPositionIsInBoardPossibleMoves
             
         };
-        }, [currentFen, 
-            currentPossibleMoves, 
-            contextSelectedBoardColorSchemeId, 
-            contextSelectedPiecesSpriteSheetId,
-            changeBoardPossibleMoves,
-            verifyPositionIsInBoardPossibleMoves
-           ]
+        }, [currentGameState, currentPossibleMoves, contextSelectedBoardColorSchemeId, contextSelectedPiecesSpriteSheetId, changeBoardPossibleMoves, verifyPositionIsInBoardPossibleMoves]
     );
 
 

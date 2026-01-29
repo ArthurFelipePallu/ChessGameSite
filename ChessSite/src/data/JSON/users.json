@@ -3,121 +3,161 @@
      "id": 1,  
      "name": "Ivan Petrov",        
      "elo": 2785, 
-     "flagIconId": "🇷🇺" 
+     "flagIconId": "🇷🇺",
+     "portraitRow":1,
+     "portraitCol":5
     },
     { 
         "id": 2,  
         "name": "Magnus Eriksen",     
         "elo": 2830, 
-        "flagIconId": "🇳🇴" 
+        "flagIconId": "🇳🇴" ,
+        "portraitRow":6,
+        "portraitCol":8
     },
     { 
         "id": 3,  
         "name": "Arjun Mehta",        
         "elo": 2742,
-        "flagIconId": "🇮🇳" 
+        "flagIconId": "🇮🇳"  ,
+        "portraitRow":3,
+        "portraitCol":0
     },
     { 
         "id": 4,  
         "name": "Wei Zhang",          
         "elo": 2760, 
-        "flagIconId": "🇨🇳" 
+        "flagIconId": "🇨🇳"  ,
+        "portraitRow":9,
+        "portraitCol":13
     },
     { 
         "id": 5,  
         "name": "Fabien Morel",       
         "elo": 2721, 
-        "flagIconId": "🇫🇷" 
+        "flagIconId": "🇫🇷"  ,
+        "portraitRow":2,
+        "portraitCol":17
     },
     { 
         "id": 6,  
         "name": "Levon Sarkisian",    
         "elo": 2791, 
-        "flagIconId": "🇦🇲" 
+        "flagIconId": "🇦🇲" ,
+        "portraitRow":1,
+        "portraitCol":1 
     },
     { 
         "id": 7,  
         "name": "Ilgar Mammadov",     
         "elo": 2754, 
-        "flagIconId": "🇦🇿" 
+        "flagIconId": "🇦🇿" ,
+        "portraitRow":4,
+        "portraitCol":13 
     },
     { 
         "id": 8,  
         "name": "Dmytro Kovalenko",   
         "elo": 2710, 
-        "flagIconId": "🇺🇦" 
+        "flagIconId": "🇺🇦" ,
+        "portraitRow":8,
+        "portraitCol":8  
     },
     { 
         "id": 9,  
         "name": "Jan Kowalski",       
         "elo": 2684, 
-        "flagIconId": "🇵🇱" 
+        "flagIconId": "🇵🇱" ,
+        "portraitRow":7,
+        "portraitCol":16 
     },
     { 
         "id": 10, 
         "name": "Thomas Müller",      
         "elo": 2702, 
-        "flagIconId": "🇩🇪" 
+        "flagIconId": "🇩🇪" ,
+        "portraitRow":1,
+        "portraitCol":16 
     },
     { 
         "id": 11, 
         "name": "James Whitaker",     
         "elo": 2690, 
-        "flagIconId": "🇬🇧" 
+        "flagIconId": "🇬🇧" ,
+        "portraitRow":2,
+        "portraitCol":3 
     },
     { 
         "id": 12, 
         "name": "Carlos Alvarez",     
         "elo": 2668, 
-        "flagIconId": "🇪🇸" 
+        "flagIconId": "🇪🇸" ,
+        "portraitRow":5,
+        "portraitCol":11 
     },
     { 
         "id": 13, 
         "name": "Michael Thompson",  
         "elo": 2725, 
-        "flagIconId": "🇺🇸" 
+        "flagIconId": "🇺🇸" ,
+        "portraitRow":1,
+        "portraitCol":13 
     },
     { 
         "id": 14, 
         "name": "Sergey Volkov",      
         "elo": 2733, 
-        "flagIconId": "🇷🇺" 
+        "flagIconId": "🇷🇺" ,
+        "portraitRow":9,
+        "portraitCol":5 
     },
     { 
         "id": 15, 
         "name": "Rohit Sharma",       
         "elo": 2675, 
-        "flagIconId": "🇮🇳" 
+        "flagIconId": "🇮🇳"  ,
+        "portraitRow":6,
+        "portraitCol":11
     },
     { 
         "id": 16, 
         "name": "Li Chen",            
         "elo": 2718, 
-        "flagIconId": "🇨🇳" 
+        "flagIconId": "🇨🇳" ,
+        "portraitRow":6,
+        "portraitCol":14 
     },
     { 
         "id": 17, 
         "name": "Pierre Dubois",      
         "elo": 2659, 
-        "flagIconId": "🇫🇷" 
+        "flagIconId": "🇫🇷" ,
+        "portraitRow":0,
+        "portraitCol":3 
     },
     { 
         "id": 18, 
         "name": "Alexei Morozov",     
         "elo": 2768, 
-        "flagIconId": "🇷🇺" 
+        "flagIconId": "🇷🇺" ,
+        "portraitRow":0,
+        "portraitCol":9 
     },
     { 
         "id": 19, 
         "name": "Aram Hakobyan",      
         "elo": 2689, 
-        "flagIconId": "🇦🇲" 
+        "flagIconId": "🇦🇲" ,
+        "portraitRow":0,
+        "portraitCol":11 
     },
     { 
         "id": 20, 
         "name": "William Carter",     
         "elo": 2645, 
-        "flagIconId": "🇺🇸" 
+        "flagIconId": "🇺🇸" ,
+        "portraitRow":2,
+        "portraitCol":18 
     }
 ]
 

@@ -236,21 +236,6 @@ export function getUserPortraitStyle(row: number, col: number) {
   row = Math.max(0, Math.min(row, spriteSheet.rows - 1));
   col = Math.max(0, Math.min(col, spriteSheet.cols - 1));
 
-  console.log(row,col);
-
-  // return {
-  //   width: "100%",
-  //   height: "100%",
-  //   backgroundImage: `url(${spriteSheet.src})`,
-  //   backgroundRepeat: "no-repeat",
-
-  //   // Each sprite becomes exactly the size of the container
-  //   backgroundSize: `${spriteSheet.cols * 100}% ${spriteSheet.rows * 100}%`,
-
-  //   // Move exactly one sprite per step
-  //   backgroundPosition: `-${col * 100}% -${row * 100}%`
-  // };
-
     return {
     width: "100%",
     height: "100%",

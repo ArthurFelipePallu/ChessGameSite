@@ -23,16 +23,17 @@ public class ChessGameController : ControllerBase
     /// <response code="200">Returns the game state</response>
     /// <response code="400">If the match is already started or other client error</response>
     /// <response code="500">If an internal server error occurs</response>
-    [HttpGet("start-game")]
+    [HttpPost("start-game")]
     [ProducesResponseType(typeof(GameStateDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status500InternalServerError)]
-    public ActionResult<GameStateDto> StartGame()
+    public ActionResult<GameStateDto> StartGame([FromBody] GameStarterDto starterDto)
     {
         try
         {
-            var startingGameState = _game.StartMatch();
-            var gameState = new GameStateDto(startingGameState);
+            _game.StartMatch(starterDto);
+
+            var gameState = _game.GetCurrentState();
             return Ok(gameState);
         }
         catch (MatchException ex)
@@ -55,78 +56,6 @@ public class ChessGameController : ControllerBase
     
     
     /// <summary>
-    /// Gets the default chess board state
-    /// </summary>
-    /// <returns>The default game state</returns>
-    /// <response code="200">Returns the default game state</response>
-    /// <response code="400">If the match is not started or other client error</response>
-    /// <response code="500">If an internal server error occurs</response>
-    [HttpGet("default-state")]
-    [ProducesResponseType(typeof(GameStateDto), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status500InternalServerError)]
-    public ActionResult<GameStateDto> GetDefaultGameState()
-    {
-        try
-        {
-            var state = _game.GetDefaultBoardState();
-            var gameState = new GameStateDto(state);
-            return Ok(gameState);
-        }
-        catch (MatchException ex)
-        {
-            var errorResponse = new ErrorResponseDto(
-                message: ex.Message,
-                errorCode: ex.ErrorCode.ToString(),
-                statusCode: 400);
-            return BadRequest(errorResponse);
-        }
-        catch (Exception)
-        {
-            var errorResponse = new ErrorResponseDto(
-                message: "An error occurred while getting the default game state.",
-                errorCode: "InternalError",
-                statusCode: 500);
-            return StatusCode(500, errorResponse);
-        }
-    }
-
-    /// <summary>
-    /// Gets a random chess board state
-    /// </summary>
-    /// <returns>A random game state</returns>
-    /// <response code="200">Returns a random game state</response>
-    /// <response code="400">If the match is not started or other client error</response>
-    /// <response code="500">If an internal server error occurs</response>
-    [HttpGet("random-state")]
-    [ProducesResponseType(typeof(GameStateDto), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status500InternalServerError)]
-    public ActionResult<GameStateDto> GetRandomGameState()
-    {
-        try
-        {
-            var state = _game.GetRandomBoardState();
-            var gameState = new GameStateDto(state);
-            return Ok(gameState);
-        }
-        catch (MatchException ex)
-        {
-            var errorResponse = new ErrorResponseDto(
-                message: ex.Message,
-                errorCode: ex.ErrorCode.ToString(),
-                statusCode: 400);
-            return BadRequest(errorResponse);
-        }
-        catch (Exception)
-        {
-            var errorResponse = new ErrorResponseDto(
-                message: "An error occurred while getting a random game state.",
-                errorCode: "InternalError",
-                statusCode: 500);
-            return StatusCode(500, errorResponse);
-        }
-    }
-
-    /// <summary>
     /// Gets the possible moves for a piece at the specified position
     /// </summary>
     /// <param name="position">The chess notation position (e.g., "e2")</param>
@@ -134,6 +63,7 @@ public class ChessGameController : ControllerBase
     /// <response code="200">Returns the possible moves</response>
     /// <response code="400">If the match is not started or other client error</response>
     /// <response code="404">If no piece is found at the position</response>
+    /// <response code="450">If there are Chess Rule errors </response>
     /// <response code="500">If an internal server error occurs</response>
     [HttpGet("possible-move/{position}")]
     [ProducesResponseType(typeof(PossibleMovesDto), StatusCodes.Status200OK)]
@@ -165,6 +95,14 @@ public class ChessGameController : ControllerBase
                 statusCode: 400);
             return BadRequest(errorResponse);
         }
+        catch (ChessException ex)
+        {
+            var errorResponse = new ErrorResponseDto(
+                message: ex.Message,
+                errorCode: ex.ErrorCode.ToString(),
+                statusCode: 450);
+            return BadRequest(errorResponse);
+        }
         catch (Exception)
         {
             var errorResponse = new ErrorResponseDto(
@@ -184,6 +122,7 @@ public class ChessGameController : ControllerBase
     /// <response code="200">Returns the updated game state</response>
     /// <response code="400">If the match is not started, move is invalid, or other client error</response>
     /// <response code="404">If no piece is found at the source position</response>
+    /// <response code="450">If there are Chess Rule errors </response>
     /// <response code="500">If an internal server error occurs</response>
     [HttpPost("execute-move")]
     [ProducesResponseType(typeof(GameStateDto), StatusCodes.Status200OK)]
@@ -213,10 +152,10 @@ public class ChessGameController : ControllerBase
             }
 
             _game.ExecuteMovement(movementDto);
-            
-            var gameState = _game.GetCurrentBoardStateFen();
-            
-            if (string.IsNullOrEmpty(gameState))
+
+            var gameState = _game.GetCurrentState();
+                
+            if (string.IsNullOrEmpty(gameState.Fen))
             {
                 var errorResponse = new ErrorResponseDto(
                     message: $"No piece found at position {movementDto.FromPos}.",
@@ -225,7 +164,7 @@ public class ChessGameController : ControllerBase
                 return NotFound(errorResponse);
             }
             
-            return Ok(new GameStateDto(gameState));
+            return Ok(gameState);
         }
         catch (MatchException ex)
         {
@@ -240,7 +179,7 @@ public class ChessGameController : ControllerBase
             var errorResponse = new ErrorResponseDto(
                 message: ex.Message,
                 errorCode: ex.ErrorCode.ToString(),
-                statusCode: 500);
+                statusCode: 450);
             return BadRequest(errorResponse);
         }
         catch (Exception)

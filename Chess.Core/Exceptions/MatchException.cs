@@ -24,20 +24,20 @@ public enum MatchErrorCode
 public class MatchException : Exception
 {
     public MatchErrorCode ErrorCode { get; }
-    public MatchStatus? CurrentStatus { get; }
-    public MatchStatus? AttemptedStatus { get; }
+    public MatchEnums? CurrentEnums { get; }
+    public MatchEnums? AttemptedEnums { get; }
 
     public MatchException(
         string message,
         MatchErrorCode errorCode = MatchErrorCode.Unknown,
-        MatchStatus? currentStatus = null,
-        MatchStatus? attemptedStatus = null,
+        MatchEnums? currentEnums = null,
+        MatchEnums? attemptedEnums = null,
         Exception? innerException = null)
         : base(message, innerException)
     {
         ErrorCode = errorCode;
-        CurrentStatus = currentStatus;
-        AttemptedStatus = attemptedStatus;
+        CurrentEnums = currentEnums;
+        AttemptedEnums = attemptedEnums;
     }
 
     public override string ToString()
@@ -45,10 +45,10 @@ public class MatchException : Exception
         var baseText = base.ToString();
         var context = $"Code: {ErrorCode}";
 
-        if (CurrentStatus.HasValue)
-            context += $", Current Status: {CurrentStatus.Value}";
-        if (AttemptedStatus.HasValue)
-            context += $", Attempted Status: {AttemptedStatus.Value}";
+        if (CurrentEnums.HasValue)
+            context += $", Current Status: {CurrentEnums.Value}";
+        if (AttemptedEnums.HasValue)
+            context += $", Attempted Status: {AttemptedEnums.Value}";
 
         return $"{baseText} ({context})";
     }
@@ -60,14 +60,14 @@ public class MatchException : Exception
 public class MatchAlreadyInPlayException : MatchException
 {
     public MatchAlreadyInPlayException(
-        MatchStatus? currentStatus = null,
+        MatchEnums? currentStatus = null,
         Exception? innerException = null)
         : base(
             message: currentStatus.HasValue 
                 ? $"Cannot start a new match. A match is already in progress with status: {currentStatus.Value}"
                 : "Cannot start a new match. A match is already in progress.",
             errorCode: MatchErrorCode.MatchAlreadyStarted,
-            currentStatus: currentStatus,
+            currentEnums: currentStatus,
             innerException: innerException)
     {
     }
@@ -100,7 +100,7 @@ public class MatchFinishedException : MatchException
         : base(
             message: $"Cannot perform '{operation}'. The match has already finished.",
             errorCode: MatchErrorCode.MatchAlreadyFinished,
-            currentStatus: MatchStatus.Finished,
+            currentEnums: MatchEnums.Finished,
             innerException: innerException)
     {
     }
@@ -112,14 +112,14 @@ public class MatchFinishedException : MatchException
 public class InvalidMatchStateTransitionException : MatchException
 {
     public InvalidMatchStateTransitionException(
-        MatchStatus currentStatus,
-        MatchStatus attemptedStatus,
+        MatchEnums currentEnums,
+        MatchEnums attemptedEnums,
         Exception? innerException = null)
         : base(
-            message: $"Cannot transition from '{currentStatus}' to '{attemptedStatus}'. This state transition is not allowed.",
+            message: $"Cannot transition from '{currentEnums}' to '{attemptedEnums}'. This state transition is not allowed.",
             errorCode: MatchErrorCode.InvalidStateTransition,
-            currentStatus: currentStatus,
-            attemptedStatus: attemptedStatus,
+            currentEnums: currentEnums,
+            attemptedEnums: attemptedEnums,
             innerException: innerException)
     {
     }
@@ -132,12 +132,12 @@ public class OperationNotAllowedException : MatchException
 {
     public OperationNotAllowedException(
         string operation,
-        MatchStatus currentStatus,
+        MatchEnums currentEnums,
         Exception? innerException = null)
         : base(
-            message: $"Operation '{operation}' is not allowed when the match is in '{currentStatus}' status.",
+            message: $"Operation '{operation}' is not allowed when the match is in '{currentEnums}' status.",
             errorCode: MatchErrorCode.OperationNotAllowedInCurrentState,
-            currentStatus: currentStatus,
+            currentEnums: currentEnums,
             innerException: innerException)
     {
     }
@@ -150,12 +150,12 @@ public class NullRequestObjectException : MatchException
 {
     public NullRequestObjectException(
         string operation,
-        MatchStatus? currentStatus = null,
+        MatchEnums? currentStatus = null,
         Exception? innerException = null)
         : base(
             message: $"Request '{operation}' came with a null object.",
             errorCode: MatchErrorCode.RequestObjectIsNull,
-            currentStatus: currentStatus,
+            currentEnums: currentStatus,
             innerException: innerException)
     {
     }

@@ -49,6 +49,8 @@ public class ChessException : Exception
     }
 }
 
+
+
 public class MovementException : ChessException
 {
     public MovementException(

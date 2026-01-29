@@ -3,4 +3,6 @@ export type UserDto={
     name:string;
     elo:number;
     flagIconId:string;
+    portraitRow:number;
+    portraitCol:number;
 }

@@ -1,7 +1,8 @@
 import api from "../../api/axios";
 import type { AxiosError } from "axios";
-import type { GameStateDto, PossibleMovesDto,ExecuteMovementDto } from "../../api/chessApi";
+import type { GameStateDto, PossibleMovesDto,ExecuteMovementDto, GameStarterDto } from "../../api/chessApi";
 import toChessNotation from "../../utils/Boards";
+import * as userService from "../../services/UserService/user-service";
 
 export interface ErrorResponseDto {
   message: string;
@@ -19,7 +20,10 @@ export type ApiResult<T> =
  */
 export async function StartGame(): Promise<ApiResult<GameStateDto>> {
   try {
-    const response = await api.get<GameStateDto>('/chessgame/start-game');
+    const whiteId = userService.getRandomUser().id;
+    const blackId = userService.getRandomUser().id;
+    const gameStarter : GameStarterDto ={ whitePlayerId:whiteId ,blackPlayerId:blackId  }
+    const response = await api.post<GameStateDto>('/chessgame/start-game',gameStarter);
     return { success: true, data: response.data };
   } catch (error) {
     const axiosError = error as AxiosError<ErrorResponseDto>;

@@ -1,8 +1,8 @@
 import './styles.css';  // CSS file for individual square styling
-import type { SquareDTO } from '../../../models/Chess/SquareDTO';
-// import { getPieceIconByKey } from '../../../services/pieceIcons-service';
 import ChessPiece from '../Piece';
-import type { PieceInformationDTO } from '../../../models/Chess/PieceInfoDTO';
+import type { SquareDTO } from '../../../models/Chess/Board/SquareDTO';
+import type { PieceInformationDTO } from '../../../models/Chess/Piece/PieceInfoDTO';
+
 
 type Prop ={
   squareInfo:SquareDTO;
@@ -18,12 +18,18 @@ const Square = ({squareInfo} : Prop) => {
 
 
   return (
+
+    
     <div
-      className={`square ${squareInfo.squareIsSelected ? 'selected' : ''} ${squareInfo.squareIsPossibleMove ? 'possible-move' : ''}`}
-      style={{ backgroundColor: squareInfo.squareColor }}
+      className={` square
+                 ${squareInfo.squareIsSelected ? 'selected' : ''} 
+                 ${squareInfo.squareIsPossibleMove ? 'possible-move' : ''}`}
+
+      style={  { backgroundColor: squareInfo.squareColor }}
+      
       onClick={squareInfo.clickAction} // Attach click handler
     >
-      <div className="piece">
+      <div className="piece ${}">
         {/* {getPieceIconByKey(squareInfo.content)} */}
         <ChessPiece piece={pieceInfo}/>
         </div> {/* Render the piece */}

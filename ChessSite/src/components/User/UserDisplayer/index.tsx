@@ -1,17 +1,16 @@
 import "./styles.css"
-import { getRandomInt } from "../../../utils/utils";
 import type { UserDto } from "../../../models/User/UserDto";
 import * as iconService from "../../../services/icon-service";
 import { getUserPortraitStyle } from "../../../services/pieceSpriteSheet-service";
+
+
 type Prop ={
     userInfo : UserDto;
 }
 
 export default function UserDisplayer({userInfo}:Prop)
 {
-    const portraitRow = getRandomInt(0,9);
-    const portraitCol = getRandomInt(0,19);
-    const portraitStyle = getUserPortraitStyle(portraitRow,portraitCol);
+    const portraitStyle = getUserPortraitStyle(userInfo.portraitRow,userInfo.portraitCol);
     return (
         <div className=" user-displayer-container">
 

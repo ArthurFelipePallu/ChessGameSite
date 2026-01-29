@@ -26,9 +26,26 @@ export interface ExecuteMovementDto {
   toPos?: string;
 }
 
-export interface GameStateDto {
-  fen: string;
+export interface GameStarterDto {
+  /** @format int32 */
+  whitePlayerId?: number;
+  /** @format int32 */
+  blackPlayerId?: number;
 }
+
+export interface GameStateDto {
+  /** @format int32 */
+  matchId: number;
+  /** @format int32 */
+  whitePlayerId?: number;
+  /** @format int32 */
+  blackPlayerId?: number;
+  fen: string;
+  turn: PieceColor;
+  squareToPromote: string;
+}
+
+export type PieceColor = number;
 
 export interface PossibleMovesDto {
   possibleMoves: string;
@@ -302,43 +319,18 @@ export class Api<
      * No description
      *
      * @tags ChessGame
-     * @name ChessGameStartGameList
-     * @request GET:/api/ChessGame/start-game
+     * @name ChessGameStartGameCreate
+     * @request POST:/api/ChessGame/start-game
      */
-    chessGameStartGameList: (params: RequestParams = {}) =>
+    chessGameStartGameCreate: (
+      data: GameStarterDto,
+      params: RequestParams = {},
+    ) =>
       this.request<GameStateDto, ErrorResponseDto>({
         path: `/api/ChessGame/start-game`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags ChessGame
-     * @name ChessGameDefaultStateList
-     * @request GET:/api/ChessGame/default-state
-     */
-    chessGameDefaultStateList: (params: RequestParams = {}) =>
-      this.request<GameStateDto, ErrorResponseDto>({
-        path: `/api/ChessGame/default-state`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags ChessGame
-     * @name ChessGameRandomStateList
-     * @request GET:/api/ChessGame/random-state
-     */
-    chessGameRandomStateList: (params: RequestParams = {}) =>
-      this.request<GameStateDto, ErrorResponseDto>({
-        path: `/api/ChessGame/random-state`,
-        method: "GET",
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
