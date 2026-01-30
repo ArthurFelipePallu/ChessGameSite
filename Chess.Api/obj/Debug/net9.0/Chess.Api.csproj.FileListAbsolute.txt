@@ -70,3 +70,6 @@ E:\Projetos\ChessApp\Chess.Api\obj\Debug\net9.0\refint\Chess.Api.dll
 E:\Projetos\ChessApp\Chess.Api\obj\Debug\net9.0\Chess.Api.pdb
 E:\Projetos\ChessApp\Chess.Api\obj\Debug\net9.0\Chess.Api.genruntimeconfig.cache
 E:\Projetos\ChessApp\Chess.Api\obj\Debug\net9.0\ref\Chess.Api.dll
+E:\Projetos\ChessApp\Chess.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\Projetos\ChessApp\Chess.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\Projetos\ChessApp\Chess.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll

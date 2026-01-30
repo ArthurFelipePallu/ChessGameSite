@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Chess.Api.SchemaFilters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,15 +14,20 @@ builder.Services.AddControllers()
         );
     });
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApi();
+
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddOpenApi();
 
 
 
 
 // Optional but recommended
 builder.Services.AddEndpointsApiExplorer();
-// builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    //c.UseInlineDefinitionsForEnums();
+    c.SchemaFilter<StringEnumSchemaFilter>();
+});
 
 builder.Services.AddCors(options =>
 {
@@ -39,7 +45,9 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    //app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 

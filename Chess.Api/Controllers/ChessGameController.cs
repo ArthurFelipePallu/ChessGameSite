@@ -193,4 +193,77 @@ public class ChessGameController : ControllerBase
     }
      
     
+    
+    
+        /// <summary>
+    /// Executes a chess move from one position to another
+    /// </summary>
+    /// <param name="promotionDto">The Data Transfer Object containing the square in which the promotion is happening and to which piece it is being promoted to</param>
+    /// <returns>The updated game state after the move</returns>
+    /// <response code="200">Returns the updated game state</response>
+    /// <response code="400">If the match is not started, move is invalid, or other client error</response>
+    /// <response code="404">If no piece is found at the source position</response>
+    /// <response code="450">If there are Chess Rule errors </response>
+    /// <response code="500">If an internal server error occurs</response>
+    [HttpPost("promote-piece")]
+    [ProducesResponseType(typeof(GameStateDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status500InternalServerError)]
+    public ActionResult<GameStateDto> PromotePiece([FromBody] PiecePromotionDto promotionDto)
+    {
+        try
+        {
+            if (promotionDto == null)
+            {
+                var nullErrorResponse = new ErrorResponseDto(
+                    message: "Movement request object is null or invalid.",
+                    errorCode: "RequestObjectIsNull",
+                    statusCode: 400);
+                return BadRequest(nullErrorResponse);
+            }
+
+            if (string.IsNullOrWhiteSpace(promotionDto.PromotingSquare) )
+            {
+                var invalidErrorResponse = new ErrorResponseDto(
+                    message: "Promoting Square and Piece to promote  are required and cannot be empty.",
+                    errorCode: "InvalidRequest",
+                    statusCode: 400);
+                return BadRequest(invalidErrorResponse);
+            }
+
+            // _game.Promo(movementDto);
+
+            var gameState = _game.GetCurrentState();
+                
+            
+            return Ok(gameState);
+        }
+        catch (MatchException ex)
+        {
+            var errorResponse = new ErrorResponseDto(
+                message: ex.Message,
+                errorCode: ex.ErrorCode.ToString(),
+                statusCode: 400);
+            return BadRequest(errorResponse);
+        }
+        catch (ChessException ex)
+        {
+            var errorResponse = new ErrorResponseDto(
+                message: ex.Message,
+                errorCode: ex.ErrorCode.ToString(),
+                statusCode: 450);
+            return BadRequest(errorResponse);
+        }
+        catch (Exception)
+        {
+            var errorResponse = new ErrorResponseDto(
+                message: $"An error occurred while trying to execute promotion at {promotionDto.PromotingSquare} to {promotionDto.PieceToPromote}.",
+                errorCode: "InternalError",
+                statusCode: 500);
+            return StatusCode(500, errorResponse);
+        }
+    }
+    
+    
 }
