@@ -8,7 +8,7 @@ import { ContextSelectedBoardConfiguration } from '../../../utils/Contexts/board
 import * as gameStateApiService from "../../../services/apiServices/chessGameState-api-service";
 import * as userService from "../../../services/UserService/user-service";
 import UserDisplayer from '../../../components/User/UserDisplayer';
-import type { GameStateDto } from '../../../api/chessApi';
+import type { GameStateDto, PieceType } from '../../../api/chessApi';
 
 
 
@@ -41,8 +41,23 @@ export default function JogoLocal()
     }, [currentPossibleMoves]);
 
 
-    const executeBoardMovement = async (fromSquare:string,toSquare:string) => {
-        const result = await gameStateApiService.executeMovement(fromSquare, toSquare);
+    const executeBoardMovement = useCallback(async (fromSquare: string, toSquare: string) => {
+            const result = await gameStateApiService.executeMovement(fromSquare, toSquare);
+
+            if (result.success) {
+            console.log(result.data);
+            SetCurrentGameState(result.data);
+            setCurrentPossibleMoves(x8_defaultPossiblePositions);
+            } else {
+            alert(`Error: ${result.error.message}`);
+            }
+        },
+        [] // add anything used from outside
+    );
+
+    const promotePieceAtSquareToPieceOfType = useCallback(async (square:string , piece : PieceType) =>
+    {
+         const result = await gameStateApiService.promotePieceAtSquareToPieceOfType(square, piece);
         if (result.success) {
             // const [boardFen] = result.data.fen.split(" ");
             // setCurrentFen(boardFen);
@@ -53,38 +68,36 @@ export default function JogoLocal()
         } else {
             alert(`Error: ${result.error.message}`);
         }
-    }
-
-
+        },
+        []
+    );
 
 
     const matchBoard = useMemo<BoardDTO>(() => {
-        if (!currentGameState) return {
-    
-            board: TurnFenToBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"),
-            possibleMoves: currentPossibleMoves,
-            promotingSquare: "",
-            boardColorSchemeId: contextSelectedBoardColorSchemeId,
-            boardUsingPieceSpriteSheetId:contextSelectedPiecesSpriteSheetId,
-            executeMove : executeBoardMovement,
-            changePossibleMovesAction: changeBoardPossibleMoves,
-            verifyPositionIsInPossibleMoves :verifyPositionIsInBoardPossibleMoves
-        };
-
         return {
-            board: TurnFenToBoard(currentGameState.fen),
+            
+            board: TurnFenToBoard(currentGameState?.fen ?? "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"),
             possibleMoves: currentPossibleMoves,
-            promotingSquare:currentGameState.squareToPromote,
+            promotingSquare:currentGameState?.squareToPromote ?? "",
             boardColorSchemeId: contextSelectedBoardColorSchemeId,
             boardUsingPieceSpriteSheetId:contextSelectedPiecesSpriteSheetId,
             executeMove : executeBoardMovement,
             changePossibleMovesAction: changeBoardPossibleMoves,
-            verifyPositionIsInPossibleMoves :verifyPositionIsInBoardPossibleMoves
+            verifyPositionIsInPossibleMoves :verifyPositionIsInBoardPossibleMoves,
+            promotePieceFromSquareToPiece:promotePieceAtSquareToPieceOfType
             
         };
-        }, [currentGameState, currentPossibleMoves, contextSelectedBoardColorSchemeId, contextSelectedPiecesSpriteSheetId, changeBoardPossibleMoves, verifyPositionIsInBoardPossibleMoves]
+        },  [
+                currentGameState,
+                currentPossibleMoves,
+                contextSelectedBoardColorSchemeId,
+                contextSelectedPiecesSpriteSheetId,
+                executeBoardMovement,
+                changeBoardPossibleMoves,
+                verifyPositionIsInBoardPossibleMoves,
+                promotePieceAtSquareToPieceOfType,
+            ]
     );
-
 
     // const loadGameState = async (
     // loader: () => Promise<ApiResult<GameStateDto>>

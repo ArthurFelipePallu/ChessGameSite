@@ -10,20 +10,31 @@
  * ---------------------------------------------------------------
  */
 
+export enum PieceType {
+  None = "None",
+  King = "King",
+  Queen = "Queen",
+  Rook = "Rook",
+  Bishop = "Bishop",
+  Knight = "Knight",
+  Pawn = "Pawn",
+}
+
+export enum PieceColor {
+  Black = "Black",
+  White = "White",
+}
+
 export interface ErrorResponseDto {
-  message: string;
-  /** @default null */
+  message?: string | null;
   errorCode?: string | null;
-  /**
-   * @format int32
-   * @default 400
-   */
+  /** @format int32 */
   statusCode?: number;
 }
 
 export interface ExecuteMovementDto {
-  fromPos?: string;
-  toPos?: string;
+  fromPos?: string | null;
+  toPos?: string | null;
 }
 
 export interface GameStarterDto {
@@ -35,20 +46,23 @@ export interface GameStarterDto {
 
 export interface GameStateDto {
   /** @format int32 */
-  matchId: number;
+  matchId?: number;
   /** @format int32 */
   whitePlayerId?: number;
   /** @format int32 */
   blackPlayerId?: number;
-  fen: string;
-  turn: PieceColor;
-  squareToPromote: string;
+  fen: string ;
+  turn?: PieceColor;
+  squareToPromote?: string | null;
 }
 
-export type PieceColor = number;
+export interface PiecePromotionDto {
+  promotingSquare?: string | null;
+  pieceToPromote?: PieceType;
+}
 
 export interface PossibleMovesDto {
-  possibleMoves: string;
+  possibleMoves?: string | null;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -104,7 +118,7 @@ export enum ContentType {
 }
 
 export class HttpClient<SecurityDataType = unknown> {
-  public baseUrl: string = "http://localhost:5036/";
+  public baseUrl: string = "";
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
@@ -307,9 +321,8 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title Chess.Api | v1
- * @version 1.0.0
- * @baseUrl http://localhost:5036/
+ * @title Chess.Api
+ * @version 1.0
  */
 export class Api<
   SecurityDataType extends unknown,
@@ -366,6 +379,26 @@ export class Api<
     ) =>
       this.request<GameStateDto, ErrorResponseDto>({
         path: `/api/ChessGame/execute-move`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ChessGame
+     * @name ChessGamePromotePieceCreate
+     * @request POST:/api/ChessGame/promote-piece
+     */
+    chessGamePromotePieceCreate: (
+      data: PiecePromotionDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<GameStateDto, ErrorResponseDto>({
+        path: `/api/ChessGame/promote-piece`,
         method: "POST",
         body: data,
         type: ContentType.Json,

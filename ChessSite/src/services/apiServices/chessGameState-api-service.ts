@@ -1,6 +1,6 @@
 import api from "../../api/axios";
 import type { AxiosError } from "axios";
-import type { GameStateDto, PossibleMovesDto,ExecuteMovementDto, GameStarterDto } from "../../api/chessApi";
+import type { GameStateDto, PossibleMovesDto,ExecuteMovementDto, GameStarterDto, PieceType, PiecePromotionDto } from "../../api/chessApi";
 import toChessNotation from "../../utils/Boards";
 import * as userService from "../../services/UserService/user-service";
 
@@ -163,3 +163,30 @@ export async function getPossibleMovesAtPosition(row:number,col:number): Promise
   }
 }
 
+/**
+ * Gets the possible moves of the piece on a square given its row and column
+ * @returns PossibleMovesDto on success, ErrorResponseDto on failure
+ */
+export async function promotePieceAtSquareToPieceOfType(square:string,piece:PieceType): Promise<ApiResult<GameStateDto>> {
+  try {
+    const promotionInfo : PiecePromotionDto = { promotingSquare:square , pieceToPromote:piece };
+    const response = await api.get<GameStateDto>(`/chessgame/promote-piece/${promotionInfo}`);
+    return { success: true, data: response.data };
+  } catch (error) {
+    const axiosError = error as AxiosError<ErrorResponseDto>;
+    if (axiosError.response?.data) {
+      return { 
+        success: false, 
+        error: axiosError.response.data 
+      };
+    }
+    return {
+      success: false,
+      error: {
+        message: axiosError.message || 'An unexpected error occurred',
+        errorCode: 'NetworkError',
+        statusCode: axiosError.response?.status || 500
+      }
+    };
+  }
+}

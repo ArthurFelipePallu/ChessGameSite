@@ -10,6 +10,7 @@
   user-select: none;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none;     /* Old Edge */
+  position:relative;
 }
 
 .newSquare{
@@ -32,4 +33,42 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  position: relative;
+  z-index: 1;
+}
+
+
+.promotion-square{
+  background-color: #e0e0e0;
+}
+.promotion-popup{
+  width:400%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+
+  top: -100%;
+  left: -150%;
+  background-color: white;
+  border:1px solid #ccc;
+  box-shadow: 0px 2px 10px rgba(0,0,0,2);
+  z-index: 10;
+}
+.promotion-popup button{
+  width: 25%;
+  height: 100%;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}
+.promotion-popup button:hover{
+  background-color: #ddd;
+}
+.promotion-trigger{
+  position:absolute;
+  top: -3px;
+  left: 30px;
+  font-size: 12px;
+  z-index: 5;
 }

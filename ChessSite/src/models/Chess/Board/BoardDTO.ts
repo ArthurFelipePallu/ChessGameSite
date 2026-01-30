@@ -1,3 +1,4 @@
+import type { PieceType } from "../../../api/chessApi";
 
 export type BoardDTO={
     board:string[][],
@@ -5,7 +6,8 @@ export type BoardDTO={
     promotingSquare:string,
     boardColorSchemeId:string,
     boardUsingPieceSpriteSheetId:string,
-    executeMove:(fromSquare:string,toSquare:string) => void;
+    executeMove:(fromSquare:string,toSquare:string) => Promise<void>;
+    promotePieceFromSquareToPiece:(square:string , piece : PieceType) => Promise<void>;
     changePossibleMovesAction:(possibleMoves:string) => void;
     verifyPositionIsInPossibleMoves: (row:number,col:number) => boolean;
 }

@@ -75,24 +75,13 @@ export default function ChessBoard({ boardInfo } : Prop)
     return (rowIndex + colIndex) % 2 === 0 ? scheme.white : scheme.black;
   };
 
-const isPromotingSquare= (
-                            promotingSquare: string,
-                            rowIndex: number,
-                            colIndex: number
-                          ): boolean => 
+const isPromotingSquare= (promotingSquare: string,squareNotation:string): boolean => 
   {
-    if (!promotingSquare) return false;
-
-    const file = promotingSquare[0].toLowerCase(); // 'e'
-    const rank = promotingSquare[1];               // '2'
-
-    // Convert file (a-h) to column index (0-7)
-    const squareCol = file.charCodeAt(0) - 'a'.charCodeAt(0);
-
-    // Convert rank (1-8) to row index (7-0)
-    const squareRow = 8 - parseInt(rank, 10);
-
-    return squareRow === rowIndex && squareCol === colIndex;
+    if(promotingSquare == squareNotation) {
+      console.log(promotingSquare);
+      console.log(squareNotation);
+    }
+    return promotingSquare == squareNotation
   };
 
 
@@ -134,16 +123,19 @@ const isPromotingSquare= (
 function createSquare(square:string,rowIndex:number,colIndex:number): JSX.Element{
   const isSelected = selectedFromSquare?.row === rowIndex && selectedFromSquare?.col === colIndex;
   const isPossibleMove = boardInfo.possibleMoves[rowIndex][colIndex];
+  const notation = toChessNotation(rowIndex,colIndex);
   const color = getSquareColor(rowIndex, colIndex, isSelected, isPossibleMove);
 
    const boardSquareInfo : SquareDTO = {
                 content :square,
+                squareChessNotation:notation,
                 squareColor:color,
                 clickAction: () => handleSquareClick(rowIndex,colIndex),
                 squareIsSelected:isSelected,
                 squareIsPossibleMove:isPossibleMove,
                 spriteSheetId:boardInfo.boardUsingPieceSpriteSheetId,
-                isPromotingSquare: isPromotingSquare(boardInfo.promotingSquare,rowIndex,colIndex),
+                isPromotingSquare: isPromotingSquare(boardInfo.promotingSquare,notation),
+                onPromote:boardInfo.promotePieceFromSquareToPiece
               }
   return (
     <Square
