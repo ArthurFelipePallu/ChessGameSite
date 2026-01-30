@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Chess.Core\Chess.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Board\Enums\" />
+  </ItemGroup>
+
 </Project>

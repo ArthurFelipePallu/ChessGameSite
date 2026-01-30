@@ -198,7 +198,7 @@ public class ChessGameController : ControllerBase
         /// <summary>
     /// Executes a chess move from one position to another
     /// </summary>
-    /// <param name="promotionDto">The Data Transfer Object containing the square in which the promotion is happening and to which piece it is being promoted to</param>
+    /// <param name="promotionInfo">The Data Transfer Object containing the square in which the promotion is happening and to which piece it is being promoted to</param>
     /// <returns>The updated game state after the move</returns>
     /// <response code="200">Returns the updated game state</response>
     /// <response code="400">If the match is not started, move is invalid, or other client error</response>
@@ -210,11 +210,11 @@ public class ChessGameController : ControllerBase
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status500InternalServerError)]
-    public ActionResult<GameStateDto> PromotePiece([FromBody] PiecePromotionDto promotionDto)
+    public ActionResult<GameStateDto> PromotePiece([FromBody] PiecePromotionDto? promotionInfo)
     {
         try
         {
-            if (promotionDto == null)
+            if (promotionInfo == null)
             {
                 var nullErrorResponse = new ErrorResponseDto(
                     message: "Movement request object is null or invalid.",
@@ -223,7 +223,7 @@ public class ChessGameController : ControllerBase
                 return BadRequest(nullErrorResponse);
             }
 
-            if (string.IsNullOrWhiteSpace(promotionDto.PromotingSquare) )
+            if (string.IsNullOrWhiteSpace(promotionInfo.PromotingSquare) )
             {
                 var invalidErrorResponse = new ErrorResponseDto(
                     message: "Promoting Square and Piece to promote  are required and cannot be empty.",
@@ -232,7 +232,7 @@ public class ChessGameController : ControllerBase
                 return BadRequest(invalidErrorResponse);
             }
 
-            // _game.Promo(movementDto);
+            _game.PromotePieceAtSquareToPieceOfType(promotionInfo);
 
             var gameState = _game.GetCurrentState();
                 
@@ -258,7 +258,7 @@ public class ChessGameController : ControllerBase
         catch (Exception)
         {
             var errorResponse = new ErrorResponseDto(
-                message: $"An error occurred while trying to execute promotion at {promotionDto.PromotingSquare} to {promotionDto.PieceToPromote}.",
+                message: $"An error occurred while trying to execute promotion at {promotionInfo.PromotingSquare} to {promotionInfo.PieceToPromote}.",
                 errorCode: "InternalError",
                 statusCode: 500);
             return StatusCode(500, errorResponse);

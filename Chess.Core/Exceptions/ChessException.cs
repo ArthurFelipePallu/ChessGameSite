@@ -75,3 +75,14 @@ public class PieceNotFoundException : ChessException
     {
     }
 }
+public class PromotionException : ChessException
+{
+    public PromotionException(
+        string message,
+        string? fromSquare = null,
+        string? piece = null,
+        Exception? innerException = null)
+        : base(message, ChessErrorCode.PromotionError, fromSquare, null, piece, innerException)
+    {
+    }
+}

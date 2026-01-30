@@ -7,6 +7,7 @@ using Chess_Console_Project.Chess.Enums;
 using Chess_Console_Project.Chess.Player;
 using Chess.Core.Exceptions;
 using Chess_Console_Project.Chess.ChessPieces;
+using Chess.Core.Models;
 using Chess.Engine.ChessGame.Board.Fen;
 
 
@@ -248,20 +249,29 @@ public class ChessMatch
         _promotingSquare = square;
     }
     public string GetPromotingSquare => _promotingSquare;
-    public void PromotePieceAtSquareTo(string square, PieceType promoteTo)
+    
+    
+    
+    public void PromotePieceAtSquareTo(PiecePromotionDto? promotionInfo)
     {
-        if (square != _promotingSquare)
+        if (promotionInfo.PromotingSquare != _promotingSquare)
             throw new ChessException("Trying to promote piece in square different than promoting square.");
         
-        var promotingSquarePosition = new ChessNotationPosition(square);
-        _chessBoard.RemovePieceFromBoardAt(promotingSquarePosition);
-        _chessBoard.AddPlayingPiece(PieceColorToPlayThisTurn(),promoteTo,promotingSquarePosition.Col,promotingSquarePosition.Row);
-
         
+        var promotingSquarePosition = new ChessNotationPosition(promotionInfo.PromotingSquare);
+
+        _chessBoard.RemovePieceFromBoardAt(promotingSquarePosition);
+        _chessBoard.AddPlayingPiece(PieceColorToPlayThisTurn(),promotionInfo.PieceToPromote,promotingSquarePosition.Col,promotingSquarePosition.Row);
+        
+        
+        ChangePlayerToMove();
         _promotingSquare = "";
 
     }
 
+
+    
+    
     /// <summary>
     /// PLAYER METHODS
     /// </summary>
