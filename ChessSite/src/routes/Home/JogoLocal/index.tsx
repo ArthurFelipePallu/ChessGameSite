@@ -131,10 +131,10 @@ export default function JogoLocal()
             </div>
           
             <div className='cs-local-game-board-container'>
-                
-                {currentGameState?.result != MatchResult.NotDefined && (
-                    <div className='cs-local-game-result'> {currentGameState?.result} </div>
-                )}
+                <div className={`cs-local-game-result ${ currentGameState?.result != MatchResult.NotDefined ? 'appear':'' }`}> {currentGameState?.result} </div>
+
+                {/* {currentGameState?.result != MatchResult.NotDefined && (
+                )} */}
                 <UserDisplayer userInfo={blackPlayerInfo} />
                 <ChessBoard
                     boardInfo={matchBoard}

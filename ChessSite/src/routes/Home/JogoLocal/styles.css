@@ -22,13 +22,29 @@
 }
 
 .cs-local-game-result{
-  position:absolute;
-  text-align: center;
   width: 400px;
-  top: 60%;
-  left: auto ;
-  font-size: 50px;
+  
   color: green;
   background-color: black;
+
+  /*Text*/  
+  text-align: center;
+  font-size: 50px;
+  
+  /*Positioning*/
+  position:absolute;
+  top: 60%;
+  left: auto ;
   z-index: 15;
+
+  /*ANIMATION STUFF*/
+  overflow: hidden; 
+  transform: scaleY(0);
+  transform-origin:center; 
+  transition: transform 0.7s ease-in;
 }
+.cs-local-game-result.appear {
+  /* Final state: Visible */
+  transform: scaleY(1);
+}
+
