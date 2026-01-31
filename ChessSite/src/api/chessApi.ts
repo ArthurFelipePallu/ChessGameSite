@@ -25,6 +25,17 @@ export enum PieceColor {
   White = "White",
 }
 
+export enum MatchResult {
+  NotDefined = "NotDefined",
+  Draw = "Draw",
+  WhiteWon = "WhiteWon",
+  BlackWon = "BlackWon",
+  WhiteResigned = "WhiteResigned",
+  BlackResigned = "BlackResigned",
+  WhiteTimedOut = "WhiteTimedOut",
+  BlackTimedOut = "BlackTimedOut",
+}
+
 export interface ErrorResponseDto {
   message?: string | null;
   errorCode?: string | null;
@@ -51,9 +62,10 @@ export interface GameStateDto {
   whitePlayerId?: number;
   /** @format int32 */
   blackPlayerId?: number;
-  fen: string ;
+  fen?: string | null;
   turn?: PieceColor;
   squareToPromote?: string | null;
+  result?: MatchResult;
 }
 
 export interface PiecePromotionDto {

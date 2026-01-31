@@ -7,6 +7,7 @@ import type { SquareDTO } from "../../../models/Chess/Board/SquareDTO";
 import { x8_noPossiblePositionsFenString } from "../../../utils/Boards";
 import { getBoardColorSchemeById } from "../../../services/boardColorScheme-service";
 import * as gameStateApiService from "../../../services/apiServices/chessGameState-api-service";
+import { MatchResult } from "../../../api/chessApi";
 
 type Prop ={
   boardInfo:BoardDTO;
@@ -125,16 +126,22 @@ function createSquare(square:string,rowIndex:number,colIndex:number): JSX.Elemen
   const isPossibleMove = boardInfo.possibleMoves[rowIndex][colIndex];
   const notation = toChessNotation(rowIndex,colIndex);
   const color = getSquareColor(rowIndex, colIndex, isSelected, isPossibleMove);
+  const notationColor = (rowIndex + colIndex) % 2 === 0 ? scheme.black : scheme.white;
+  const isAFile = colIndex == 0;
+  const is1Rank = rowIndex == 7;
 
    const boardSquareInfo : SquareDTO = {
                 content :square,
                 squareChessNotation:notation,
                 squareColor:color,
+                squareNotationColor:notationColor,
                 clickAction: () => handleSquareClick(rowIndex,colIndex),
                 squareIsSelected:isSelected,
                 squareIsPossibleMove:isPossibleMove,
                 spriteSheetId:boardInfo.boardUsingPieceSpriteSheetId,
                 isPromotingSquare: isPromotingSquare(boardInfo.promotingSquare,notation),
+                isAFileSquare:isAFile,
+                is1RankSquare:is1Rank,
                 onPromote:boardInfo.promotePieceFromSquareToPiece
               }
   return (
@@ -154,7 +161,7 @@ function createSquare(square:string,rowIndex:number,colIndex:number): JSX.Elemen
           gridTemplateColumns: `repeat(${boardInfo.board[0].length}, 1fr)`,
           gridTemplateRows: `repeat(${boardInfo.board.length}, 1fr)`,
         }}
-      >
+      >                      
         {boardInfo.board.map((row, rowIndex) => (
           row.map((square, colIndex) => {
             return createSquare(square,rowIndex,colIndex);

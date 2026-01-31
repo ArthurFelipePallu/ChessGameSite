@@ -14,6 +14,15 @@ const Square = ({squareInfo} : Prop) => {
 
   const [showPromotionPopup,setShowPromotionPopup] = useState<boolean>(false);
 
+
+  useState( () => {
+
+
+
+  } );
+
+
+
   function handlePromotionChoice(piece:PieceType)
   {
     setShowPromotionPopup(false);
@@ -32,33 +41,6 @@ const Square = ({squareInfo} : Prop) => {
     else 
       squareInfo.clickAction();
   }
-
-  // function getPieceInfoOfType(piece : PieceType): PieceInformationDTO
-  // {
-  //   return {
-  //     pieceType: squareInfo.content,
-  //     spriteSheetId:squareInfo.spriteSheetId
-  //   }
-  // }
-
-  // return (
-
-    
-  //   <div
-  //     className={` square
-  //                ${squareInfo.squareIsSelected ? 'selected' : ''} 
-  //                ${squareInfo.squareIsPossibleMove ? 'possible-move' : ''}`}
-
-  //     style={  { backgroundColor: squareInfo.squareColor }}
-      
-  //     onClick={handleSquareClick} // Attach click handler
-  //   >
-  //     <div className="piece ${}">
-  //       {/* {getPieceIconByKey(squareInfo.content)} */}
-  //       <ChessPiece piece={pieceInfo}/>
-  //       </div> {/* Render the piece */}
-  //   </div>
-  // );
 
   function getPlayerColorFromSquareContent() : PieceColor
   {
@@ -120,7 +102,7 @@ const Square = ({squareInfo} : Prop) => {
                  ${squareInfo.squareIsPossibleMove ? 'possible-move' : ''}
                  ${squareInfo.isPromotingSquare ? 'promotion-square' : ''}`}
 
-      style={  { backgroundColor: squareInfo.squareColor }}
+      style={  { backgroundColor: squareInfo.squareColor , color: squareInfo.squareNotationColor }}
       
       onClick={handleSquareClick} // Attach click handler
     >
@@ -133,10 +115,21 @@ const Square = ({squareInfo} : Prop) => {
         </div> 
       )}
       {
+        squareInfo.isAFileSquare  && (
+          <div className='square-rank-notation'> {squareInfo.squareChessNotation[1]}  </div>
+        )
+      }
+      {
+        squareInfo.is1RankSquare  && (
+          <div className='square-file-notation'> {squareInfo.squareChessNotation[0]} </div>
+        )
+      }
+      {
         squareInfo.isPromotingSquare && !showPromotionPopup && (
           <div className='promotion-trigger'> ⚠️ </div>
         )
       }
+      
       <div className="piece">
           {createPieceOfType(squareInfo.content)}
       </div>

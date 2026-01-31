@@ -8,7 +8,7 @@ import { ContextSelectedBoardConfiguration } from '../../../utils/Contexts/board
 import * as gameStateApiService from "../../../services/apiServices/chessGameState-api-service";
 import * as userService from "../../../services/UserService/user-service";
 import UserDisplayer from '../../../components/User/UserDisplayer';
-import type { GameStateDto, PieceType } from '../../../api/chessApi';
+import { MatchResult, type GameStateDto, type PieceType } from '../../../api/chessApi';
 
 
 
@@ -122,20 +122,24 @@ export default function JogoLocal()
 
 
     return(
-     <div className='cs-jogolocal-container'>
-        <div className=' cs-jogolocal-content-container'>
+     <div className='cs-local-game-container'>
+        <div className=' cs-local-game-content-container'>
             <div>
                 <button onClick={() => gameStateApiService.StartGame()}>
                     Start Game
                 </button>
             </div>
           
-            <div className='cs-jogolocal-board-container'>
-                    <UserDisplayer userInfo={blackPlayerInfo} />
-                    <ChessBoard
-                        boardInfo={matchBoard}
-                    />
-                    <UserDisplayer userInfo={whitePlayerInfo} />
+            <div className='cs-local-game-board-container'>
+                
+                {currentGameState?.result != MatchResult.NotDefined && (
+                    <div className='cs-local-game-result'> {currentGameState?.result} </div>
+                )}
+                <UserDisplayer userInfo={blackPlayerInfo} />
+                <ChessBoard
+                    boardInfo={matchBoard}
+                />
+                <UserDisplayer userInfo={whitePlayerInfo} />
             </div>
            
         </div>
