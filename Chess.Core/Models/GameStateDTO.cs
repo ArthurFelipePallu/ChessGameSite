@@ -14,9 +14,9 @@ public record GameStateDto
     
     public string SquareToPromote { get; set; }
     // public MatchStyleType MatchType { get; set; }
-    // public MatchResult Result { get; set; }
+    public MatchResult Result { get; set; }
 
-    public GameStateDto(int matchId,int whiteId,int blackId,string fen , PieceColor turn,string squareToPromote)
+    public GameStateDto(int matchId,int whiteId,int blackId,string fen , PieceColor turn,string squareToPromote,MatchResult result)
     {
         MatchId = matchId;
         WhitePlayerId = whiteId;
@@ -25,7 +25,7 @@ public record GameStateDto
         Turn = turn;
         SquareToPromote = squareToPromote;
         // MatchType = matchType;
-        // Result = result;
+        Result = result;
         
     }
 }

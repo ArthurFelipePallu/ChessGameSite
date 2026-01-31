@@ -21,15 +21,12 @@ public class ChessMatch
     private int BlackPlayerId { get;  set; }
     
     private int _movesCount = 0;
-    private Screen _screen;
-    ChessBoard _chessBoard;
-    MatchEnums _matchEnums;
+    ChessBoard _board;
     private PieceColor _toPlayColor = PieceColor.White;
-    private ChessPlayer _playerWhite;
-    private ChessPlayer _playerBlack;
     private string _promotingSquare = "";
-    private Piece _lastCapturedPiece = null;
-
+    private Piece _lastCapturedPiece;
+    private MatchResult _matchResult = MatchResult.NotDefined;
+        
 
     public ChessMatch(int whitePlayerId, int blackPlayerId)
     {
@@ -43,32 +40,21 @@ public class ChessMatch
     /// <summary>
     /// MATCH METHODS
     /// </summary>
-    public int GetIdOfMatch()
-    {
-        return MatchId;
-    }
-    public int GetWhitePlayerIdOfMatch()
-    {
-        return WhitePlayerId;
-    }
-    public int GetBlackPlayerIdOfMatch()
-    {
-        return BlackPlayerId;
-    }
+    public int GetIdOfMatch() => MatchId;
+    public MatchResult GetMatchResult() => _matchResult;
+    public int GetWhitePlayerIdOfMatch() => WhitePlayerId;
+    public int GetBlackPlayerIdOfMatch() => BlackPlayerId;
 
     /// <summary>
     /// MATCH METHODS
     /// </summary>
-    private void AlterMatchStatus(MatchEnums enums)
-    {
-        _matchEnums = enums;
-    }
+
     public Piece AccessPieceAtChessBoardPosition(string pos)
     {
         if (_promotingSquare != "")
             throw new ChessException("There is a piece to promote before resuming game");
         var notationPosition = new ChessNotationPosition(pos);
-        return _chessBoard.AccessPieceAtChessNotationPosition(notationPosition);
+        return _board.AccessPieceAtChessNotationPosition(notationPosition);
     }
     public bool PieceAtPositionIsOfCurrentTurnColor(string pos)
     {
@@ -98,7 +84,7 @@ public class ChessMatch
 
     public string RetrieveBoardCurrentStateFen()
     {
-        return FenHelper.GetPiecePlacement(_chessBoard);
+        return FenHelper.GetPiecePlacement(_board);
     }
     
 
@@ -107,8 +93,8 @@ public class ChessMatch
     /// </summary>
     private void CreateChessBoard()
     {
-        _chessBoard = new ChessBoard();
-        _chessBoard.CreateChessBoardInitialPosition();
+        _board = new ChessBoard();
+        _board.CreateChessBoardInitialPosition();
     }
 
 
@@ -126,28 +112,27 @@ public class ChessMatch
         if (_promotingSquare != "")
             throw new ChessException("There is a piece to promote before resuming game");
         
-        var actionMessage = "";
         var movementIsSuccessful = false;
 
         if (IsMovementCastles(piece, destination))
         {
             var castlesDir = GetCastleDirection(piece, destination);
-            movementIsSuccessful = MovePieceTo(piece,destination,out actionMessage);
+            movementIsSuccessful = MovePieceTo(piece,destination);
             MoveRookInCastles(piece,castlesDir);
         }
         else if (IsMovementEnPassent(piece, destination))
         {
             var positionToTake = new ChessNotationPosition(piece.GetPiecePosition().Row, destination.Col);
-            var pieceToTake = _chessBoard.AccessPieceAtChessNotationPosition(positionToTake);
-            _chessBoard.RemovePieceFromPlay(pieceToTake);
+            var pieceToTake = _board.AccessPieceAtChessNotationPosition(positionToTake);
+            _board.RemovePieceFromPlay(pieceToTake);
 
-            movementIsSuccessful = MovePieceTo(piece,destination,out actionMessage);
+            movementIsSuccessful = MovePieceTo(piece,destination);
         }
         else
-            movementIsSuccessful = MovePieceTo(piece,destination,out actionMessage);
+            movementIsSuccessful = MovePieceTo(piece,destination);
 
         //_screen.PrintBoardAndPlayers(_playerWhite,_playerBlack,_chessBoard,_toPlay);
-        _chessBoard.SetLastMovedPiece(piece);
+        _board.SetLastMovedPiece(piece);
         //_screen.ScreenWriteAndWaitForEnterToContinue(actionMessage);
 
         if (piece is Pawn pawn)
@@ -159,6 +144,11 @@ public class ChessMatch
             }
         }
 
+        if (IsKingOfColorInCheckMate(GetThisTurnOpponentColor()))
+        {
+            _matchResult = _toPlayColor == PieceColor.White ? MatchResult.WhiteWon : MatchResult.BlackWon;
+        }
+        
         if(movementIsSuccessful)
         {
             ChangePlayerToMove();
@@ -166,27 +156,28 @@ public class ChessMatch
 
         }
     }
-    private bool MovePieceTo(Piece piece, ChessNotationPosition destination, out string message)
+    private bool MovePieceTo(Piece piece, ChessNotationPosition destination)
     {
         var originalPiecePosition = piece.GetPiecePosition();
-        _chessBoard.RemovePieceFromBoardAt(originalPiecePosition);
+        _board.RemovePieceFromBoardAt(originalPiecePosition);
 
-        var destinationPiece = _chessBoard.AccessPieceAtChessNotationPosition(destination);
+        var destinationPiece = _board.AccessPieceAtChessNotationPosition(destination);
         if(destinationPiece != null)
         {
             _lastCapturedPiece = destinationPiece;
-            _chessBoard.RemovePieceFromPlay(destinationPiece);
+            _board.RemovePieceFromPlay(destinationPiece);
         }
 
-        _chessBoard.PutPieceAtDestinationPosition(piece, destination);
+        _board.PutPieceAtDestinationPosition(piece, destination);
 
         if (IsKingOfColorInCheck(piece.GetPieceColor()))
         {
-            _chessBoard.RemovePieceFromBoardAt(destination);
-            _chessBoard.PutPieceAtDestinationPosition(piece,originalPiecePosition);
+            _board.RemovePieceFromBoardAt(destination);
+            _board.PutPieceAtDestinationPosition(piece,originalPiecePosition);
             if(destinationPiece != null)
-                _chessBoard.PutPieceAtDestinationPosition(destinationPiece,destination);
+                _board.PutPieceAtDestinationPosition(destinationPiece,destination);
 
+            
             throw new ChessException(
                 message: $"Movement is Invalid. The movement left the {piece.GetPieceColor()} King In Check.",
                 ChessErrorCode.CheckViolation,
@@ -195,11 +186,6 @@ public class ChessMatch
                 piece: piece.ToString());
         }
         piece.IncreaseTimesMoved();
-
-        message = destinationPiece == null
-            ? $"[ CHESS MATCH ] Piece {piece} moved to destination {destination}"
-            : $"[ CHESS MATCH ] Piece [{piece}] took [{destinationPiece}] at destination [{destination}]";
-
 
         return true;
     }
@@ -211,7 +197,7 @@ public class ChessMatch
     {
         if (piece.GetPieceType() != PieceType.Pawn) return false;
         if (piece.GetPiecePosition().Col == destination.Col) return false;
-        return _chessBoard.AccessPieceAtChessNotationPosition(destination) == null;
+        return _board.AccessPieceAtChessNotationPosition(destination) == null;
     }
 
     /// <summary>
@@ -233,10 +219,10 @@ public class ChessMatch
         var rookCol = castlesDir == HorizontalDirections.Left ? 'a' : 'h';
         var kingPos = king.GetPiecePosition();
         var rookOriginalChessNotationPosition = new ChessNotationPosition(kingPos.Row, rookCol);
-        var rook = _chessBoard.AccessPieceAtChessNotationPosition(rookOriginalChessNotationPosition);
+        var rook = _board.AccessPieceAtChessNotationPosition(rookOriginalChessNotationPosition);
         var rookDestinationColumnIndex = kingPos.ColumnIndex - (int)castlesDir;
         var rookDestinationPosition = ChessNotationPosition.FromArrayIndices(kingPos.RowIndex, rookDestinationColumnIndex);
-        MovePieceTo(rook,rookDestinationPosition,out var actionMessage);
+        MovePieceTo(rook,rookDestinationPosition);
 
     }
 
@@ -249,9 +235,6 @@ public class ChessMatch
         _promotingSquare = square;
     }
     public string GetPromotingSquare => _promotingSquare;
-    
-    
-    
     public void PromotePieceAtSquareTo(PiecePromotionDto? promotionInfo)
     {
         if (promotionInfo.PromotingSquare != _promotingSquare)
@@ -260,8 +243,8 @@ public class ChessMatch
         
         var promotingSquarePosition = new ChessNotationPosition(promotionInfo.PromotingSquare);
 
-        _chessBoard.RemovePieceFromBoardAt(promotingSquarePosition);
-        _chessBoard.AddPlayingPiece(PieceColorToPlayThisTurn(),promotionInfo.PieceToPromote,promotingSquarePosition.Col,promotingSquarePosition.Row);
+        _board.RemovePieceFromBoardAt(promotingSquarePosition);
+        _board.AddPlayingPiece(GetThisTurnPlayingColor(),promotionInfo.PieceToPromote,promotingSquarePosition.Col,promotingSquarePosition.Row);
         
         
         ChangePlayerToMove();
@@ -284,23 +267,26 @@ public class ChessMatch
             IncreaseTurnCount();
     }
 
-    public PieceColor PieceColorToPlayThisTurn()
+    public PieceColor GetThisTurnPlayingColor()
     {
         return _toPlayColor;
+    }
+    public PieceColor GetThisTurnOpponentColor()
+    {
+        return _toPlayColor == PieceColor.White ? PieceColor.Black : PieceColor.White;
     }
 
     public bool IsKingOfColorInCheck(PieceColor color)
     {
-        return _chessBoard.IsKingInCheck(color);
+        return _board.IsKingInCheck(color);
     }
-    public bool IsKingOfColorInCheckMate(PieceColor color)
+
+    private bool IsKingOfColorInCheckMate(PieceColor color)
     {
         if(!IsKingOfColorInCheck(color)) return false;
 
-        var lastPieceCapturedHolder = _lastCapturedPiece;
-        foreach (var piece in _chessBoard.GetChessPiecesInPlay(color))
+        foreach (var piece in _board.GetChessPiecesInPlay(color))
         {
-            var originPosition = piece.GetPiecePosition();
             var mat = piece.GetAllPossibleMoves();
             for (var i = 0; i < mat.GetLength(0); i++)
             {
@@ -308,29 +294,59 @@ public class ChessMatch
                 {
                     if (mat[i, j])
                     {
-                        _lastCapturedPiece = null;
                         var destination = ChessNotationPosition.FromArrayIndices(i, j);
-                        var moveIsPossible = MovePieceTo(piece, destination, out var msg);
 
-                        if (moveIsPossible)
+                        // Test if this move would get the king out of check
+                        if (WouldMoveGetKingOutOfCheck(piece, destination))
                         {
-                            _chessBoard.RemovePieceFromBoardAt(destination);
-                            _chessBoard.PutPieceAtDestinationPosition(piece, originPosition);
-                            if(_lastCapturedPiece != null)
-                                _chessBoard.ReturnPieceToPlay(_lastCapturedPiece);
-
-                            _lastCapturedPiece = lastPieceCapturedHolder;
-                            piece.DecreaseTimesMoved();
-                            return false;
+                            return false; // Found a legal move that gets king out of check
                         }
-                        if(_lastCapturedPiece != null)
-                            _chessBoard.ReturnPieceToPlay(_lastCapturedPiece);
                     }
                 }
             }
-
         }
-        _lastCapturedPiece = lastPieceCapturedHolder;
-        return true;
+
+        return true; // No legal moves found that get king out of check = checkmate
+    }
+
+    private bool WouldMoveGetKingOutOfCheck(Piece piece, ChessNotationPosition destination)
+    {
+        var originalPosition = piece.GetPiecePosition();
+        var destinationPiece = _board.AccessPieceAtChessNotationPosition(destination);
+
+        try
+        {
+            // Temporarily make the move
+            _board.RemovePieceFromBoardAt(originalPosition);
+            if (destinationPiece != null)
+            {
+                _board.RemovePieceFromPlay(destinationPiece);
+            }
+            _board.PutPieceAtDestinationPosition(piece, destination);
+
+            // Check if king is still in check after this move
+            var kingIsSafe = !IsKingOfColorInCheck(piece.GetPieceColor());
+
+            // Always undo the move
+            _board.RemovePieceFromBoardAt(destination);
+            _board.PutPieceAtDestinationPosition(piece, originalPosition);
+            if (destinationPiece != null)
+            {
+                _board.ReturnPieceToPlay(destinationPiece);
+            }
+
+            return kingIsSafe;
+        }
+        catch (Exception)
+        {
+            // If any error occurs during the test move, undo and return false
+            _board.RemovePieceFromBoardAt(destination);
+            _board.PutPieceAtDestinationPosition(piece, originalPosition);
+            if (destinationPiece != null)
+            {
+                _board.ReturnPieceToPlay(destinationPiece);
+            }
+            return false;
+        }
     }
 }

@@ -37,11 +37,12 @@ public class ChessGame
         var whiteId = _match.GetWhitePlayerIdOfMatch();
         var blackId = _match.GetBlackPlayerIdOfMatch();
         var boardStateFen = _match.RetrieveBoardCurrentStateFen();
-        var colorToPlay = _match.PieceColorToPlayThisTurn();
+        var colorToPlay = _match.GetThisTurnPlayingColor();
         var promotingSquare = _match.GetPromotingSquare;
+        var result = _match.GetMatchResult();
         
         
-        return new GameStateDto(matchId, whiteId, blackId,boardStateFen, colorToPlay, promotingSquare);
+        return new GameStateDto(matchId, whiteId, blackId,boardStateFen, colorToPlay, promotingSquare,result);
     }
 
     public string GetPossiblePositionOfPieceAtPosition(string position)
@@ -52,8 +53,8 @@ public class ChessGame
         
         var piece = _match.AccessPieceAtChessBoardPosition(position);
 
-        if (piece.GetPieceColor() != _match.PieceColorToPlayThisTurn())
-            throw new MovementException($"Piece selected does not belong to {_match.PieceColorToPlayThisTurn()} player");
+        if (piece.GetPieceColor() != _match.GetThisTurnPlayingColor())
+            throw new MovementException($"Piece selected does not belong to {_match.GetThisTurnPlayingColor()} player");
         
         _match.CalculatePiecePossibleMoves(piece);
         return _match.RetrievePiecePossibleMovesAsString(piece);
@@ -72,6 +73,7 @@ public class ChessGame
         
         
         _match.ExecuteMovement(piece, new ChessNotationPosition(movementDto.ToPos));
+        
         
     }
 
