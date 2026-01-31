@@ -51,11 +51,10 @@ public class ChessGame
         
         
         var piece = _match.AccessPieceAtChessBoardPosition(position);
-        if (piece == null) return "";//there is no piece at position
 
-        // if (piece.GetPieceColor() != _match.PieceColorToPlayThisTurn())
-        //     throw new MovementException($"Piece selected does not belong to {_match.PieceColorToPlayThisTurn()} player");
-        //
+        if (piece.GetPieceColor() != _match.PieceColorToPlayThisTurn())
+            throw new MovementException($"Piece selected does not belong to {_match.PieceColorToPlayThisTurn()} player");
+        
         _match.CalculatePiecePossibleMoves(piece);
         return _match.RetrievePiecePossibleMovesAsString(piece);
     }

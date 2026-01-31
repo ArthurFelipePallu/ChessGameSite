@@ -170,7 +170,7 @@ export async function getPossibleMovesAtPosition(row:number,col:number): Promise
 export async function promotePieceAtSquareToPieceOfType(square:string,piece:PieceType): Promise<ApiResult<GameStateDto>> {
   try {
     const promotionInfo : PiecePromotionDto = { promotingSquare:square , pieceToPromote:piece };
-    const response = await api.get<GameStateDto>(`/chessgame/promote-piece/${promotionInfo}`);
+    const response = await api.post<GameStateDto>(`/chessgame/promote-piece`,promotionInfo);
     return { success: true, data: response.data };
   } catch (error) {
     const axiosError = error as AxiosError<ErrorResponseDto>;

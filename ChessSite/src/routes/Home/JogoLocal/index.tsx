@@ -123,7 +123,7 @@ export default function JogoLocal()
 
     return(
      <div className='cs-jogolocal-container'>
-        <div className='cs-container-flex-center-center cs-jogolocal-content-container'>
+        <div className=' cs-jogolocal-content-container'>
             <div>
                 <button onClick={() => gameStateApiService.StartGame()}>
                     Start Game

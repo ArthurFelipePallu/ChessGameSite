@@ -3,7 +3,7 @@ import ChessPiece from '../Piece';
 import type { SquareDTO } from '../../../models/Chess/Board/SquareDTO';
 import type { PieceInformationDTO } from '../../../models/Chess/Piece/PieceInfoDTO';
 import { useState } from 'react';
-import { PieceType } from '../../../api/chessApi';
+import { PieceColor, PieceType } from '../../../api/chessApi';
 
 type Prop ={
   squareInfo:SquareDTO;
@@ -20,10 +20,7 @@ const Square = ({squareInfo} : Prop) => {
     squareInfo.onPromote(squareInfo.squareChessNotation,piece);
   }
 
-  const pieceInfo : PieceInformationDTO ={
-    pieceType: squareInfo.content,
-    spriteSheetId:squareInfo.spriteSheetId
-  }
+
 
   function handleSquareClick()
   {
@@ -63,6 +60,58 @@ const Square = ({squareInfo} : Prop) => {
   //   </div>
   // );
 
+  function getPlayerColorFromSquareContent() : PieceColor
+  {
+    const content = squareInfo.content;
+    return content === content.toUpperCase() ? PieceColor.White : PieceColor.Black;
+
+  }
+
+
+  function createPieceOfType(type:string)
+  {
+    
+    const pieceInfo : PieceInformationDTO ={
+      pieceType: type,
+      spriteSheetId:squareInfo.spriteSheetId
+    }
+    return <ChessPiece piece={pieceInfo}/>
+  }
+  function getPieceTypeCharNotation(piece:PieceType)
+  {
+    const playerColor = getPlayerColorFromSquareContent();
+
+    switch(piece)
+    {
+      case PieceType.Bishop:
+        return playerColor == PieceColor.White ? 'B':'b';
+        break;
+
+      case PieceType.Knight:
+        return playerColor == PieceColor.White ? 'N':'n';
+        break;
+
+      case PieceType.Rook:
+        return playerColor == PieceColor.White ? 'R':'r';
+        break;
+
+      case PieceType.Queen:
+        return playerColor == PieceColor.White ? 'Q':'q';
+        break;
+    }
+
+    return ' ';
+  }
+
+  function createPopUpButtonOfPieceType(pieceType:PieceType)
+  {
+    const pieceChar = getPieceTypeCharNotation(pieceType);
+    return <button onClick={() => handlePromotionChoice(pieceType)}>
+             {createPieceOfType(pieceChar)}
+           </button>
+
+  }
+
 
   return (    
     <div
@@ -77,10 +126,10 @@ const Square = ({squareInfo} : Prop) => {
     >
       {squareInfo.isPromotingSquare && showPromotionPopup &&(
         <div className="promotion-popup">
-          <button onClick={() => handlePromotionChoice(PieceType.Bishop)}>B</button>
-          <button onClick={() => handlePromotionChoice(PieceType.Knight)}>N</button>
-          <button onClick={() => handlePromotionChoice(PieceType.Rook)}  >R</button>
-          <button onClick={() => handlePromotionChoice(PieceType.Queen)} >Q</button>
+          {createPopUpButtonOfPieceType(PieceType.Bishop)}
+          {createPopUpButtonOfPieceType(PieceType.Knight)}
+          {createPopUpButtonOfPieceType(PieceType.Rook)}
+          {createPopUpButtonOfPieceType(PieceType.Queen)}
         </div> 
       )}
       {
@@ -89,8 +138,8 @@ const Square = ({squareInfo} : Prop) => {
         )
       }
       <div className="piece">
-          <ChessPiece piece={pieceInfo}/>
-        </div>
+          {createPieceOfType(squareInfo.content)}
+      </div>
     </div>
   );
 };
