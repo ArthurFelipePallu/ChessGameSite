@@ -1,11 +1,12 @@
 
 export default function TurnFenToBoard(fen: string): string[][] {
+  
+    const rows = fen.split('/');
     // Initialize an empty 8x8 board
-    const board: string[][] = Array(8).fill(null).map(() => Array(8).fill(''));
+    const board: string[][] = Array(rows.length).fill(null).map(() => Array(rows.length).fill(''));
     let rowIndex = 0;
 
     // Split the FEN string by rows
-    const rows = fen.split('/');
 
     // Iterate through each row in the FEN string
     rows.forEach((row) => {

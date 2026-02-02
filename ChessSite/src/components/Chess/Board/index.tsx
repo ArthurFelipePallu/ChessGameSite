@@ -4,10 +4,9 @@ import toChessNotation from "../../../utils/Boards";
 import {useEffect, useState, useCallback} from "react";
 import type { BoardDTO } from "../../../models/Chess/Board/BoardDTO";
 import type { SquareDTO } from "../../../models/Chess/Board/SquareDTO";
-import { x8_noPossiblePositionsFenString } from "../../../utils/Boards";
+import { x8_defaultPossiblePositionsFenString } from "../../../utils/Boards";
 import { getBoardColorSchemeById } from "../../../services/boardColorScheme-service";
-import * as gameStateApiService from "../../../services/apiServices/chessGameState-api-service";
-import { MatchResult } from "../../../api/chessApi";
+import * as gameStateApiService from "../../../services/apiServices/chess-api-service";
 
 type Prop ={
   boardInfo:BoardDTO;
@@ -31,15 +30,16 @@ export default function ChessBoard({ boardInfo } : Prop)
   const loadPossibleMoves = useCallback(async (row: number, col: number) => {
     const result = await gameStateApiService.getPossibleMovesAtPosition(row, col);
     if (result.success) {
+
+      const moves =result.data.possibleMoves ?? x8_defaultPossiblePositionsFenString;
       // Call the callback to update possible moves in the parent component
-      changePossibleMovesAction(result.data.possibleMoves);
+      changePossibleMovesAction(moves);
     } else {
       console.error("Failed to load possible moves:", result.error.message);
       // You can also show a toast/notification to the user here
       alert(`Error: ${result.error.message}`);
     }
   }, [changePossibleMovesAction]);
-
 
 
   useEffect(() => {
@@ -112,7 +112,7 @@ const isPromotingSquare= (promotingSquare: string,squareNotation:string): boolea
         // Assume user wants to select a new piece (or clear if empty/opponent piece, handled by API/parent)
         setSelectedFromSquare({ row: rowIndex, col: colIndex }); 
         // Immediately clear possible moves to prevent visual flicker before API response
-        changePossibleMovesAction(x8_noPossiblePositionsFenString); 
+        changePossibleMovesAction(x8_defaultPossiblePositionsFenString); 
         return;
       }
     }

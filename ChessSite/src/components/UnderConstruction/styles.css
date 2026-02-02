@@ -1,0 +1,94 @@
+.uc-container {
+  width: 100%;
+  height: 50%;
+  background: #000;
+  padding: 1%;
+  color: white;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+}
+
+.uc-content {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  align-items:center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.upper-content {
+  width: 100%;
+  display: flex;
+  align-items:center;
+  justify-content: flex-start;
+  gap: 24px;
+}
+.bottom-content {
+  width: 100%;
+  display: flex;
+  align-items:center;
+  justify-content: flex-start;
+  gap: 24px;
+}
+.uc-text .small {
+  display: block;
+  font-size: 22px;
+  opacity: 0.9;
+}
+
+.uc-text .big {
+  display: block;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Triangle icon (pure CSS) */
+.uc-triangle {
+  width: 0;
+  height: 0;
+  border-left: 48px solid transparent;
+  border-right: 48px solid transparent;
+  border-bottom: 84px solid #f5c400;
+}
+
+.uc-stripes {
+  position: relative;
+  overflow: hidden;
+  height: 20px;
+  width: 100%;
+  background: #000;
+}
+
+.uc-stripes::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  /* make it wider than the container */
+  width: 200%;
+
+  background: repeating-linear-gradient(
+    -45deg,
+    #f5c400 0px,
+    #f5c400 12px,
+    #000 12px,
+    #000 24px
+  );
+
+  animation: stripes-move 13s linear infinite;
+  will-change: transform;
+}
+
+@keyframes stripes-move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

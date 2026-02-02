@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import ChessConfigBoardColorSchemeSelection from "../BoardColor/BoardColorSchemeSelection";
 import ChessConfigSpriteSheetSelection from "../PieceSetSelection";
+import UnderConstruction from "../../UnderConstruction";
 
 function EmptyComponent(){
     return (<></>);
@@ -20,18 +21,18 @@ const Tabs =[
     },
     {
         "id": 2,
-        "name":"connection",
-        "component":EmptyComponent,
+        "name":"settings",
+        "component":UnderConstruction,
     },
     {
         "id": 3,
         "name":"sounds",
-        "component":EmptyComponent,
+        "component":UnderConstruction,
     },
     {
         "id": 4,
         "name":"account",
-        "component":EmptyComponent,
+        "component":UnderConstruction,
     }
 ]
 

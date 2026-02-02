@@ -1,8 +1,9 @@
 import "./styles.css"
 import ChessBoard from "../../../Chess/Board";
-import type { BoardDTO } from "../../../../models/Chess/BoardDTO";
+import type { BoardDTO } from "../../../../models/Chess/Board/BoardDTO";
 import { x2_Board , x2_defaultPossiblePositions } from '../../../../utils/Boards';
 import { type BoardColorSchemeCardDTO } from "../../../../models/ConfigurationModels/BoardColorSchemeDTO";
+import { BooleanFenToBooleanArray } from "../../../../utils/Fen";
 
 type Prop={
     colorScheme: BoardColorSchemeCardDTO;
@@ -12,9 +13,10 @@ export default function BoardColorSchemeCard({colorScheme} : Prop){
 
     const cardBoard : BoardDTO = {
         board: x2_Board,
-        possibleMoves: x2_defaultPossiblePositions,
+        possibleMoves: BooleanFenToBooleanArray(x2_defaultPossiblePositions,2,2,'x'),
         boardColorSchemeId: colorScheme.schemeId,
-        boardUsingPieceSpriteSheetId: ""
+        boardUsingPieceSpriteSheetId: "",
+        promotingSquare: "",
     }
 
 

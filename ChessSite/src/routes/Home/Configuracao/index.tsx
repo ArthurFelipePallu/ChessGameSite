@@ -125,7 +125,6 @@ export default function ChessConfigPage(){
       <div className="cs-container-flex-center-center">
         {createCurrentSchemeBoard()}
         {createCurrentPieceSetCard()}
-
       </div>
       
       
